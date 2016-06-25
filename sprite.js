@@ -10,6 +10,6 @@ Sprite = function(x, y) {
         var img = new Image();
         img.src = image;
     
-        ctx.drawImage(img, this.x, this.y,);
+        ctx.drawImage(img, this.x, this.y);
     }
 }
