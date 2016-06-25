@@ -1,12 +1,16 @@
-Background = function() {
+Background = function(graphic) {
 
-    this.draw = function(ctx, image) {
-        var img = new Image();
-        img.src = image;
+    var gfx = new Image();
+    gfx.src = graphic;
 
-        var pat=ctx.createPattern(img,"repeat");
-        ctx.rect(0,0,canvas.width,canvas.tile);
+    this.draw = function(ctx) {
+
+        var pat= ctx.createPattern(gfx, 'repeat');
+
+        ctx.rect(0, 0, canvas.width, canvas.height);
+
         ctx.fillStyle=pat;
+
         ctx.fill();
     }
-};
+}
