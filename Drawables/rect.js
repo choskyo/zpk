@@ -9,7 +9,7 @@ Rect = function(x, y, w, h) {
     this.h = h;
 
     this.intersects = function(shape){
-        var offset = 0;
+        var offset = 0;direction
 
         if(shape.radius != null)
             offset = shape.radius;

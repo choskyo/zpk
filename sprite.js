@@ -9,11 +9,7 @@ Sprite = function(x, y) {
     this.draw = function(ctx, image) {
         var img = new Image();
         img.src = image;
-        
-        var pat = ctx.createPattern(img, "no-repeat");
-        ctx.rect(this.x, this.y, img.width, img.height);
-        ctx.fillStyle = pat;
-        ctx.fill();
-        ctx.drawImage(img, "no-repeat");
+    
+        ctx.drawImage(img, this.x, this.y,);
     }
-};
+}
