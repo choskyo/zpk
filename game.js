@@ -12,6 +12,8 @@ var bg = new Background('Assets/Graphics/stars.jpg');
 
 var planet = new Sprite(500, 600);
 
+var player = new Player('Assets/Graphics/zebum.png');
+
 var zebu = new Image();
 zebu.src = 'Assets/Graphics/zebu.png';
 
@@ -27,4 +29,13 @@ setInterval(function() {
 
     rect.draw(ctx, 'red');
 
+    player.draw(ctx);
+    player.checkMovement(player);
+
 }, 33);
+
+$(document).keydown(function( event ) {
+    if ( event.which == 38 ) {
+        player.pX -= 5;
+    }
+});

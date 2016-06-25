@@ -32,5 +32,7 @@ Rect = function(x, y, w, h) {
     this.draw = function(ctx, colour) {
         ctx.fillStyle = colour;
         ctx.fillRect(this.x, this.y, this.w, this.h);
-    }
+    };
+
+    
 };
