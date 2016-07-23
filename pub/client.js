@@ -48,7 +48,6 @@ socket.on('nP',function(data){
     ctx.clearRect(0,0,canvas.width,canvas.height);
 
     for(var i = 0 ; i < data.length; i++) {
-        console.log('rgb = ' + data[i].r + data[i].g + data[i].b);
         ctx.fillStyle = 'rgb(' + data[i].r + ',' + data[i].g + ',' + data[i].b + ')';
         ctx.fillRect(data[i].x, data[i].y, 100, 60);
     }

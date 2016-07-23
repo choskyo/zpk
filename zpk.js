@@ -14,20 +14,21 @@ serv.listen(process.env.PORT || 80);
 console.log("Server started.");
 
 var socketList = {};
+var playerList = {};
+
+var Player = require('./player.js');
 
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
 	console.log("Client " + socket.id + " connected.");
-	socket.x = 0;
-	socket.y = 0;
-	socket.r = Math.floor(Math.random()*(255)+1);
-	socket.g = Math.floor(Math.random()*(255)+1);
-	socket.b = Math.floor(Math.random()*(255)+1);
+
+	playerList[socket.id] = new Player(socket.id);
 
 	socketList[socket.id] = socket;
 
 	socket.on('disconnect',function(){
+		delete playerList[socket.id];
 		delete socketList[socket.id];
 	});
 
@@ -35,16 +36,16 @@ io.sockets.on('connection', function(socket){
 
 setInterval(function(){
 	var pack = [];
-	for(var s in socketList){
-		var socket = socketList[s];
-		socket.x++;
-		socket.y++;
+	for(var p in playerList){
+		var player = playerList[p];
+		player.x++;
+		player.y++;
 		pack.push({
-			x:socket.x,
-			y:socket.y,
-			r:socket.r,
-			g:socket.g,
-			b:socket.b
+			x:player.x,
+			y:player.y,
+			r:player.r,
+			g:player.g,
+			b:player.b
 		});
 	}
 	for(var s2 in socketList){
