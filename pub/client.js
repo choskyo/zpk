@@ -8,37 +8,38 @@ var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
 ctx.font = '30px Arial';
 
-document.onmousedown = function(event){socket.emit('keyPress',{inputId:'attack',state:true});
+document.onmousedown = function(event){
+    socket.emit('kP',{inputId:'attack',state:true});
 };
 document.onmouseup = function(event){
-    socket.emit('keyPress',{inputId:'attack',state:false});
+    socket.emit('kP',{inputId:'attack',state:false});
 };
 document.onmousemove = function(event){
     var x = -250 + event.clientX - 8;
     var y = -250 + event.clientY - 8;
     var angle = Math.atan2(y,x) / Math.PI * 180;
-    socket.emit('keyPress',{inputId:'mouseAngle',state:angle});
+    socket.emit('kP',{inputId:'mouseAngle',state:angle});
 };
 document.onkeydown = function(event){
     if(event.keyCode === 68)	//d
-        socket.emit('keyPress',{inputId:'right',state:true});
+        socket.emit('kP',{input:'right',state:true});
     else if(event.keyCode === 83)	//s
-        socket.emit('keyPress',{inputId:'down',state:true});
+        socket.emit('kP',{input:'down',state:true});
     else if(event.keyCode === 65) //a
-        socket.emit('keyPress',{inputId:'left',state:true});
+        socket.emit('kP',{input:'left',state:true});
     else if(event.keyCode === 87) // w
-        socket.emit('keyPress',{inputId:'up',state:true});
+        socket.emit('kP',{input:'up',state:true});
 
 };
 document.onkeyup = function(event){
     if(event.keyCode === 68)	//d
-        socket.emit('keyPress',{inputId:'right',state:false});
+        socket.emit('kP',{input:'right',state:false});
     else if(event.keyCode === 83)	//s
-        socket.emit('keyPress',{inputId:'down',state:false});
+        socket.emit('kP',{input:'down',state:false});
     else if(event.keyCode === 65) //a
-        socket.emit('keyPress',{inputId:'left',state:false});
+        socket.emit('kP',{input:'left',state:false});
     else if(event.keyCode === 87) // w
-        socket.emit('keyPress',{inputId:'up',state:false});
+        socket.emit('kP',{input:'up',state:false});
 };
 
 

@@ -23,9 +23,21 @@ io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
 	console.log("Client " + socket.id + " connected.");
 
-	playerList[socket.id] = new Player(socket.id);
+	var player = Player(socket.id);
+	playerList[socket.id] = player;
 
 	socketList[socket.id] = socket;
+
+	socket.on('kP', function(p) {
+		if(p.input === 'left')
+			player.keyLeft = p.state;
+		else if(p.input === 'right')
+			player.keyRight = p.state;
+		else if(p.input === 'up')
+			player.keyUp = p.state;
+		else if(p.input === 'down')
+			player.keyDown = p.state;
+	});
 
 	socket.on('disconnect',function(){
 		delete playerList[socket.id];
@@ -38,8 +50,11 @@ setInterval(function(){
 	var pack = [];
 	for(var p in playerList){
 		var player = playerList[p];
-		player.x++;
-		player.y++;
+
+		//Check what's going on
+		player.updatePos();
+
+		//Push data to packet
 		pack.push({
 			x:player.x,
 			y:player.y,
