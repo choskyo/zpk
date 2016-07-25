@@ -2,30 +2,28 @@
  * Created by will on 21/07/16.
  */
 
+var Entity = require('./entity.js');
+
 var Player = function(id) {
-    var self = {
 
-        //Client ID
-        id: id,
+    var self = Entity();
 
-        //Position
-        x: 255,
-        y: 255,
+    //Client ID
+    self.id         = id;
 
-        //Colour (Temporary!)
-        r: Math.floor(Math.random()*(255)+1),
-        g: Math.floor(Math.random()*(255)+1),
-        b: Math.floor(Math.random()*(255)+1),
+    //Colour (Temporary!)
+    self.r          = Math.floor(Math.random()*(255)+1);
+    self.g          = Math.floor(Math.random()*(255)+1);
+    self.b          = Math.floor(Math.random()*(255)+1);
 
-        //Movement
-        keyRight: false,
-        keyLeft: false,
-        keyUp: false,
-        keyDown: false,
-        speed: 10
+    //Movement
+    self.keyRight   = false;
+    self.keyLeft    = false;
+    self.keyUp      = false;
+    self.keyDown    = false;
+    self.speed      = 10;
 
-    };
-
+    //Functions
     self.updatePos = function() {
         if(self.keyRight)
             self.x += self.speed;

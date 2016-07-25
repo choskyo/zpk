@@ -46,10 +46,23 @@ document.onkeyup = function(event){
 socket.on('nP',function(data){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.clearRect(0,0,canvas.width,canvas.height);
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
     for(var i = 0 ; i < data.length; i++) {
         ctx.fillStyle = 'rgb(' + data[i].r + ',' + data[i].g + ',' + data[i].b + ')';
         ctx.fillRect(data[i].x, data[i].y, 100, 60);
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(data[i].x, data[i].y, 100, 60);
+    }
+});
+
+socket.on('stations', function(data) {
+    for(var s = 0; s < data.length; s++) {
+        ctx.fillStyle = 'rgb(' + data[s].r + ',' + data[s].g + ',' + data[s].b + ')';
+        ctx.fillRect(data[s].x, data[s].y, data[s].w, data[s].h);
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(data[s].x, data[s].y, data[s].w, data[s].h);
     }
 });
