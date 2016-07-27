@@ -15,10 +15,10 @@ console.log("Server started.");
 
 var Entity = require('./entity.js');
 var Player = require('./player.js');
+Player.list = {};
 var Station = require('./station.js');
 
 var socketList = {};
-var playerList = {};
 var stationList = [];
 
 var stat1 = new Station;
@@ -39,24 +39,12 @@ io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
 	console.log("Client " + socket.id + " connected.");
 
-	var player = Player(socket.id);
-	playerList[socket.id] = player;
-
 	socketList[socket.id] = socket;
 
-	socket.on('kP', function(p) {
-		if(p.input === 'left')
-			player.keyLeft = p.state;
-		else if(p.input === 'right')
-			player.keyRight = p.state;
-		else if(p.input === 'up')
-			player.keyUp = p.state;
-		else if(p.input === 'down')
-			player.keyDown = p.state;
-	});
+	Player.onConnect(socket);
 
 	socket.on('disconnect',function(){
-		delete playerList[socket.id];
+		Player.onDisconnect(socket);
 		delete socketList[socket.id];
 	});
 
@@ -64,29 +52,13 @@ io.sockets.on('connection', function(socket){
 
 setInterval(function(){
 
-	var pack = [];
+	var pack = Player.update();
 	var statPack = [];
 
 	for(var s in stationList) {
 		var station = stationList[s];
 
 		statPack.push(station);
-	}
-
-	for(var p in playerList){
-		var player = playerList[p];
-
-		//Check what's going on
-		player.updatePos();
-
-		//Push data to packet
-		pack.push({
-			x:player.x,
-			y:player.y,
-			r:player.r,
-			g:player.g,
-			b:player.b
-		});
 	}
 
 	for(var s2 in socketList){

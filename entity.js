@@ -5,7 +5,8 @@ var Entity = function() {
     var self = {
         x: 255,
         y: 255,
-        speed: 1,
+        speedX: 0,
+        speedY: 0,
         id: ""
     };
 
@@ -14,8 +15,8 @@ var Entity = function() {
     };
 
     self.updatePos = function() {
-        self.x += speed;
-        self.y += speed;
+        self.x += self.speedX;
+        self.y += self.speedY;
     };
 
     return self;
