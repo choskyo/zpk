@@ -3,6 +3,7 @@
  */
 
 var Entity = require('./entity.js');
+var Projectile = require ('./projectile.js');
 
 //Player Object
 var Player = function(id) {
@@ -17,6 +18,17 @@ var Player = function(id) {
     self.g          = Math.floor(Math.random()*(255)+1);
     self.b          = Math.floor(Math.random()*(255)+1);
 
+    //Misc info
+    self.centerX = 0;
+    self.centerY = 0;
+    self.attackMode = false;
+
+    //Mouse Info
+    self.mouseAngle = 0;
+    self.mouseX = 0;
+    self.mouseY = 0;
+    self.click = false;
+
     //Movement
     self.keyRight   = false;
     self.keyLeft    = false;
@@ -30,6 +42,26 @@ var Player = function(id) {
     self.update = function() {
         self.updateSpeed();
         superUpdate();
+
+        self.centerX = self.x+50;
+        self.centerY = self.y+30;
+
+        self.mouseAngle = Math.atan2(self.mouseY - self.centerY, self.mouseX - self.centerX) * 180 / Math.PI;
+
+        if(self.click) {
+            console.log("CX: " + self.centerX + " | CY: " + self.centerY);
+            console.log("X: " + self.mouseX + " | Y: " + self.mouseY);
+            console.log("A: " + self.mouseAngle + "deg");
+            self.pew(self.mouseAngle);
+        }
+
+    };
+
+    self.pew = function(angle) {
+        var p = Projectile(angle);
+
+        p.x = self.x + 50;
+        p.y = self.y + 30;
     };
 
     self.updateSpeed = function() {
@@ -70,6 +102,12 @@ Player.onConnect = function(socket) {
             player.keyUp = p.state;
         else if(p.input === 'down')
             player.keyDown = p.state;
+        else if(p.input === 'attack')
+            player.click = p.state;
+        else if(p.input === 'mousePos') {
+            player.mouseX = p.co.x;
+            player.mouseY = p.co.y;
+        }
     });
 };
 Player.onDisconnect = function(socket) {

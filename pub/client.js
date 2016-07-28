@@ -9,16 +9,18 @@ var ctx = document.getElementById("canvas").getContext("2d");
 ctx.font = '30px Arial';
 
 document.onmousedown = function(event){
-    socket.emit('kP',{inputId:'attack',state:true});
+    socket.emit('kP',{input:'attack',state:true});
 };
 document.onmouseup = function(event){
-    socket.emit('kP',{inputId:'attack',state:false});
+    socket.emit('kP',{input:'attack',state:false});
 };
 document.onmousemove = function(event){
-    var x = -250 + event.clientX - 8;
-    var y = -250 + event.clientY - 8;
-    var angle = Math.atan2(y,x) / Math.PI * 180;
-    socket.emit('kP',{inputId:'mouseAngle',state:angle});
+    var co = {
+        x: event.clientX,
+        y: event.clientY
+    };
+
+    socket.emit('kP',{input:'mousePos',co});
 };
 document.onkeydown = function(event){
     if(event.keyCode === 68)	//d
@@ -60,7 +62,7 @@ socket.on('updatePack',function(data){
         ctx.fillStyle = 'rgb(' + data.projectile[i].r + ',' + data.projectile[i].g + ',' + data.projectile[i].b + ')';
         ctx.fillRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
         ctx.strokeStyle = "#FFF";
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 1;
         ctx.strokeRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
     }
 

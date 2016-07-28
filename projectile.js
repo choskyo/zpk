@@ -12,8 +12,8 @@ var Projectile = function(ang) {
     self.id         = Math.random();
 
     //Overwrite speed vars
-    self.speedX = Math.cos(ang/180*Math.PI * 10);
-    self.speedY = Math.sin(ang/180*Math.PI * 10);
+    self.speedX = Math.cos(ang/180*Math.PI) * 10;
+    self.speedY = Math.sin(ang/180*Math.PI) * 10;
 
     //Colour (Temporary!)
     self.r          = 0;
@@ -38,10 +38,6 @@ var Projectile = function(ang) {
 
 Projectile.list = {};
 Projectile.update = function() {
-
-    if(Math.random() <0.1) {
-        Projectile(Math.random()*360);
-    }
 
     var pack = [];
     for(var p in Projectile.list){
