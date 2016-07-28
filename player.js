@@ -4,6 +4,7 @@
 
 var Entity = require('./entity.js');
 
+//Player Object
 var Player = function(id) {
 
     var self = Entity();
@@ -24,11 +25,11 @@ var Player = function(id) {
     self.maxSpeed   = 10;
 
     //Functions
-    var super_update = self.update;
+    var superUpdate = self.update;
 
     self.update = function() {
         self.updateSpeed();
-        super_update();
+        superUpdate();
     };
 
     self.updateSpeed = function() {

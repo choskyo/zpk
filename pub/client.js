@@ -2,7 +2,7 @@
  * Created by will on 14/07/16.
  */
 
-var socket = io('http://localhost:80');
+var socket = io('http://localhost:3000');
 
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
@@ -43,26 +43,56 @@ document.onkeyup = function(event){
 };
 
 
-socket.on('nP',function(data){
+socket.on('updatePack',function(data){
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    for(var i = 0 ; i < data.length; i++) {
-        ctx.fillStyle = 'rgb(' + data[i].r + ',' + data[i].g + ',' + data[i].b + ')';
-        ctx.fillRect(data[i].x, data[i].y, 100, 60);
+    for(let i = 0 ; i < data.player.length; i++) {
+        ctx.fillStyle = 'rgb(' + data.player[i].r + ',' + data.player[i].g + ',' + data.player[i].b + ')';
+        ctx.fillRect(data.player[i].x, data.player[i].y, 100, 60);
         ctx.strokeStyle = "#FFF";
         ctx.lineWidth = 5;
-        ctx.strokeRect(data[i].x, data[i].y, 100, 60);
+        ctx.strokeRect(data.player[i].x, data.player[i].y, 100, 60);
+    }
+
+    for(let i = 0 ; i < data.projectile.length; i++) {
+        ctx.fillStyle = 'rgb(' + data.projectile[i].r + ',' + data.projectile[i].g + ',' + data.projectile[i].b + ')';
+        ctx.fillRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
+    }
+
+    for(let i = 0 ; i < data.station.length; i++) {
+        ctx.fillStyle = 'rgb(' + data.station[i].r + ',' + data.station[i].g + ',' + data.station[i].b + ')';
+        ctx.fillRect(data.station[i].x, data.station[i].y, data.station[i].w, data.station[i].h);
+        ctx.strokeStyle = "#FFF";
+        ctx.lineWidth = 5;
+        ctx.strokeRect(data.station[i].x, data.station[i].y, data.station[i].w, data.station[i].h);
     }
 });
 
-socket.on('stations', function(data) {
-    for(var s = 0; s < data.length; s++) {
-        ctx.fillStyle = 'rgb(' + data[s].r + ',' + data[s].g + ',' + data[s].b + ')';
-        ctx.fillRect(data[s].x, data[s].y, data[s].w, data[s].h);
-        ctx.strokeStyle = "#FFF";
-        ctx.lineWidth = 5;
-        ctx.strokeRect(data[s].x, data[s].y, data[s].w, data[s].h);
-    }
-});
+function drawRotatedRect(x, y, width, height, degrees) {
+
+    // first save the untranslated/unrotated context
+    ctx.save();
+
+    ctx.beginPath();
+    // move the rotation point to the center of the rect
+    ctx.translate(x + width / 2, y + height / 2);
+    // rotate the rect
+    ctx.rotate(degrees * Math.PI / 180);
+
+    // draw the rect on the transformed context
+    // Note: after transforming [0,0] is visually [x,y]
+    //       so the rect needs to be offset accordingly when drawn
+    ctx.rect(-width / 2, -height / 2, width, height);
+
+    ctx.fillStyle = "gold";
+    ctx.fill();
+
+    // restore the context to its untranslated/unrotated state
+    ctx.restore();
+
+}

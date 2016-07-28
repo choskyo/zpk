@@ -4,31 +4,62 @@
 
 var Entity = require('./entity.js');
 
-var Projectile = function(id) {
+var Projectile = function(ang) {
 
     var self = Entity();
 
     //Client ID
-    self.id         = id;
+    self.id         = Math.random();
+
+    //Overwrite speed vars
+    self.speedX = Math.cos(ang/180*Math.PI * 10);
+    self.speedY = Math.sin(ang/180*Math.PI * 10);
 
     //Colour (Temporary!)
-    self.r          = Math.floor(Math.random()*(255)+1);
-    self.g          = Math.floor(Math.random()*(255)+1);
-    self.b          = Math.floor(Math.random()*(255)+1);
+    self.r          = 0;
+    self.g          = 125;
+    self.b          = 255;
 
-    //Functions
-    self.updatePos = function() {
-        if(self.keyRight)
-            self.x += self.speed;
-        if(self.keyLeft)
-            self.x -= self.speed;
-        if(self.keyUp)
-            self.y -= self.speed;
-        if(self.keyDown)
-            self.y += self.speed;
+    //Projectile specific
+    self.timeToKill = 0;
+    self.remove = 0;
+
+    var superUpdate = self.update;
+    self.update = function() {
+        if(self.timeToKill++ > 40) {
+            self.remove = 1;
+        }
+        superUpdate();
     };
 
+    Projectile.list[self.id] = self;
     return self;
+};
+
+Projectile.list = {};
+Projectile.update = function() {
+
+    if(Math.random() <0.1) {
+        Projectile(Math.random()*360);
+    }
+
+    var pack = [];
+    for(var p in Projectile.list){
+        var proj = Projectile.list[p];
+
+        //Check what's going on
+        proj.update();
+
+        //Push data to packet
+        pack.push({
+            x:proj.x,
+            y:proj.y,
+            r:proj.r,
+            g:proj.g,
+            b:proj.b
+        });
+    }
+    return pack;
 };
 
 module.exports = Projectile;

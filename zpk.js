@@ -10,29 +10,20 @@ app.get('/',function(req, res) {
 });
 app.use('/pub',express.static(__dirname + '/pub'));
 
-serv.listen(process.env.PORT || 80);
+serv.listen(process.env.PORT || 3000);
 console.log("Server started.");
 
 var Entity = require('./entity.js');
 var Player = require('./player.js');
-Player.list = {};
 var Station = require('./station.js');
+var Projectile = require('./projectile.js');
 
 var socketList = {};
-var stationList = [];
 
-var stat1 = new Station;
-stat1.name = "desu";
-stat1.x = 400;
-stat1.y = 500;
+var stat1 = new Station("desu", 400, 500);
 
-var stat2 = new Station;
-stat2.name = "desu";
-stat2.x = 100;
-stat2.y = 100;
+var stat2 = new Station("kawaii", 50, 50);
 
-stationList.push(stat1);
-stationList.push(stat2);
 
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
@@ -52,19 +43,15 @@ io.sockets.on('connection', function(socket){
 
 setInterval(function(){
 
-	var pack = Player.update();
-	var statPack = [];
-
-	for(var s in stationList) {
-		var station = stationList[s];
-
-		statPack.push(station);
-	}
+	var pack = {
+		player: Player.update(),
+		projectile: Projectile.update(),
+		station: Station.update()
+	};
 
 	for(var s2 in socketList){
 		var socket2 = socketList[s2];
-		socket2.emit('nP',pack);
-		socket2.emit('stations', statPack);
+		socket2.emit('updatePack',pack);
 	}
 
 },1000/33);
