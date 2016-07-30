@@ -39,6 +39,13 @@ io.sockets.on('connection', function(socket){
 		delete socketList[socket.id];
 	});
 
+	socket.on('clientMessage', function(message) {
+		var username = ("" + socket.id).slice(2, 7);
+		for(var u in socketList) {
+			socketList[u].emit('serverMessage', '[' + username + ']' + message);
+		}
+	})
+
 });
 
 setInterval(function(){

@@ -4,6 +4,27 @@
 
 var socket = io('http://localhost:3000');
 
+/**
+ * Chat
+ *
+ */
+var chatOutput = document.getElementById("chat-output");
+var chatInput = document.getElementById("chat-input");
+var chatForm = document.getElementById("chat-form");
+socket.on('serverMessage', function(message) {
+    chatOutput.innerHTML += "<div STYLE='color:white; font: 18px bold arial'>" + message + "</div>"
+});
+chatForm.onsubmit = function(e) {
+    e.preventDefault();
+
+    socket.emit('clientMessage', chatInput.value);
+    chatInput.value = '';
+};
+/**
+ *
+ * @type {Element}
+ */
+
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
 ctx.font = '30px Arial';

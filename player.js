@@ -49,9 +49,9 @@ var Player = function(id) {
         self.mouseAngle = Math.atan2(self.mouseY - self.centerY, self.mouseX - self.centerX) * 180 / Math.PI;
 
         if(self.click) {
-            console.log("CX: " + self.centerX + " | CY: " + self.centerY);
-            console.log("X: " + self.mouseX + " | Y: " + self.mouseY);
-            console.log("A: " + self.mouseAngle + "deg");
+            //console.log("CX: " + self.centerX + " | CY: " + self.centerY);
+            //console.log("X: " + self.mouseX + " | Y: " + self.mouseY);
+            //console.log("A: " + self.mouseAngle + "deg");
             self.pew(self.mouseAngle);
         }
 
