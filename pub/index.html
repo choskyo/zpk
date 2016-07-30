@@ -13,9 +13,14 @@
 			</canvas>
 		</div>
 
-		<div id="chat" style="left:0; bottom:0; height:200px; width:100%; background-color: rgb(0, 0, 255); opacity:0.3; position: absolute; z-index: 1">
-			<div id="chat-output" style="width:100%; margin: 0 0 10px 0; min-height:80%; opacity:1; overflow-y: scroll">
-				<div STYLE="color:white; font: 18px bold arial">[TESTY] HI THERE! </div>
+		<div id="chat" style=" left:0; bottom:0; height:200px; width:100%; background-color: rgb(0, 0, 255); opacity:0.3; position: absolute; z-index: 1">
+			<div id="chat-output" style="width:100%; margin: 0 0 10px 0; height:80%; opacity:1; overflow-y: scroll">
+				<div id="chatWelcome" STYLE="color:white; font: 18px bold arial">
+					<script>
+						var d = new Date();
+						document.getElementById("chatWelcome").innerHTML = "[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "]";
+					</script>
+				</div>
 			</div>
 			<form id="chat-form">
 				<input id="chat-input" type="text" style="width:100%; opacity:1"/>
