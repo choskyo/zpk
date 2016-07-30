@@ -29,10 +29,20 @@ var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
 	console.log("Client " + socket.id + " connected.");
-
 	socketList[socket.id] = socket;
 
-	Player.onConnect(socket);
+	socket.on('loginRequest', function(user) {
+		console.log('u: ' + user.username + ' | p : ' + user.password);
+		if(user.username == 'qwe' && user.password == 'asd') {
+			Player.onConnect(socket);
+			socket.emit('loginResponse', {success: true});
+		}
+		else {
+			socket.emit('loginResponse', {success: false});
+		}
+	});
+
+
 
 	socket.on('disconnect',function(){
 		Player.onDisconnect(socket);

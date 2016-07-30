@@ -5,6 +5,31 @@
 var socket = io('http://localhost:3000');
 
 /**
+ * Login
+ */
+var gameDiv         = document.getElementById("gameDiv");
+var splashScreen    = document.getElementById("splashScreen");
+var loginUsername   = document.getElementById("username");
+var loginPassword   = document.getElementById("password");
+var btnLogin        = document.getElementById("login");
+var btnRegister     = document.getElementById("register");
+var loginResponse   = document.getElementById("loginResponse");
+
+btnLogin.onclick = function() {
+    socket.emit('loginRequest', {username: loginUsername.value, password: loginPassword.value});
+};
+socket.on('loginResponse', function(response) {
+
+    if(response.success == true) {
+        splashScreen.style.display = 'none';
+        gameDiv.style.display = 'inline';
+    } else {
+        loginResponse.innerHTML = "Login failed.";
+    }
+});
+
+
+/**
  * Chat
  *
  */
@@ -20,11 +45,10 @@ chatForm.onsubmit = function(e) {
     socket.emit('clientMessage', chatInput.value);
     chatInput.value = '';
 };
-/**
- *
- * @type {Element}
- */
 
+/**
+ * Game
+ */
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
 ctx.font = '30px Arial';

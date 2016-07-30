@@ -43,7 +43,7 @@ var Projectile = function(p, ang) {
             }
         }
 
-        if(self.timeToKill++ > 20) {
+        if(self.timeToKill++ > 30) {
             self.remove = 1;
         }
     };
