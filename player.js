@@ -13,6 +13,9 @@ var Player = function(id) {
     //Client ID
     self.id         = id;
 
+    self.w = 100;
+    self.h = 60;
+
     //Colour (Temporary!)
     self.r          = Math.floor(Math.random()*(255)+1);
     self.g          = Math.floor(Math.random()*(255)+1);
@@ -58,7 +61,7 @@ var Player = function(id) {
     };
 
     self.pew = function(angle) {
-        var p = Projectile(angle);
+        var p = Projectile(self.id, angle);
 
         p.x = self.x + 50;
         p.y = self.y + 30;
@@ -88,7 +91,7 @@ var Player = function(id) {
 };
 
 //Static methods
-Player.list = {};
+exports.playerList = Player.list = {};
 Player.onConnect = function(socket) {
     var player = Player(socket.id);
 
@@ -125,6 +128,8 @@ Player.update = function() {
         pack.push({
             x:player.x,
             y:player.y,
+            w:player.w,
+            h:player.h,
             r:player.r,
             g:player.g,
             b:player.b
