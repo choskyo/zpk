@@ -24,7 +24,19 @@ socket.on('loginResponse', function(response) {
         splashScreen.style.display = 'none';
         gameDiv.style.display = 'inline';
     } else {
-        loginResponse.innerHTML = "Login failed.";
+        loginResponse.innerHTML = "Login failed :(";
+    }
+});
+
+btnRegister.onclick = function() {
+    socket.emit('regRequest', {username: loginUsername.value, password: loginPassword.value});
+};
+socket.on('regResponse', function(response) {
+    if(response.success == false) {
+        loginResponse.innerHTML = "Username taken :(";
+    } else {
+        loginResponse.style.color = "#AFA";
+        loginResponse.innerHTML = "Registration success! :D";
     }
 });
 

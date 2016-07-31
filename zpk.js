@@ -1,5 +1,5 @@
-//var mongojs = require("mongojs");
-//var db = mongojs('localhost:27017/myGame', ['account']);
+var Database = require("./database.js");
+var db = new Database();
 
 var express = require('express');
 var app = express();
@@ -32,14 +32,30 @@ io.sockets.on('connection', function(socket){
 	socketList[socket.id] = socket;
 
 	socket.on('loginRequest', function(user) {
-		console.log('u: ' + user.username + ' | p : ' + user.password);
-		if(user.username == 'qwe' && user.password == 'asd') {
-			Player.onConnect(socket);
-			socket.emit('loginResponse', {success: true});
-		}
-		else {
-			socket.emit('loginResponse', {success: false});
-		}
+		db.isPasswordValid(user, function(r) {
+			if(r) {
+				Player.onConnect(socket);
+				socket.emit('loginResponse', {success: true});
+			}
+			else {
+				socket.emit('loginResponse', {success: false});
+			}
+
+		});
+
+	});
+
+	socket.on('regRequest', function(user) {
+		db.isUserTaken(user, function(r) {
+			if(r) {
+				socket.emit('regResponse', {success: false});
+			}
+			else {
+				db.newUser(user, function(){
+					socket.emit('regResponse', {success: true});
+				});
+			}
+		})
 	});
 
 
