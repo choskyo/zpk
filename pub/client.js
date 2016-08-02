@@ -45,35 +45,59 @@ document.onkeyup = function(event){
 };
 
 
-socket.on('updatePack',function(data){
+socket.on('initPack', function(pack) {
+    for(var pl =0; pl < pack.player.length; pl++)
+        new Player(pack.player[i]);
+
+    for(var pr =0; pr < pack.player.length; pr++)
+        new Projectile(data.projectile[i]);
+});
+
+socket.on('updatePack', function(pack) {
+    for(var pl = 0; pl < pack.player.length; pl++) {
+        var packPlayer = pack.player[pl];
+        var player = Player.list[packPlayer.id];
+        if(player) {
+            if(packPlayer.x != undefined)
+                player.x = packPlayer.x;
+            if(packPlayer.y != undefined)
+                player.y = packPlayer.y;
+        }
+    }
+
+    for(var pr = 0; pr < pack.player.length; pr++) {
+        var packProj = pack.projectile[pr];
+        var projectile = Projectile.list[packProj.id];
+        if(projectile) {
+            if(packProj.x != undefined)
+                projectile.x = packProj.x;
+            if(packProj.y != undefined)
+                projectile.y = packProj.y;
+        }
+    }
+
+});
+
+socket.on('delPack', function(pack) {
+    for(var pl = 0; pl < pack.player.length; pl++)
+        delete Player.list[pack.player[pl]];
+
+    for(var pr = 0; pr < pack.player.length; pl++)
+        delete Projectile.list[pack.projectile[pr]];
+});
+
+setInterval(function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    for(let i = 0 ; i < data.player.length; i++) {
-        ctx.fillStyle = 'rgb(' + data.player[i].r + ',' + data.player[i].g + ',' + data.player[i].b + ')';
-        ctx.fillRect(data.player[i].x, data.player[i].y, 100, 60);
-        ctx.strokeStyle = "#FFF";
-        ctx.lineWidth = 5;
-        ctx.strokeRect(data.player[i].x, data.player[i].y, 100, 60);
-    }
+    for(var pl in Player.list)
+        ctx.fillRect(pl.x, pl.y, pl.w, pl.h);
 
-    for(let i = 0 ; i < data.projectile.length; i++) {
-        ctx.fillStyle = 'rgb(' + data.projectile[i].r + ',' + data.projectile[i].g + ',' + data.projectile[i].b + ')';
-        ctx.fillRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
-        ctx.strokeStyle = "#FFF";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(data.projectile[i].x, data.projectile[i].y, 10, 10);
-    }
+    for(var pr in Projectile.list)
+        ctx.fillRect(pr.x, pr.y, pr.w, pr.h);
 
-    for(let i = 0 ; i < data.station.length; i++) {
-        ctx.fillStyle = 'rgb(' + data.station[i].r + ',' + data.station[i].g + ',' + data.station[i].b + ')';
-        ctx.fillRect(data.station[i].x, data.station[i].y, data.station[i].w, data.station[i].h);
-        ctx.strokeStyle = "#FFF";
-        ctx.lineWidth = 5;
-        ctx.strokeRect(data.station[i].x, data.station[i].y, data.station[i].w, data.station[i].h);
-    }
-});
+}, 40);
 
 function drawRotatedRect(x, y, width, height, degrees) {
 
