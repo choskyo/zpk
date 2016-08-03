@@ -46,11 +46,11 @@ document.onkeyup = function(event){
 
 
 socket.on('initPack', function(pack) {
-    for(var pl =0; pl < pack.player.length; pl++)
-        new Player(pack.player[i]);
+    for(var pl =0; pl < pack.players.length; pl++)
+        new Player(pack.players[i]);
 
-    for(var pr =0; pr < pack.player.length; pr++)
-        new Projectile(data.projectile[i]);
+    for(var pr =0; pr < pack.projectiles.length; pr++)
+        new Projectile(pack.projectiles[i]);
 });
 
 socket.on('updatePack', function(pack) {

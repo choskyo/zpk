@@ -77,9 +77,9 @@ io.sockets.on('connection', function(socket){
 setInterval(function(){
 
 	var pack = {
-		player: Player.update(),
-		projectile: Projectile.update(),
-		station: Station.update()
+		players: Player.update(),
+		projectiles: Projectile.update(),
+		stations: Station.update()
 	};
 
 	for(var s2 in socketList){
