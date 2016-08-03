@@ -9,8 +9,16 @@ var Player = function (initPack) {
     self.w = initPack.w;
     self.h = initPack.h;
 
+    self.r = initPack.r;
+    self.g = initPack.g;
+    self.b = initPack.b;
+
     self.draw = function() {
+        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.fillRect(self.x, self.y, self.w, self.h);
+        ctx.strokeStyle = '#FFF';
+        ctx.lineWidth = 5;
+        ctx.strokeRect(self.x, self.y, self.w, self.h);
     };
 
     Player.list[self.id] = self;

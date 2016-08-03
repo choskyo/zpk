@@ -79,8 +79,7 @@ setInterval(function(){
 
 	var updatePack = {
 		players: Player.update(),
-		projectiles: Projectile.update(),
-		stations: Station.update()
+		projectiles: Projectile.update()
 	};
 
 	for(var s in socketList){

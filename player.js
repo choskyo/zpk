@@ -66,6 +66,9 @@ var Player = function(id) {
     var superUpdate = self.update;
 
     self.update = function() {
+
+        console.log(self.x + ',' + self.y);
+
         self.updateSpeed();
         superUpdate();
 
@@ -162,15 +165,7 @@ Player.update = function() {
         player.update();
 
         //Push data to packet
-        pack.push({
-            x:player.x,
-            y:player.y,
-            w:player.w,
-            h:player.h,
-            r:player.r,
-            g:player.g,
-            b:player.b
-        });
+        pack.push(player.getUpdatePack());
     }
     return pack;
 };
