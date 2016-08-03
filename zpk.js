@@ -17,6 +17,7 @@ var Entity = require('./entity.js');
 var Player = require('./player.js');
 var Station = require('./station.js');
 var Projectile = require('./projectile.js');
+var Pack = require('./pack.js');
 
 var socketList = {};
 
@@ -76,15 +77,23 @@ io.sockets.on('connection', function(socket){
 
 setInterval(function(){
 
-	var pack = {
+	var updatePack = {
 		players: Player.update(),
 		projectiles: Projectile.update(),
 		stations: Station.update()
 	};
 
-	for(var s2 in socketList){
-		var socket2 = socketList[s2];
-		socket2.emit('updatePack',pack);
+	for(var s in socketList){
+		var sock = socketList[s];
+		sock.emit('initPack', Pack.initPack);
+		sock.emit('updatePack', updatePack);
+		sock.emit('delPack', Pack.delPack);
 	}
 
-},1000/33);
+	Pack.initPack.players = [];
+	Pack.initPack.projectiles = [];
+
+	Pack.delPack.players = [];
+	Pack.delPack.projectiles = [];
+
+},1000/25);

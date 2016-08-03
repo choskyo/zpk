@@ -47,10 +47,10 @@ document.onkeyup = function(event){
 
 socket.on('initPack', function(pack) {
     for(var pl =0; pl < pack.players.length; pl++)
-        new Player(pack.players[i]);
+        new Player(pack.players[pl]);
 
     for(var pr =0; pr < pack.projectiles.length; pr++)
-        new Projectile(pack.projectiles[i]);
+        new Projectile(pack.projectiles[pr]);
 });
 
 socket.on('updatePack', function(pack) {
@@ -89,7 +89,8 @@ socket.on('delPack', function(pack) {
 setInterval(function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var pl in Player.list)
         ctx.fillRect(pl.x, pl.y, pl.w, pl.h);

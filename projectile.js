@@ -92,7 +92,7 @@ Projectile.update = function() {
         proj.update();
 
         if(proj.remove == 1) {
-            pack.delPack.projectiles.push(proj.id);
+            Pack.delPack.projectiles.push(proj.id);
             delete Projectile.list[p];
         }
         else {

@@ -150,7 +150,7 @@ Player.getAllPacks = function() {
     return players;
 };
 Player.onDisconnect = function(socket) {
-    Pack.delPack.push(socket.id);
+    Pack.delPack.players.push(socket.id);
     delete Player.list[socket.id];
 };
 Player.update = function() {
