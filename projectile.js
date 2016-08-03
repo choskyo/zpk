@@ -4,7 +4,7 @@
 
 var Entity = require('./entity.js');
 var Player = require('./player.js');
-
+var Pack = require('./pack.js');
 
 var Projectile = function(p, ang) {
 
@@ -26,6 +26,28 @@ var Projectile = function(p, ang) {
     //Projectile specific
     self.timeToKill = 0;
     self.remove = 0;
+
+    //Pack funcs
+    self.getInitPack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y,
+            w: self.w,
+            h: self.h,
+            r: self.r,
+            g: self.g,
+            b: self.b
+        }
+    };
+
+    self.getUpdatePack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y
+        }
+    };
 
     var superUpdate = self.update;
 
@@ -49,10 +71,17 @@ var Projectile = function(p, ang) {
     };
 
     Projectile.list[self.id] = self;
+    Pack.initPack.projectiles.push(self.getInitPack());
     return self;
 };
 
 Projectile.list = {};
+Projectile.getAllPacks = function() {
+    var projectiles = [];
+    for(var p in Projectile.list)
+        projectiles.push(Projectile.list[p].getInitPack());
+    return projectiles;
+};
 Projectile.update = function() {
 
     var pack = [];
@@ -63,17 +92,12 @@ Projectile.update = function() {
         proj.update();
 
         if(proj.remove == 1) {
+            pack.delPack.projectiles.push(proj.id);
             delete Projectile.list[p];
         }
         else {
             //Push data to packet
-            pack.push({
-                x:proj.x,
-                y:proj.y,
-                r:proj.r,
-                g:proj.g,
-                b:proj.b
-            });
+            pack.push(proj.getUpdatePack());
         }
 
 

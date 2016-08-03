@@ -4,6 +4,7 @@
 
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
+var Pack = require('./pack.js');
 
 //Player Object
 var Player = function(id) {
@@ -38,6 +39,28 @@ var Player = function(id) {
     self.keyUp      = false;
     self.keyDown    = false;
     self.maxSpeed   = 10;
+
+    //Pack funcs
+    self.getInitPack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y,
+            w: self.w,
+            h: self.h,
+            r: self.r,
+            g: self.g,
+            b: self.b
+        }
+    };
+
+    self.getUpdatePack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y
+        }
+    };
 
     //Functions
     var superUpdate = self.update;
@@ -87,6 +110,8 @@ var Player = function(id) {
 
     Player.list[id] = self;
 
+    Pack.initPack.players.push(self.getInitPack());
+
     return self;
 };
 
@@ -112,8 +137,20 @@ Player.onConnect = function(socket) {
             player.mouseY = p.co.y;
         }
     });
+
+    socket.emit('initPack', {
+        players: Player.getAllPacks(),
+        projectiles: Projectile.getAllPacks()
+    });
+};
+Player.getAllPacks = function() {
+    var players = [];
+    for(var p in Player.list)
+        players.push(Player.list[p].getInitPack());
+    return players;
 };
 Player.onDisconnect = function(socket) {
+    Pack.delPack.push(socket.id);
     delete Player.list[socket.id];
 };
 Player.update = function() {

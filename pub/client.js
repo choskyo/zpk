@@ -54,8 +54,8 @@ socket.on('initPack', function(pack) {
 });
 
 socket.on('updatePack', function(pack) {
-    for(var pl = 0; pl < pack.player.length; pl++) {
-        var packPlayer = pack.player[pl];
+    for(var pl = 0; pl < pack.players.length; pl++) {
+        var packPlayer = pack.players[pl];
         var player = Player.list[packPlayer.id];
         if(player) {
             if(packPlayer.x != undefined)
@@ -65,8 +65,8 @@ socket.on('updatePack', function(pack) {
         }
     }
 
-    for(var pr = 0; pr < pack.player.length; pr++) {
-        var packProj = pack.projectile[pr];
+    for(var pr = 0; pr < pack.projectiles.length; pr++) {
+        var packProj = pack.projectiles[pr];
         var projectile = Projectile.list[packProj.id];
         if(projectile) {
             if(packProj.x != undefined)
@@ -79,11 +79,11 @@ socket.on('updatePack', function(pack) {
 });
 
 socket.on('delPack', function(pack) {
-    for(var pl = 0; pl < pack.player.length; pl++)
-        delete Player.list[pack.player[pl]];
+    for(var pl = 0; pl < pack.players.length; pl++)
+        delete Player.list[pack.players[pl]];
 
-    for(var pr = 0; pr < pack.player.length; pl++)
-        delete Projectile.list[pack.projectile[pr]];
+    for(var pr = 0; pr < pack.projectiles.length; pl++)
+        delete Projectile.list[pack.projectiles[pr]];
 });
 
 setInterval(function() {
