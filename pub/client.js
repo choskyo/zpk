@@ -46,44 +46,45 @@ document.onkeyup = function(event){
 
 
 socket.on('initPack', function(pack) {
-    for(var pl =0; pl < pack.players.length; pl++)
-        new Player(pack.players[pl]);
-
-    for(var pr =0; pr < pack.projectiles.length; pr++)
-        new Projectile(pack.projectiles[pr]);
+    for(var i = 0 ; i < pack.players.length; i++){
+        new Player(pack.players[i]);
+    }
+    for(var j = 0 ; j < pack.projectiles.length; j++){
+        new Projectile(pack.projectiles[j]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
-    for(var pl = 0; pl < pack.players.length; pl++) {
-        var packPlayer = pack.players[pl];
-        var player = Player.list[packPlayer.id];
+    for(var i = 0; i < pack.players.length; i++) {
+        var p = pack.players[i];
+        var player = Player.list[p.id];
         if(player) {
-            if(packPlayer.x != undefined)
-                player.x = packPlayer.x;
-            if(packPlayer.y != undefined)
-                player.y = packPlayer.y;
+            if(p.x != undefined)
+                player.x = p.x;
+            if(p.y != undefined)
+                player.y = p.y;
         }
     }
 
-    for(var pr = 0; pr < pack.projectiles.length; pr++) {
-        var packProj = pack.projectiles[pr];
-        var projectile = Projectile.list[packProj.id];
+    for(var j = 0; j < pack.projectiles.length; j++) {
+        var q = pack.projectiles[j];
+        var projectile = Projectile.list[q.id];
         if(projectile) {
-            if(packProj.x != undefined)
-                projectile.x = packProj.x;
-            if(packProj.y != undefined)
-                projectile.y = packProj.y;
+            if(q.x != undefined)
+                projectile.x = q.x;
+            if(q.y != undefined)
+                projectile.y = q.y;
         }
     }
 
 });
 
 socket.on('delPack', function(pack) {
-    for(var pl = 0; pl < pack.players.length; pl++)
-        delete Player.list[pack.players[pl]];
+    for(var i = 0; i < pack.players.length; i++)
+        delete Player.list[pack.players[i]];
 
-    for(var pr = 0; pr < pack.projectiles.length; pl++)
-        delete Projectile.list[pack.projectiles[pr]];
+    for(var j = 0; j < pack.projectiles.length; j++)
+        delete Projectile.list[pack.projectiles[j]];
 });
 
 setInterval(function() {
@@ -93,33 +94,9 @@ setInterval(function() {
     //ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     for(var pl in Player.list)
-        ctx.fillRect(pl.x, pl.y, pl.w, pl.h);
+        Player.list[pl].draw();
 
     for(var pr in Projectile.list)
-        ctx.fillRect(pr.x, pr.y, pr.w, pr.h);
+        Projectile.list[pr].draw();
 
 }, 40);
-
-function drawRotatedRect(x, y, width, height, degrees) {
-
-    // first save the untranslated/unrotated context
-    ctx.save();
-
-    ctx.beginPath();
-    // move the rotation point to the center of the rect
-    ctx.translate(x + width / 2, y + height / 2);
-    // rotate the rect
-    ctx.rotate(degrees * Math.PI / 180);
-
-    // draw the rect on the transformed context
-    // Note: after transforming [0,0] is visually [x,y]
-    //       so the rect needs to be offset accordingly when drawn
-    ctx.rect(-width / 2, -height / 2, width, height);
-
-    ctx.fillStyle = "gold";
-    ctx.fill();
-
-    // restore the context to its untranslated/unrotated state
-    ctx.restore();
-
-}
