@@ -79,7 +79,8 @@ setInterval(function(){
 
 	var updatePack = {
 		players: Player.update(),
-		projectiles: Projectile.update()
+		projectiles: Projectile.update(),
+		stations: Station.update()
 	};
 
 	for(var s in socketList){
@@ -91,8 +92,10 @@ setInterval(function(){
 
 	Pack.initPack.players = [];
 	Pack.initPack.projectiles = [];
+	Pack.initPack.stations = [];
 
 	Pack.delPack.players = [];
 	Pack.delPack.projectiles = [];
+	Pack.delPack.stations = [];
 
 },1000/25);

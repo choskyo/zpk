@@ -52,6 +52,9 @@ socket.on('initPack', function(pack) {
     for(var j = 0 ; j < pack.projectiles.length; j++){
         new Projectile(pack.projectiles[j]);
     }
+    for(var k = 0; k < pack.stations.length; k++) {
+        new Station(pack.stations[k]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
@@ -77,6 +80,17 @@ socket.on('updatePack', function(pack) {
         }
     }
 
+    for(var k = 0; k < pack.stations.length; k++) {
+        var r = pack.stations[k];
+        var station = Station.list[r.id];
+        if(station) {
+            if(r.x != undefined)
+                station.x = r.x;
+            if(r.y != undefined)
+                station.y = r.y;
+        }
+    }
+
 });
 
 socket.on('delPack', function(pack) {
@@ -98,5 +112,8 @@ setInterval(function() {
 
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
+
+    for(var st in Station.list)
+        Station.list[st].draw();
 
 }, 40);

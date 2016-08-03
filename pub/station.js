@@ -1,7 +1,7 @@
 /**
- * Created by will on 02/08/16.
+ * Created by will on 03/08/16.
  */
-var Projectile = function(initPack) {
+var Station = function(initPack) {
     var self = {};
     self.id = initPack.id;
     self.x = initPack.x;
@@ -16,13 +16,13 @@ var Projectile = function(initPack) {
         ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.fillRect(self.x, self.y, self.w, self.h);
         ctx.strokeStyle = '#FFF';
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 5;
         ctx.strokeRect(self.x, self.y, self.w, self.h);
     };
 
-    Projectile.list[self.id] = self;
+    Station.list[self.id] = self;
 
     return self;
 };
 
-Projectile.list = {};
+Station.list = {};

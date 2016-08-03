@@ -3,10 +3,12 @@
  */
 exports.initPack = {
     players:[],
-    projectiles:[]
+    projectiles:[],
+    stations:[]
 };
 
 exports.delPack = {
     players:[],
-    projectiles:[]
+    projectiles:[],
+    stations:[]
 };

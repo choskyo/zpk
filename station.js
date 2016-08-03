@@ -3,6 +3,7 @@
  */
 
 var Entity = require('./entity.js');
+var Pack = require('./pack.js');
 
 var Station = function(name, x, y) {
 
@@ -25,6 +26,28 @@ var Station = function(name, x, y) {
     self.g = Math.floor(Math.random() * (255) + 1);
     self.b = Math.floor(Math.random() * (255) + 1);
 
+    //Pack funcs
+    self.getInitPack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y,
+            w: self.w,
+            h: self.h,
+            r: self.r,
+            g: self.g,
+            b: self.b
+        }
+    };
+
+    self.getUpdatePack = function() {
+        return {
+            id: self.id,
+            x: self.x,
+            y: self.y
+        }
+    };
+
     //Functions
     var superUpdate = self.update;
 
@@ -38,7 +61,12 @@ var Station = function(name, x, y) {
 };
 
 Station.list = {};
-
+Station.getAllPacks = function() {
+    var stations = [];
+    for(var s in Station.list)
+        stations.push(Station.list[s].getInitPack());
+    return stations;
+};
 Station.update = function() {
     var pack = [];
 
@@ -48,15 +76,7 @@ Station.update = function() {
 
         station.update();
 
-        pack.push({
-            x:station.x,
-            y:station.y,
-            w:station.w,
-            h:station.h,
-            r:station.r,
-            g:station.g,
-            b:station.b
-        })
+        pack.push(station.getUpdatePack());
     }
     return pack;
 };

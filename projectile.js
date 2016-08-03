@@ -14,6 +14,9 @@ var Projectile = function(p, ang) {
     self.id         = Math.random();
     self.parentId = p;
 
+    self.w = 10;
+    self.h = 10;
+
     //Overwrite speed vars
     self.speedX = Math.cos(ang/180*Math.PI) * 10;
     self.speedY = Math.sin(ang/180*Math.PI) * 10;
@@ -52,10 +55,7 @@ var Projectile = function(p, ang) {
     var superUpdate = self.update;
 
     self.update = function() {
-
-
         superUpdate();
-
 
         for(var player in Player.playerList) {
             var p = Player.playerList[player];

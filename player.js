@@ -4,6 +4,7 @@
 
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
+var Station = require ('./station.js');
 var Pack = require('./pack.js');
 
 //Player Object
@@ -66,8 +67,6 @@ var Player = function(id) {
     var superUpdate = self.update;
 
     self.update = function() {
-
-        console.log(self.x + ',' + self.y);
 
         self.updateSpeed();
         superUpdate();
@@ -143,7 +142,8 @@ Player.onConnect = function(socket) {
 
     socket.emit('initPack', {
         players: Player.getAllPacks(),
-        projectiles: Projectile.getAllPacks()
+        projectiles: Projectile.getAllPacks(),
+        stations: Station.getAllPacks()
     });
 };
 Player.getAllPacks = function() {
