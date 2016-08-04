@@ -2,8 +2,8 @@
  * Created by will on 31/07/16.
  */
 module.exports = function() {
-    var mongojs = require("mongojs");
-    var db = mongojs('localhost:27017/zpk1', ['account']);
+    var mongojs = require("mongojs"); var Station = require('./station.js');
+    var db = mongojs('localhost:27017/zpk1', ['account', 'station']);
 
 
     this.isPasswordValid = function(pack, callback) {
@@ -33,4 +33,14 @@ module.exports = function() {
             callback();
         });
     };
+
+    this.getStations = function() {
+        db.station.find(function(error, result) {
+            if(result.length > 0) {
+                for(var i = 0; i < result.length; i++) {
+                    new Station(result[i].name, result[i].x, result[i].y);
+                }
+            }
+        });
+    }
 };

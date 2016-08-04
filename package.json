@@ -1,8 +1,8 @@
 {
-  "name": "project",
-  "version": "1.0.0",
+  "name": "zpk",
+  "version": "0.1",
   "description": "",
-  "main": "app.js",
+  "main": "zpk.js",
   "dependencies": {
     "express": "^4.13.4",
     "socket.io": "^1.4.5"

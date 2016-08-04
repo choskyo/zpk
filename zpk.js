@@ -1,4 +1,4 @@
-var Database = require("./database.js");
+var Database = require("./database.js"); 
 var db = new Database();
 
 var express = require('express');
@@ -21,10 +21,7 @@ var Pack = require('./pack.js');
 
 var socketList = {};
 
-var stat1 = new Station("desu", 400, 500);
-
-var stat2 = new Station("kawaii", 50, 50);
-
+db.getStations();
 
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
