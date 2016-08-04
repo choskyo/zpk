@@ -44,8 +44,10 @@ document.onkeyup = function(event){
         socket.emit('kP',{input:'up',state:false});
 };
 
-
 socket.on('initPack', function(pack) {
+    if(pack.ownId)
+        ownId = pack.ownId;
+
     for(var i = 0 ; i < pack.players.length; i++){
         new Player(pack.players[i]);
     }
@@ -102,6 +104,8 @@ socket.on('delPack', function(pack) {
 });
 
 setInterval(function() {
+    if(!ownId)
+        return;
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);

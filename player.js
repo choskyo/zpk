@@ -141,6 +141,7 @@ Player.onConnect = function(socket) {
     });
 
     socket.emit('initPack', {
+        ownId: socket.id,
         players: Player.getAllPacks(),
         projectiles: Projectile.getAllPacks(),
         stations: Station.getAllPacks()
