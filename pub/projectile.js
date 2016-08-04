@@ -13,8 +13,8 @@ var Projectile = function(initPack) {
     self.b = initPack.b;
 
     self.draw = function() {
-        var x = self.x - Player.list[ownId].x + canvas.width/2;
-        var y = self.y - Player.list[ownId].y + canvas.height/2;
+        var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
+        var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
         ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.fillRect(x, y, self.w, self.h);
