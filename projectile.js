@@ -18,8 +18,8 @@ var Projectile = function(p, ang) {
     self.h = 10;
 
     //Overwrite speed vars
-    self.speedX = (Math.cos(ang/180*Math.PI) * 10) + Player.playerList[self.parentId].speedX;
-    self.speedY = Math.sin(ang/180*Math.PI) * 10 + Player.playerList[self.parentId].speedY;
+    self.speedX = (Math.cos(ang/180*Math.PI) * 20) + Player.playerList[self.parentId].speedX;
+    self.speedY = Math.sin(ang/180*Math.PI) * 20 + Player.playerList[self.parentId].speedY;
 
     //Colour (Temporary!)
     self.r          = 0;
@@ -29,6 +29,8 @@ var Projectile = function(p, ang) {
     //Projectile specific
     self.timeToKill = 0;
     self.remove = 0;
+    self.maxShields = 1;
+    self.shields = 1;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -40,7 +42,9 @@ var Projectile = function(p, ang) {
             h: self.h,
             r: self.r,
             g: self.g,
-            b: self.b
+            b: self.b,
+            shields: self.shields,
+            maxShields: self.maxShields
         }
     };
 
@@ -48,7 +52,8 @@ var Projectile = function(p, ang) {
         return {
             id: self.id,
             x: self.x,
-            y: self.y
+            y: self.y,
+            shields: self.shields
         }
     };
 
@@ -59,9 +64,16 @@ var Projectile = function(p, ang) {
 
         for(var player in Player.playerList) {
             var p = Player.playerList[player];
-            
+
             if(self.intersects(p) && self.parentId != p.id) {
+                p.shields -= 1;
                 self.remove = 1;
+
+                if(p.shields <= 0) {
+                    p.shields = p.maxShields;
+                    p.x = Math.random() * 600;
+                    p.y = Math.random() * 600;
+                }
             }
         }
 

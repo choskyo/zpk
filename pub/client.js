@@ -70,6 +70,8 @@ socket.on('updatePack', function(pack) {
                 player.x = p.x;
             if(p.y != undefined)
                 player.y = p.y;
+            if(p.shields != undefined)
+                player.shields = p.shields;
         }
     }
 
@@ -81,6 +83,8 @@ socket.on('updatePack', function(pack) {
                 projectile.x = q.x;
             if(q.y != undefined)
                 projectile.y = q.y;
+            if(q.shields != undefined)
+                projectile.shields = q.shields;
         }
     }
 

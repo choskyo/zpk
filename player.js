@@ -24,6 +24,9 @@ var Player = function(id) {
     self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
+    self.killCount = 0;
+    self.maxShields = 4;
+    self.shields = 4;
     self.centerX = 0;
     self.centerY = 0;
     self.attackMode = false;
@@ -42,7 +45,7 @@ var Player = function(id) {
     self.keyLeft    = false;
     self.keyUp      = false;
     self.keyDown    = false;
-    self.maxSpeed   = 10;
+    self.maxSpeed   = 20;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -54,7 +57,9 @@ var Player = function(id) {
             h: self.h,
             r: self.r,
             g: self.g,
-            b: self.b
+            b: self.b,
+            shields: self.shields,
+            maxShields: self.maxShields
         }
     };
 
@@ -62,7 +67,8 @@ var Player = function(id) {
         return {
             id: self.id,
             x: self.x,
-            y: self.y
+            y: self.y,
+            shields: self.shields
         }
     };
 
@@ -84,7 +90,7 @@ var Player = function(id) {
             self.canShoot = false;
             setTimeout(function() {
                 self.canShoot = true;
-            }, 2000);
+            }, 500);
         }
 
     };

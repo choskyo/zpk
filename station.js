@@ -13,8 +13,6 @@ var Station = function(name, x, y) {
     self.id = Math.random();
     self.name = name;
 
-    self.angle = 0;
-
     self.x = x;
     self.y = y;
 

@@ -19,7 +19,7 @@
 					Password:
 				</label>
 
-				<input id="password" type="password" class="form-control">
+				<input id="password" type="password" class="form-control" disabled>
 
 				<button id="login" class="btn btn-success">Sign In</button>
 				<button id="register" class="btn btn-info">Register</button>
@@ -32,7 +32,7 @@
 				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
 			</canvas>
 
-			<div id="chat" style=" left:0; bottom:0; height:200px; width:100%; background-color: rgb(0, 0, 255); opacity:0.3; position: absolute; z-index: 1">
+			<div id="chat" style=" left:0; bottom:0; height:200px; width:100%; background-color: rgb(0, 0, 255); opacity:0.8; position: absolute; z-index: 1">
 				<div id="chat-output" style="width:100%; margin: 0 0 10px 0; height:80%; opacity:1; overflow-y: scroll">
 					<div id="chatWelcome" STYLE="color:white; font: 18px bold arial">
 						<script>
@@ -42,8 +42,12 @@
 					</div>
 				</div>
 				<form id="chat-form">
-					<input id="chat-input" type="text" style="width:100%; opacity:1"/>
+					<input id="chat-input" type="text" style="width:100%; opacity:1; color:white; background-color:black"/>
 				</form>
+			</div>
+
+			<div id="shields" style="left: 0; top:0; height:60px; width:100%; background-color: blue; opacity: 1; position:absolute; z-index: 1">
+				<div id="shieldsDisplay" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial">Shields: </div>
 			</div>
 		</div>
 	</body>

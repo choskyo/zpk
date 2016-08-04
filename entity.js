@@ -9,7 +9,10 @@ var Entity = function() {
         h: 0,
         speedX: 0,
         speedY: 0,
-        id: ""
+        id: "",
+        angle: 0,
+        maxShields: 999,
+        shields: 999
     };
 
     self.intersects = function(extEntity) {
