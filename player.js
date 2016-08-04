@@ -27,6 +27,7 @@ var Player = function(id) {
     self.centerX = 0;
     self.centerY = 0;
     self.attackMode = false;
+    self.canShoot = true;
 
     //Mouse Info
     self.mouseAngle = 0;
@@ -78,11 +79,12 @@ var Player = function(id) {
 
         self.mouseAngle = Math.atan2(self.mouseY - self.screenCenterY, self.mouseX - self.screenCenterX) * 180 / Math.PI;
 
-        if(self.click) {
-            //console.log("CX: " + self.centerX + " | CY: " + self.centerY);
-            //console.log("X: " + self.mouseX + " | Y: " + self.mouseY);
-            //console.log("A: " + self.mouseAngle + "deg");
+        if(self.click && self.canShoot) {
             self.pew(self.mouseAngle);
+            self.canShoot = false;
+            setTimeout(function() {
+                self.canShoot = true;
+            }, 2000);
         }
 
     };
