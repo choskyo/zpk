@@ -17,7 +17,9 @@ document.onmouseup = function(event){
 document.onmousemove = function(event){
     var co = {
         x: event.clientX,
-        y: event.clientY
+        y: event.clientY,
+        centerX: window.innerWidth/2,
+        centerY: window.innerHeight/2
     };
 
     socket.emit('kP',{input:'mousePos',co});

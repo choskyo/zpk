@@ -30,6 +30,8 @@ var Player = function(id) {
 
     //Mouse Info
     self.mouseAngle = 0;
+    self.screenCenterX = 0;
+    self.screenCenterY = 0;
     self.mouseX = 0;
     self.mouseY = 0;
     self.click = false;
@@ -74,7 +76,7 @@ var Player = function(id) {
         self.centerX = self.x+50;
         self.centerY = self.y+30;
 
-        self.mouseAngle = Math.atan2(self.mouseY - self.centerY, self.mouseX - self.centerX) * 180 / Math.PI;
+        self.mouseAngle = Math.atan2(self.mouseY - self.screenCenterY, self.mouseX - self.screenCenterX) * 180 / Math.PI;
 
         if(self.click) {
             //console.log("CX: " + self.centerX + " | CY: " + self.centerY);
@@ -135,6 +137,8 @@ Player.onConnect = function(socket) {
         else if(p.input === 'attack')
             player.click = p.state;
         else if(p.input === 'mousePos') {
+            player.screenCenterX = p.co.centerX;
+            player.screenCenterY = p.co.centerY;
             player.mouseX = p.co.x;
             player.mouseY = p.co.y;
         }
