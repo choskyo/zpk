@@ -1,28 +1,35 @@
-var Database = require("./database.js"); 
+//Use db object as if it was a MVC repo
+var Database = require("./database.js");
 var db = new Database();
 
-var express = require('express');
-var app = express();
-var serv = require('http').Server(app);
-
-app.get('/',function(req, res) {
-	res.sendFile(__dirname + '/pub/index.html');
-});
-app.use('/pub',express.static(__dirname + '/pub'));
-
-serv.listen(process.env.PORT || 3000);
-console.log("Server started.");
-
+//Fetch serverside game classes
 var Entity = require('./entity.js');
 var Player = require('./player.js');
 var Station = require('./station.js');
 var Projectile = require('./projectile.js');
+//All packs should be defined in below file
 var Pack = require('./pack.js');
+
+//Standard nodejs setup
+var express = require('express');
+var app = express();
+var serv = require('http').Server(app);
+app.get('/',function(req, res) {
+	res.sendFile(__dirname + '/pub/index.html');
+});
+app.use('/pub',express.static(__dirname + '/pub'));
+serv.listen(process.env.PORT || 3000);
+
+console.log("Server started.");
 
 var socketList = {};
 
+//Fetch permanent entities from db
 db.getStations();
+//db.getDrones
+//db.getOtherStuff etc
 
+//Anything to do with receiving + sending packs to clients
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
@@ -38,11 +45,8 @@ io.sockets.on('connection', function(socket){
 			else {
 				socket.emit('loginResponse', {success: false});
 			}
-
 		});
-
 	});
-
 	socket.on('regRequest', function(user) {
 		db.isUserTaken(user, function(r) {
 			if(r) {
@@ -55,23 +59,21 @@ io.sockets.on('connection', function(socket){
 			}
 		})
 	});
-
-
-
 	socket.on('disconnect',function(){
 		Player.onDisconnect(socket);
 		delete socketList[socket.id];
 	});
 
+	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
 		var username = ("" + socket.id).slice(2, 7);
 		for(var u in socketList) {
 			socketList[u].emit('serverMessage', '[' + username + ']' + message);
 		}
 	})
-
 });
 
+//25?FPS loop
 setInterval(function(){
 
 	var updatePack = {
@@ -95,4 +97,4 @@ setInterval(function(){
 	Pack.delPack.projectiles = [];
 	Pack.delPack.stations = [];
 
-},1000/25);
+},40);
