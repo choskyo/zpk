@@ -2,7 +2,7 @@
  * Created by will on 14/07/16.
  */
 
-var socket = io('http://82.45.35.98:3000');
+var socket = io('http://localhost:3000');
 
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
@@ -72,6 +72,8 @@ socket.on('updatePack', function(pack) {
                 player.y = p.y;
             if(p.shields != undefined)
                 player.shields = p.shields;
+            if(p.storage != undefined)
+                player.storage = p.storage;
         }
     }
 

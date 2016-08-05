@@ -16,6 +16,8 @@ var Player = function (initPack) {
     self.shields = initPack.shields;
     self.maxShields = initPack.maxShields;
 
+    self.storage = initPack.storage;
+
     self.draw = function() {
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
@@ -35,6 +37,16 @@ var Player = function (initPack) {
         ctx.fillRect(x, y - 40, barWidth, 6);
 
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
+
+        self.drawInventory();
+    };
+
+    self.drawInventory = function() {
+        storage.innerHTML = '<div id="Items" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial">----Items----</div>'
+
+        for(var i in Player.list[ownId].storage) {
+            storage.innerHTML += "<div style='font: 12pt arial bold'>" + '[' + Player.list[ownId].storage[i].amount + '] ' + Player.list[ownId].storage[i].name + "</div>";
+        }
     };
 
     Player.list[self.id] = self;

@@ -16,9 +16,18 @@ var Entity = function() {
     };
 
     self.storage = {
-        kaching: 100,
-        pew: 30,
-        zoom: 10
+        kaching: {
+            name: 'kaching',
+            amount: 10
+        },
+        pew: {
+            name: 'pew',
+            amount: 5
+        },
+        zoom: {
+            name: 'zoom',
+            amount: 2
+        }
     };
 
     self.intersects = function(extEntity) {
