@@ -45,6 +45,7 @@ var Player = function(id) {
     self.keyLeft    = false;
     self.keyUp      = false;
     self.keyDown    = false;
+    self.speed      = 0;
     self.maxSpeed   = 20;
 
     //Pack funcs
@@ -105,21 +106,23 @@ var Player = function(id) {
     };
 
     self.updateSpeed = function() {
-        if(self.keyRight)
-        {
-            self.speedX = self.maxSpeed;
+        if(self.keyRight) {
+            if(self.maxSpeed > self.speedX)
+                self.speedX += 1;
         }
-        else if(self.keyLeft)
-            self.speedX = -self.maxSpeed;
-        else
-            self.speedX = 0;
+        else if(self.keyLeft) {
+            if(self.speedX > -self.maxSpeed)
+                self.speedX -= 1;
+        }
 
-        if(self.keyUp)
-            self.speedY = -self.maxSpeed;
-        else if(self.keyDown)
-            self.speedY = self.maxSpeed;
-        else
-            self.speedY = 0;
+        if(self.keyUp) {
+            if(self.speedY > -self.maxSpeed)
+                self.speedY -=1;
+        }
+        else if(self.keyDown) {
+            if(self.speedY < self.maxSpeed)
+                self.speedY += 1;
+        }
     };
 
     Player.list[id] = self;
