@@ -59,7 +59,8 @@ var Player = function(id) {
             g: self.g,
             b: self.b,
             shields: self.shields,
-            maxShields: self.maxShields
+            maxShields: self.maxShields,
+            storage: self.storage
         }
     };
 
@@ -68,7 +69,8 @@ var Player = function(id) {
             id: self.id,
             x: self.x,
             y: self.y,
-            shields: self.shields
+            shields: self.shields,
+            storage: self.storage
         }
     };
 

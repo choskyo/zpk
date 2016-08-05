@@ -15,6 +15,12 @@ var Entity = function() {
         shields: 999
     };
 
+    self.storage = {
+        kaching: 100,
+        pew: 30,
+        zoom: 10
+    };
+
     self.intersects = function(extEntity) {
         return !(extEntity.x > self.x + self.w ||
         extEntity.x + extEntity.w < self.x ||
