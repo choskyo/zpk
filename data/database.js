@@ -38,7 +38,7 @@ module.exports = function() {
         db.station.find(function(error, result) {
             if(result.length > 0) {
                 for(var i = 0; i < result.length; i++) {
-                    new Station(result[i].name, result[i].x, result[i].y);
+                    new Station(result[i].name, result[i].x, result[i].y, result[i].area);
                 }
             }
         });

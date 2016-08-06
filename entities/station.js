@@ -5,7 +5,7 @@
 var Entity = require('./entity.js');
 var Pack = require('./../data/pack.js');
 
-var Station = function(name, x, y) {
+var Station = function(name, x, y, area) {
 
     var self = Entity();
 
@@ -23,6 +23,8 @@ var Station = function(name, x, y) {
     self.r = Math.floor(Math.random() * (255) + 1);
     self.g = Math.floor(Math.random() * (255) + 1);
     self.b = Math.floor(Math.random() * (255) + 1);
+
+    self.area = area;
 
     //Pack funcs
     self.getInitPack = function() {
