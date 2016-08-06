@@ -46,7 +46,7 @@ var Player = function(id) {
     self.keyUp      = false;
     self.keyDown    = false;
     self.speed      = 0;
-    self.maxSpeed   = 20;
+    self.maxSpeed   = 10;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -107,6 +107,9 @@ var Player = function(id) {
     };
 
     self.updateSpeed = function() {
+
+        //console.log('X: ' + self.speedX + ' Y: ' + self.speedY);
+
         if(self.keyRight) {
             if(self.angle < 360 && self.angle > -360)
                 self.angle += 6;
@@ -120,19 +123,52 @@ var Player = function(id) {
                 self.angle = 0;
         }
 
+        var degX = Math.cos(self.angle/180*Math.PI) *0.5 ;
+        var degY = Math.sin(self.angle/180*Math.PI) *0.5 ;
+
         if(self.keyUp) {
-            if(self.speedY > -self.maxSpeed) {
-                self.speedX += Math.cos(self.angle/180*Math.PI);
-                self.speedY += Math.sin(self.angle/180*Math.PI);
+            if(self.speedX > -self.maxSpeed && self.speedX < self.maxSpeed) {
+                self.speedX += degX;
+            }
+            else if (self.speedX <= -self.maxSpeed && degX > 0) {
+                self.speedX += degX;
+            }
+            else if (self.speedX >= self.maxSpeed && degX < 0) {
+                self.speedX += degX;
             }
 
-        }
-        else if(self.keyDown) {
-            if(self.speedY < self.maxSpeed) {
-                self.speedX -= Math.cos(self.angle/180*Math.PI) * 0.5;
-                self.speedY -= Math.sin(self.angle/180*Math.PI) * 0.5;
+            if(self.speedY >= -self.maxSpeed && self.speedY < self.maxSpeed) {
+                self.speedY += degY;
+            }
+            else if (self.speedY <= -self.maxSpeed && degY > 0) {
+                self.speedY += degY;
+            }
+            else if (self.speedY > self.maxSpeed && degY < 0) {
+                self.speedY += degY;
             }
         }
+        else if(self.keyDown) {
+            if(self.speedX > -self.maxSpeed && self.speedX < self.maxSpeed) {
+                self.speedX -= degX;
+            }
+            else if (self.speedX < -self.maxSpeed && degX < 0) {
+                self.speedX -= degX;
+            }
+            else if (self.speedX >= self.maxSpeed && degX > 0) {
+                self.speedX -= degX;
+            }
+
+            if(self.speedY > -self.maxSpeed && self.speedY < self.maxSpeed) {
+                self.speedY -= degY;
+            }
+            else if (self.speedY <= -self.maxSpeed && degY < 0) {
+                self.speedY -= degY;
+            }
+            else if (self.speedY >= self.maxSpeed && degY > 0) {
+                self.speedY -= degY;
+            }
+        }
+
     };
 
     self.respawn = function() {
