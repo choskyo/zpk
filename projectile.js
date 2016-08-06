@@ -18,8 +18,8 @@ var Projectile = function(p, ang) {
     self.h = 10;
 
     //Overwrite speed vars
-    self.speedX = Math.cos(ang/180*Math.PI) * 20 + Player.playerList[self.parentId].speedX;
-    self.speedY = Math.sin(ang/180*Math.PI) * 20 + Player.playerList[self.parentId].speedY;
+    self.speedX = Math.cos(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedX;
+    self.speedY = Math.sin(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedY;
 
     //Colour (Temporary!)
     self.r          = 0;
