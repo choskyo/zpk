@@ -33,7 +33,8 @@ document.onkeydown = function(event){
         socket.emit('kP',{input:'left',state:true});
     else if(event.keyCode === 87) // w
         socket.emit('kP',{input:'up',state:true});
-
+    else if(event.keyCode === 70)
+        socket.emit('kP',{input:'warp', state:true});
 };
 document.onkeyup = function(event){
     if(event.keyCode === 68)	//d
@@ -44,6 +45,8 @@ document.onkeyup = function(event){
         socket.emit('kP',{input:'left',state:false});
     else if(event.keyCode === 87) // w
         socket.emit('kP',{input:'up',state:false});
+    else if(event.keyCode === 70)
+        socket.emit('kP',{input:'warp', state:false});
 };
 
 respawn.onclick = function() {
@@ -80,6 +83,8 @@ socket.on('updatePack', function(pack) {
                 player.storage = p.storage;
             if(p.angle != undefined)
                 player.angle = p.angle;
+            if(p.area != undefined)
+                player.area = p.area;
         }
     }
 
@@ -93,6 +98,8 @@ socket.on('updatePack', function(pack) {
                 projectile.y = q.y;
             if(q.shields != undefined)
                 projectile.shields = q.shields;
+            if(q.area != undefined)
+                projectile.area = q.area;
         }
     }
 

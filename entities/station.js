@@ -34,7 +34,8 @@ var Station = function(name, x, y) {
             h: self.h,
             r: self.r,
             g: self.g,
-            b: self.b
+            b: self.b,
+            area: self.area
         }
     };
 

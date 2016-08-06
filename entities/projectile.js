@@ -44,7 +44,8 @@ var Projectile = function(p, ang) {
             g: self.g,
             b: self.b,
             shields: self.shields,
-            maxShields: self.maxShields
+            maxShields: self.maxShields,
+            area: self.area
         }
     };
 
@@ -53,7 +54,8 @@ var Projectile = function(p, ang) {
             id: self.id,
             x: self.x,
             y: self.y,
-            shields: self.shields
+            shields: self.shields,
+            area: self.area
         }
     };
 
@@ -65,7 +67,7 @@ var Projectile = function(p, ang) {
         for(var player in Player.playerList) {
             var p = Player.playerList[player];
 
-            if(self.intersects(p) && self.parentId != p.id) {
+            if(self.intersects(p) && self.parentId != p.id && p.area == self.area) {
                 p.shields -= 1;
                 self.remove = 1;
 

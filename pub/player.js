@@ -19,6 +19,8 @@ var Player = function (initPack) {
 
     self.storage = initPack.storage;
 
+    self.area = initPack.area;
+
     self.draw = function() {
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;

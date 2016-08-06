@@ -12,8 +12,13 @@ var Station = function(initPack) {
     self.g = initPack.g;
     self.b = initPack.b;
     self.angle = 1;
+    self.area = initPack.area;
 
     self.draw = function() {
+
+        if(Player.list[ownId].area != self.area)
+            return;
+
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 

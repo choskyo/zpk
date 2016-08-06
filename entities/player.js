@@ -31,6 +31,8 @@ var Player = function(id) {
     self.centerY = 0;
     self.attackMode = false;
     self.canShoot = true;
+    self.canWarp = true;
+    self.warping = false;
 
     //Mouse Info
     self.mouseAngle = 0;
@@ -61,7 +63,8 @@ var Player = function(id) {
             b: self.b,
             shields: self.shields,
             maxShields: self.maxShields,
-            storage: self.storage
+            storage: self.storage,
+            area: self.area
         }
     };
 
@@ -79,7 +82,8 @@ var Player = function(id) {
             y: self.y,
             shields: self.shields,
             storage: self.storage,
-            angle: self.angle
+            angle: self.angle,
+            area: self.area
         }
     };
 
@@ -104,11 +108,19 @@ var Player = function(id) {
             }, 500);
         }
 
+        if(self.warping && self.canWarp) {
+            self.zoom();
+            self.canWarp = false;
+            setTimeout(function() {
+                self.canWarp = true;
+            }, 500);
+        }
+
     };
 
     self.pew = function(angle) {
         var p = Projectile(self.id, angle);
-
+        p.area = self.area;
         p.x = self.x + 50;
         p.y = self.y + 30;
     };
@@ -215,6 +227,9 @@ Player.onConnect = function(socket) {
             player.screenCenterY = p.co.centerY;
             player.mouseX = p.co.x;
             player.mouseY = p.co.y;
+        }
+        else if(p.input == 'warp') {
+            player.warping = p.state;
         }
     });
 
