@@ -12,7 +12,8 @@ var Entity = function() {
         id: "",
         angle: 0,
         maxShields: 999,
-        shields: 999
+        shields: 999,
+        area: 'testy'
     };
 
     self.storage = {

@@ -4,7 +4,7 @@
 
 var Entity = require('./entity.js');
 var Player = require('./player.js');
-var Pack = require('./pack.js');
+var Pack = require('./../data/pack.js');
 
 var Projectile = function(p, ang) {
 

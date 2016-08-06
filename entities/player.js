@@ -5,7 +5,7 @@
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
 var Station = require ('./station.js');
-var Pack = require('./pack.js');
+var Pack = require('./../data/pack.js');
 
 //Player Object
 var Player = function(id) {
@@ -63,6 +63,13 @@ var Player = function(id) {
             maxShields: self.maxShields,
             storage: self.storage
         }
+    };
+
+    self.zoom = function() {
+        if(self.area == 'testy')
+            self.area = 'qwe';
+        else
+            self.area = 'testy';
     };
 
     self.getUpdatePack = function() {

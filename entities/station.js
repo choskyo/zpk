@@ -3,7 +3,7 @@
  */
 
 var Entity = require('./entity.js');
-var Pack = require('./pack.js');
+var Pack = require('./../data/pack.js');
 
 var Station = function(name, x, y) {
 

@@ -2,7 +2,7 @@
  * Created by will on 14/07/16.
  */
 
-var socket = io('');
+var socket = io('localhost:3001');
 
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");

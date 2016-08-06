@@ -1,14 +1,14 @@
 //Use db object as if it was a MVC repo
-var Database = require("./database.js");
+var Database = require("./data/database.js");
 var db = new Database();
 
 //Fetch serverside game classes
-var Entity = require('./entity.js');
-var Player = require('./player.js');
-var Station = require('./station.js');
-var Projectile = require('./projectile.js');
+var Entity = require('./entities/entity.js');
+var Player = require('./entities/player.js');
+var Station = require('./entities/station.js');
+var Projectile = require('./entities/projectile.js');
 //All packs should be defined in below file
-var Pack = require('./pack.js');
+var Pack = require('./data/pack.js');
 
 //Standard nodejs setup
 var express = require('express');

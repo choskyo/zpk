@@ -2,7 +2,7 @@
  * Created by will on 31/07/16.
  */
 module.exports = function() {
-    var mongojs = require("mongojs"); var Station = require('./station.js');
+    var mongojs = require("mongojs"); var Station = require('./../entities/station.js');
     var db = mongojs('localhost:27017/zpk1', ['account', 'station']);
 
 
