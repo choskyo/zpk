@@ -64,6 +64,10 @@ io.sockets.on('connection', function(socket){
 		delete socketList[socket.id];
 	});
 
+	socket.on('respawnRequest', function(userId) {
+		Player.list[userId].respawn();
+	});
+
 	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
 		var username = ("" + socket.id).slice(2, 7);

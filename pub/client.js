@@ -46,6 +46,10 @@ document.onkeyup = function(event){
         socket.emit('kP',{input:'up',state:false});
 };
 
+respawn.onclick = function() {
+    socket.emit('respawnRequest', ownId);
+};
+
 socket.on('initPack', function(pack) {
     if(pack.ownId)
         ownId = pack.ownId;

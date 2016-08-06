@@ -70,9 +70,7 @@ var Projectile = function(p, ang) {
                 self.remove = 1;
 
                 if(p.shields <= 0) {
-                    p.shields = p.maxShields;
-                    p.x = Math.random() * 600;
-                    p.y = Math.random() * 600;
+                    p.respawn();
                 }
             }
         }

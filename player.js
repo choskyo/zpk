@@ -125,6 +125,14 @@ var Player = function(id) {
         }
     };
 
+    self.respawn = function() {
+        self.speedX = 0;
+        self.speedY = 0;
+        self.x = Math.random()*500;
+        self.y = Math.random()*500;
+        self.shields = self.maxShields;
+    };
+
     Player.list[id] = self;
 
     Pack.initPack.players.push(self.getInitPack());
