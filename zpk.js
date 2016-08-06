@@ -41,6 +41,10 @@ io.sockets.on('connection', function(socket){
 			if(r) {
 				Player.onConnect(socket);
 				socket.emit('loginResponse', {success: true});
+				var username = ("" + socket.id).slice(2, 7);
+				for(var u in socketList) {
+					socketList[u].emit('serverMessage', '[' + username + '] has connected.');
+				}
 			}
 			else {
 				socket.emit('loginResponse', {success: false});
@@ -61,6 +65,10 @@ io.sockets.on('connection', function(socket){
 	});
 	socket.on('disconnect',function(){
 		Player.onDisconnect(socket);
+		var username = ("" + socket.id).slice(2, 7);
+		for(var u in socketList) {
+			socketList[u].emit('serverMessage', '[' + username + '] has left the game.');
+		}
 		delete socketList[socket.id];
 	});
 
