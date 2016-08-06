@@ -71,7 +71,8 @@ var Player = function(id) {
             x: self.x,
             y: self.y,
             shields: self.shields,
-            storage: self.storage
+            storage: self.storage,
+            angle: self.angle
         }
     };
 
@@ -107,21 +108,30 @@ var Player = function(id) {
 
     self.updateSpeed = function() {
         if(self.keyRight) {
-            if(self.maxSpeed > self.speedX)
-                self.speedX += 1;
+            if(self.angle < 360 && self.angle > -360)
+                self.angle += 6;
+            else
+                self.angle = 0;
         }
         else if(self.keyLeft) {
-            if(self.speedX > -self.maxSpeed)
-                self.speedX -= 1;
+            if(self.angle < 360 && self.angle > -360)
+                self.angle -= 6;
+            else
+                self.angle = 0;
         }
 
         if(self.keyUp) {
-            if(self.speedY > -self.maxSpeed)
-                self.speedY -=1;
+            if(self.speedY > -self.maxSpeed) {
+                self.speedX += Math.cos(self.angle/180*Math.PI);
+                self.speedY += Math.sin(self.angle/180*Math.PI);
+            }
+
         }
         else if(self.keyDown) {
-            if(self.speedY < self.maxSpeed)
-                self.speedY += 1;
+            if(self.speedY < self.maxSpeed) {
+                self.speedX -= Math.cos(self.angle/180*Math.PI) * 0.5;
+                self.speedY -= Math.sin(self.angle/180*Math.PI) * 0.5;
+            }
         }
     };
 

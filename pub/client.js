@@ -78,6 +78,8 @@ socket.on('updatePack', function(pack) {
                 player.shields = p.shields;
             if(p.storage != undefined)
                 player.storage = p.storage;
+            if(p.angle != undefined)
+                player.angle = p.angle;
         }
     }
 
