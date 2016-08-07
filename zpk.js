@@ -27,7 +27,6 @@ var socketList = {};
 
 //Fetch permanent entities from db
 db.getStations();
-new Wormhole('WormholeA', 300, 200, 'testy', 'qwe');
 new Wormhole('WormholeB', 350, 250, 'qwe', 'testy');
 new Wormhole('WormholeC', -100, -200, 'testy', 'qwe');
 

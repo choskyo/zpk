@@ -33,7 +33,11 @@
 
 				<button id="login" class="btn btn-success">Sign In</button>
 				<button id="register" class="btn btn-info">Register</button>
+				<br/><br/>
+				<p class="bg-primary">zpk is best played in fullscreen (F11).</p>
 			</div>
+
+
 		</div>
 
 
@@ -46,9 +50,11 @@
 				<div id="chat-output" style="width:100%; margin: 0 0 10px 0; height:80%; opacity:1; overflow-y: scroll">
 					<div id="chatWelcome" STYLE="color:white; font: 18px bold arial">
 						<script>
-							var d = new Date();
-							document.getElementById("chatWelcome").innerHTML = "[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "]";
-						</script>
+							setInterval(function() {
+								var d = new Date();
+								document.getElementById("chatWelcome").innerHTML = "[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "]";
+							}, 1000);
+							</script>
 					</div>
 				</div>
 				<form id="chat-form">

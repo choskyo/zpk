@@ -23,7 +23,7 @@ var Station = function(initPack) {
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
         if(self.angle < 360)
-            self.angle++;
+            self.angle+=0.25;
         else
             self.angle=1;
 

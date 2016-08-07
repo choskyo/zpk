@@ -143,16 +143,17 @@ setInterval(function() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    
+
+    for(var st in Station.list)
+        Station.list[st].draw();
 
     for(var pl in Player.list)
         Player.list[pl].draw();
 
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
-
-    for(var st in Station.list)
-        Station.list[st].draw();
 
     for(var wh in Wormhole.list)
         Wormhole.list[wh].draw();

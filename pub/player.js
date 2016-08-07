@@ -37,13 +37,11 @@ var Player = function (initPack) {
         ctx.fill();
         ctx.restore();
 
-        /*
-        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
-        ctx.fillRect(x, y, self.w, self.h);
-        ctx.strokeStyle = '#FFF';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(x, y, self.w, self.h);
-*/
+        ctx.beginPath();
+        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,1000,0,2*Math.PI);
+        ctx.strokeStyle = '#F00';
+        ctx.stroke();
+
         var barWidth = 100 * self.shields / self.maxShields;
 
         ctx.fillStyle = "darkblue";
