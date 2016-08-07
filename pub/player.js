@@ -29,11 +29,15 @@ var Player = function (initPack) {
         ctx.beginPath();
         ctx.translate(x + self.w/ 2, y + self.h/ 2);
         ctx.rotate(self.angle * Math.PI / 180);
-        ctx.rect(-self.w / 2, -self.h / 2, self.w, self.h);
+        ctx.moveTo(self.w/2, 0);
+        ctx.lineTo(-self.w/2, -self.h/2);
+        ctx.lineTo(-self.w/2, self.h/2);
+        ctx.closePath();
+        //ctx.rect(-self.w / 2, -self.h / 2, self.w, self.h);
         ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.strokeStyle = '#FFF';
-        ctx.lineWidth = 5;
-        ctx.strokeRect(-self.w / 2, -self.h / 2, self.w, self.h);
+        ctx.lineWidth = 2;
+        ctx.stroke();
         ctx.fill();
         ctx.restore();
 
