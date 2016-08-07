@@ -88,6 +88,12 @@ socket.on('updatePack', function(pack) {
                 player.angle = p.angle;
             if(p.area != undefined)
                 player.area = p.area;
+            if(p.r != undefined)
+                player.r = p.r;
+            if(p.g != undefined)
+                player.g = p.g;
+            if(p.b != undefined)
+                player.b = p.b;
         }
     }
 
@@ -144,7 +150,7 @@ setInterval(function() {
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    
+
 
     for(var st in Station.list)
         Station.list[st].draw();

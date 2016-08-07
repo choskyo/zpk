@@ -22,8 +22,8 @@ var Projectile = function(p, ang) {
     self.speedY = Math.sin(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedY;
 
     //Colour (Temporary!)
-    self.r          = 0;
-    self.g          = 125;
+    self.r          = 255;
+    self.g          = 255;
     self.b          = 255;
 
     //Projectile specific
@@ -31,6 +31,8 @@ var Projectile = function(p, ang) {
     self.remove = 0;
     self.maxShields = 1;
     self.shields = 1;
+
+    self.team = 'safe';
 
     //Pack funcs
     self.getInitPack = function() {
@@ -67,7 +69,7 @@ var Projectile = function(p, ang) {
         for(var player in Player.playerList) {
             var p = Player.playerList[player];
 
-            if(self.intersects(p) && self.parentId != p.id && p.area == self.area) {
+            if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team != 'safe') {
                 p.shields -= 1;
                 self.remove = 1;
 

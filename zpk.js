@@ -82,6 +82,18 @@ io.sockets.on('connection', function(socket){
 
 	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
+		if(message == '/red') {
+			Player.list[socket.id].setRed();
+			return;
+		}
+		else if(message == '/blue') {
+			Player.list[socket.id].setBlue();
+			return;
+		}
+		else if(message == '/safe') {
+			Player.list[socket.id].setSafe();
+			return;
+		}
 		var username = ("" + socket.id).slice(2, 7);
 		for(var u in socketList) {
 			socketList[u].emit('serverMessage', '[' + username + ']' + message);

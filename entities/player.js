@@ -88,6 +88,9 @@ var Player = function(id) {
             id: self.id,
             x: self.x,
             y: self.y,
+            r: self.r,
+            g: self.g,
+            b: self.b,
             shields: self.shields,
             storage: self.storage,
             angle: self.angle,
@@ -125,6 +128,7 @@ var Player = function(id) {
     self.pew = function(angle) {
         var p = Projectile(self.id, angle);
         p.area = self.area;
+        p.team = self.team;
         p.x = self.x + 50;
         p.y = self.y + 30;
     };
@@ -200,6 +204,27 @@ var Player = function(id) {
         self.x = Math.random()*500;
         self.y = Math.random()*500;
         self.shields = self.maxShields;
+    };
+
+    self.setRed = function() {
+        self.team = 'red';
+        self.r = 255;
+        self.g = Math.floor(Math.random()*(75)+1);
+        self.b = Math.floor(Math.random()*(75)+1);
+    };
+
+    self.setBlue = function() {
+        self.team = 'blue';
+        self.r = Math.floor(Math.random()*(75)+1);
+        self.g = Math.floor(Math.random()*(75)+1);
+        self.b = 255;
+    };
+
+    self.setSafe = function() {
+        self.team = 'safe';
+        self.r = Math.floor(Math.random()*(75)+1);
+        self.g = Math.floor(Math.random()*(75)+1);
+        self.b = Math.floor(Math.random()*(75)+1);
     };
 
     Player.list[id] = self;
