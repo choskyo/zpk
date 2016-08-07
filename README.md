@@ -5,7 +5,7 @@ honours project
 
 - nodejs
 - sockets.io
-- mongodb
+- mongodb & mongojs
 
 # trello
 https://trello.com/b/JptqnV4Y
