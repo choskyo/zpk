@@ -69,11 +69,12 @@ var Projectile = function(p, ang) {
         for(var player in Player.playerList) {
             var p = Player.playerList[player];
 
-            if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team != 'safe') {
+            if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP) {
                 p.shields -= 1;
                 self.remove = 1;
 
                 if(p.shields <= 0) {
+                    Player.playerList[self.parentId].team.addScore();
                     p.respawn();
                 }
             }

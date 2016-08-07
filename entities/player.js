@@ -6,6 +6,7 @@ var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
 var Station = require ('./station.js');
 var Wormhole = require ('./wormhole.js');
+var Team = require('./team.js');
 var Pack = require('./../data/pack.js');
 
 //Player Object
@@ -25,6 +26,7 @@ var Player = function(id) {
     self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
+    self.team = Team.list['safe'];
     self.killCount = 0;
     self.maxShields = 4;
     self.shields = 4;
@@ -207,21 +209,21 @@ var Player = function(id) {
     };
 
     self.setRed = function() {
-        self.team = 'red';
+        self.team = Team.list['red'];
         self.r = 255;
         self.g = Math.floor(Math.random()*(75)+1);
         self.b = Math.floor(Math.random()*(75)+1);
     };
 
     self.setBlue = function() {
-        self.team = 'blue';
+        self.team = Team.list['blue'];
         self.r = Math.floor(Math.random()*(75)+1);
         self.g = Math.floor(Math.random()*(75)+1);
         self.b = 255;
     };
 
     self.setSafe = function() {
-        self.team = 'safe';
+        self.team = Team.list['safe'];
         self.r = Math.floor(Math.random()*(75)+1);
         self.g = Math.floor(Math.random()*(75)+1);
         self.b = Math.floor(Math.random()*(75)+1);
@@ -267,7 +269,8 @@ Player.onConnect = function(socket) {
         players: Player.getAllPacks(),
         projectiles: Projectile.getAllPacks(),
         stations: Station.getAllPacks(),
-        wormholes: Wormhole.getAllPacks()
+        wormholes: Wormhole.getAllPacks(),
+        teams: Team.getAllPacks()
     });
 };
 Player.getAllPacks = function() {

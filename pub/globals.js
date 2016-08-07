@@ -5,6 +5,7 @@ var ownId = null;
 var shields = document.getElementById("shieldsDisplay");
 var storage = document.getElementById("playerStorage");
 var respawn = document.getElementById("respawnButton");
+var teamScore = document.getElementById("teamScore");
 
 
 var mobileUI = document.getElementById("mobileMovement");

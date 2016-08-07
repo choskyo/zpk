@@ -8,6 +8,7 @@ var Player = require('./entities/player.js');
 var Station = require('./entities/station.js');
 var Projectile = require('./entities/projectile.js');
 var Wormhole = require('./entities/wormhole.js');
+var Team = require('./entities/team.js');
 //All packs should be defined in below file
 var Pack = require('./data/pack.js');
 
@@ -29,6 +30,9 @@ var socketList = {};
 db.getStations();
 new Wormhole('WormholeB', 350, 250, 'qwe', 'testy');
 new Wormhole('WormholeC', -100, -200, 'testy', 'qwe');
+var red = new Team('red', true);
+var blue = new Team('blue', true);
+var safe = new Team('safe', false);
 
 //db.getDrones
 //db.getOtherStuff etc
@@ -108,7 +112,8 @@ setInterval(function(){
 		players: Player.update(),
 		projectiles: Projectile.update(),
 		stations: Station.update(),
-		wormholes: Wormhole.update()
+		wormholes: Wormhole.update(),
+		teams: Team.update()
 	};
 
 	for(var s in socketList){
@@ -122,10 +127,12 @@ setInterval(function(){
 	Pack.initPack.projectiles = [];
 	Pack.initPack.stations = [];
 	Pack.initPack.wormholes = [];
+	Pack.initPack.teams = [];
 
 	Pack.delPack.players = [];
 	Pack.delPack.projectiles = [];
 	Pack.delPack.stations = [];
 	Pack.delPack.wormholes = [];
+	Pack.delPack.teams = [];
 
 },40);

@@ -69,6 +69,9 @@ socket.on('initPack', function(pack) {
     for(var l = 0; l < pack.wormholes.length; l++) {
         new Wormhole(pack.wormholes[l]);
     }
+    for(var t = 0; t < pack.teams.length; t++) {
+        new Team(pack.teams[t]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
@@ -133,6 +136,15 @@ socket.on('updatePack', function(pack) {
                 wormhole.y = s.y;
         }
     }
+
+    for(var t = 0; t < pack.teams.length; t++) {
+        var u = pack.teams[t];
+        var team = Team.list[u.name];
+        if(team) {
+            if(u.score != undefined)
+                team.score = u.score;
+        }
+    }
 });
 
 socket.on('delPack', function(pack) {
@@ -163,5 +175,8 @@ setInterval(function() {
 
     for(var wh in Wormhole.list)
         Wormhole.list[wh].draw();
+
+    for(var te in Team.list)
+        Team.list[te].draw();
 
 }, 40);
