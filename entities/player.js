@@ -17,8 +17,8 @@ var Player = function(id) {
     //Client ID
     self.id         = id;
 
-    self.w = 100;
-    self.h = 60;
+    self.w = 50;
+    self.h = 30;
 
     //Colour (Temporary!)
     self.r          = Math.floor(Math.random()*(255)+1);
@@ -131,8 +131,8 @@ var Player = function(id) {
         var p = Projectile(self.id, angle);
         p.area = self.area;
         p.team = self.team;
-        p.x = self.x + 50;
-        p.y = self.y + 30;
+        p.x = self.x + self.w/2;
+        p.y = self.y + self.h/2;
     };
 
     self.updateSpeed = function() {

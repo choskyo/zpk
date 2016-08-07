@@ -14,7 +14,7 @@ var Entity = function() {
         maxShields: 999,
         shields: 999,
         area: 'testy',
-        team: 'blue'
+        docked: false
     };
 
     self.storage = {

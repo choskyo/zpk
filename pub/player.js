@@ -42,13 +42,13 @@ var Player = function (initPack) {
         ctx.strokeStyle = '#F00';
         ctx.stroke();
 
-        var barWidth = 100 * self.shields / self.maxShields;
+        var barWidth = 50 * self.shields / self.maxShields;
 
         ctx.fillStyle = "darkblue";
-        ctx.fillRect(x, y - 60, 100, 6);
+        ctx.fillRect(x, y - 30, 50, 6);
 
         ctx.fillStyle = "lightblue";
-        ctx.fillRect(x, y - 60, barWidth, 6);
+        ctx.fillRect(x, y - 30, barWidth, 6);
 
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
 
