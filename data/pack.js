@@ -4,11 +4,13 @@
 exports.initPack = {
     players:[],
     projectiles:[],
-    stations:[]
+    stations:[],
+    wormholes:[]
 };
 
 exports.delPack = {
     players:[],
     projectiles:[],
-    stations:[]
+    stations:[],
+    wormholes:[]
 };

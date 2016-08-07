@@ -2,7 +2,7 @@
  * Created by will on 14/07/16.
  */
 
-var socket = io('localhost:3001');
+var socket = io('http://localhost:3001/');
 
 var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
@@ -66,6 +66,9 @@ socket.on('initPack', function(pack) {
     for(var k = 0; k < pack.stations.length; k++) {
         new Station(pack.stations[k]);
     }
+    for(var l = 0; l < pack.wormholes.length; l++) {
+        new Wormhole(pack.wormholes[l]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
@@ -114,6 +117,16 @@ socket.on('updatePack', function(pack) {
         }
     }
 
+    for(var l = 0; l < pack.wormholes.length; l++) {
+        var s = pack.wormholes[l];
+        var wormhole = Wormhole.list[s.id];
+        if(wormhole) {
+            if(s.x != undefined)
+                wormhole.x = s.x;
+            if(s.y != undefined)
+                wormhole.y = s.y;
+        }
+    }
 });
 
 socket.on('delPack', function(pack) {
@@ -140,5 +153,8 @@ setInterval(function() {
 
     for(var st in Station.list)
         Station.list[st].draw();
+
+    for(var wh in Wormhole.list)
+        Wormhole.list[wh].draw();
 
 }, 40);

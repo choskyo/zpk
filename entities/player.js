@@ -5,6 +5,7 @@
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
 var Station = require ('./station.js');
+var Wormhole = require ('./wormhole.js');
 var Pack = require('./../data/pack.js');
 
 //Player Object
@@ -69,10 +70,17 @@ var Player = function(id) {
     };
 
     self.zoom = function() {
-        if(self.area == 'testy')
-            self.area = 'qwe';
-        else
-            self.area = 'testy';
+        for(var wh in Wormhole.list) {
+            var w = Wormhole.list[wh];
+
+            if(self.intersects(w) && self.area == w.area) {
+                self.area = w.destination;
+                self.canWarp = false;
+                setTimeout(function() {
+                    self.canWarp = true;
+                }, 500);
+            }
+        }
     };
 
     self.getUpdatePack = function() {
@@ -110,10 +118,6 @@ var Player = function(id) {
 
         if(self.warping && self.canWarp) {
             self.zoom();
-            self.canWarp = false;
-            setTimeout(function() {
-                self.canWarp = true;
-            }, 500);
         }
 
     };
@@ -237,7 +241,8 @@ Player.onConnect = function(socket) {
         ownId: socket.id,
         players: Player.getAllPacks(),
         projectiles: Projectile.getAllPacks(),
-        stations: Station.getAllPacks()
+        stations: Station.getAllPacks(),
+        wormholes: Wormhole.getAllPacks()
     });
 };
 Player.getAllPacks = function() {
