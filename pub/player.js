@@ -9,6 +9,7 @@ var Player = function (initPack) {
     self.w = initPack.w;
     self.h = initPack.h;
     self.angle = initPack.angle;
+    self.docked = false;
 
     self.r = initPack.r;
     self.g = initPack.g;

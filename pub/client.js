@@ -35,6 +35,8 @@ document.onkeydown = function(event){
         socket.emit('kP',{input:'up',state:true});
     else if(event.keyCode === 70)
         socket.emit('kP',{input:'warp', state:true});
+    else if(event.keyCode === 82)
+        socket.emit('kP',{input:'dock', state:true});
 };
 document.onkeyup = function(event){
     if(event.keyCode === 68)	//d
@@ -97,6 +99,8 @@ socket.on('updatePack', function(pack) {
                 player.g = p.g;
             if(p.b != undefined)
                 player.b = p.b;
+            if(p.docked != undefined)
+                player.docked = p.docked;
         }
     }
 
@@ -162,14 +166,14 @@ setInterval(function() {
     canvas.height = window.innerHeight;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-
-
     for(var st in Station.list)
         Station.list[st].draw();
 
-    for(var pl in Player.list)
-        Player.list[pl].draw();
-
+    for(var pl in Player.list) {
+        if(!Player.list[pl].docked)
+            Player.list[pl].draw();
+    }
+    
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
 

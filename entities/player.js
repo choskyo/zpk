@@ -32,7 +32,8 @@ var Player = function(id) {
     self.shields = 4;
     self.centerX = 0;
     self.centerY = 0;
-    self.attackMode = false;
+    self.docking = false;
+    self.docked = false;
     self.canShoot = true;
     self.canWarp = true;
     self.warping = false;
@@ -96,7 +97,18 @@ var Player = function(id) {
             shields: self.shields,
             storage: self.storage,
             angle: self.angle,
-            area: self.area
+            area: self.area,
+            docked: self.docked
+        }
+    };
+
+    self.dock = function() {
+        for(var st in Station.list) {
+            var s = Station.list[st];
+
+            if(self.intersects(s) && self.area == s.area) {
+                self.docked = true;
+            }
         }
     };
 
@@ -104,14 +116,24 @@ var Player = function(id) {
     var superUpdate = self.update;
 
     self.update = function() {
-
-        self.updateSpeed();
         superUpdate();
 
-        self.centerX = self.x+50;
-        self.centerY = self.y+30;
+        if(self.docking && !self.docked) {
+            self.dock();
+        }
 
-        self.mouseAngle = Math.atan2(self.mouseY - self.screenCenterY, self.mouseX - self.screenCenterX) * 180 / Math.PI;
+        if (self.docked) {
+            self.speedX = 0;
+            self.speedY = 0;
+            return;
+        }
+
+        self.updateSpeed();
+
+
+        //self.centerX = self.x+50;
+        //self.centerY = self.y+30;
+        //self.mouseAngle = Math.atan2(self.mouseY - self.screenCenterY, self.mouseX - self.screenCenterX) * 180 / Math.PI;
 
         if(self.click && self.canShoot) {
             self.pew(self.mouseAngle);
@@ -261,6 +283,9 @@ Player.onConnect = function(socket) {
         }
         else if(p.input == 'warp') {
             player.warping = p.state;
+        }
+        else if(p.input == 'dock') {
+            player.docking = p.state;
         }
     });
 
