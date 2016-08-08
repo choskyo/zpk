@@ -58,6 +58,16 @@ var Player = function (initPack) {
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
 
         self.drawInventory();
+        self.drawStationScreen();
+    };
+
+    self.drawStationScreen = function() {
+        if(self.docked)
+            stationScreen.style.display = 'inline';
+        else if(!self.docked) {
+            stationScreen.style.display = 'none';
+        }
+
     };
 
     self.drawInventory = function() {

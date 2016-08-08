@@ -118,6 +118,10 @@ var Player = function(id) {
     self.update = function() {
         superUpdate();
 
+        if(!self.docking && self.docked) {
+            self.docked = false;
+        }
+
         if(self.docking && !self.docked) {
             self.dock();
         }

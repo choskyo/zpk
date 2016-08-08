@@ -6,7 +6,8 @@ var shields = document.getElementById("shieldsDisplay");
 var storage = document.getElementById("playerStorage");
 var respawn = document.getElementById("respawnButton");
 var teamScore = document.getElementById("teamScore");
-
+var btnUndock = document.getElementById('btnUndock');
+var stationScreen = document.getElementById('stationScreen');
 
 var mobileUI = document.getElementById("mobileMovement");
 var mobUp = document.getElementById("goUp");

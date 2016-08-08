@@ -54,6 +54,9 @@ document.onkeyup = function(event){
 respawn.onclick = function() {
     socket.emit('respawnRequest', ownId);
 };
+btnUndock.onclick = function() {
+    socket.emit('kP',{input:'dock', state:false});
+};
 
 socket.on('initPack', function(pack) {
     if(pack.ownId)
@@ -170,8 +173,7 @@ setInterval(function() {
         Station.list[st].draw();
 
     for(var pl in Player.list) {
-        if(!Player.list[pl].docked)
-            Player.list[pl].draw();
+        Player.list[pl].draw();
     }
     
     for(var pr in Projectile.list)
