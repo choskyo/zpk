@@ -32,12 +32,15 @@ var Entity = function() {
         }
     };
 
-    self.intersects = function(extEntity) {
-        return !(extEntity.x > self.x + self.w ||
-        extEntity.x + extEntity.w < self.x ||
-        extEntity.y > self.y + self.h ||
-        extEntity.y + extEntity.h < self.y);
+    self.intersects = function(e) {
+        return !(e.x > self.x + self.w ||
+        e.x + e.w < self.x ||
+        e.y > self.y + self.h ||
+        e.y + e.h < self.y);
+    };
 
+    self.getDistance = function(e) {
+        return Math.hypot(e.x - self.x, e.y - self.y);
     };
 
     self.update = function() {

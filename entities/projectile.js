@@ -14,8 +14,8 @@ var Projectile = function(p, ang) {
     self.id         = Math.random();
     self.parentId = p;
 
-    self.w = 10;
-    self.h = 10;
+    self.w = 4;
+    self.h = 4;
 
     //Overwrite speed vars
     self.speedX = Math.cos(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedX;

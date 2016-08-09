@@ -17,8 +17,8 @@ var Player = function(id) {
     //Client ID
     self.id         = id;
 
-    self.w = 50;
-    self.h = 30;
+    self.w = 30;
+    self.h = 15;
 
     //Colour (Temporary!)
     self.r          = Math.floor(Math.random()*(255)+1);
@@ -52,7 +52,7 @@ var Player = function(id) {
     self.keyUp      = false;
     self.keyDown    = false;
     self.speed      = 0;
-    self.maxSpeed   = 10;
+    self.maxSpeed   = 8;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -76,7 +76,7 @@ var Player = function(id) {
         for(var wh in Wormhole.list) {
             var w = Wormhole.list[wh];
 
-            if(self.intersects(w) && self.area == w.area) {
+            if(self.getDistance(w) < 40 && self.area == w.area) {
                 self.area = w.destination;
                 self.canWarp = false;
                 setTimeout(function() {

@@ -47,10 +47,10 @@ var Player = function (initPack) {
         ctx.strokeStyle = '#F00';
         ctx.stroke();
 
-        var barWidth = 50 * self.shields / self.maxShields;
+        var barWidth = 30 * self.shields / self.maxShields;
 
         ctx.fillStyle = "darkblue";
-        ctx.fillRect(x, y - 30, 50, 6);
+        ctx.fillRect(x, y - 30, 30, 6);
 
         ctx.fillStyle = "lightblue";
         ctx.fillRect(x, y - 30, barWidth, 6);
