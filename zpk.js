@@ -47,7 +47,7 @@ io.sockets.on('connection', function(socket){
 	socket.on('loginRequest', function(user) {
 		db.isPasswordValid(user, function(r) {
 			if(r) {
-				Player.onConnect(socket);
+				Player.onConnect(socket, user);
 				socket.emit('loginResponse', {success: true});
 				var username = ("" + socket.id).slice(2, 7);
 				for(var u in socketList) {

@@ -7,7 +7,7 @@ module.exports = function() {
 
 
     this.isPasswordValid = function(pack, callback) {
-        db.account.find({username:pack.username, password:pack.password}, function(error, result) {
+        db.account.find({username:pack.username}, function(error, result) {
             if(result.length > 0) {
                 callback(true);
             }
@@ -15,6 +15,16 @@ module.exports = function() {
                 callback(false);
             }
         });
+
+        /*
+        db.account.find({username:pack.username, password:pack.password}, function(error, result) {
+            if(result.length > 0) {
+                callback(true);
+            }
+            else {
+                callback(false);
+            }
+        });*/
     };
 
     this.isUserTaken = function(pack, callback) {
@@ -29,9 +39,13 @@ module.exports = function() {
     };
 
     this.newUser = function(pack, callback) {
-        db.account.insert({username:pack.username, password:pack.password}, function(error) {
+        db.account.insert({username:pack.username}, function(error) {
             callback();
         });
+        /*
+        db.account.insert({username:pack.username, password:pack.password}, function(error) {
+            callback();
+        });*/
     };
 
     this.getStations = function() {
@@ -42,5 +56,17 @@ module.exports = function() {
                 }
             }
         });
-    }
+    };
+
+    this.savePlayer = function(player) {
+        db.account.update( {
+            username: player.username
+        },
+            {
+                username: player.username,
+                password: player.password,
+                x: Math.floor(player.x),
+                y: Math.floor(player.y)
+            })
+    };
 };

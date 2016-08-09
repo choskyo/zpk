@@ -1,6 +1,8 @@
 /**
  * Created by will on 21/07/16.
  */
+var Database = require('../data/database.js');
+var db = new Database();
 
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
@@ -10,12 +12,13 @@ var Team = require('./team.js');
 var Pack = require('./../data/pack.js');
 
 //Player Object
-var Player = function(id) {
+var Player = function(id, user) {
 
     var self = Entity();
 
     //Client ID
     self.id         = id;
+    self.username   = user.username;
 
     self.w = 30;
     self.h = 15;
@@ -264,8 +267,8 @@ var Player = function(id) {
 
 //Static methods
 exports.playerList = Player.list = {};
-Player.onConnect = function(socket) {
-    var player = Player(socket.id);
+Player.onConnect = function(socket, user) {
+    var player = Player(socket.id, user);
 
     socket.on('kP', function(p) {
         if(p.input === 'left') {
@@ -309,6 +312,9 @@ Player.getAllPacks = function() {
     return players;
 };
 Player.onDisconnect = function(socket) {
+    if(Player.list[socket.id] != undefined)
+        db.savePlayer(Player.list[socket.id]);
+    
     Pack.delPack.players.push(socket.id);
     delete Player.list[socket.id];
 };
