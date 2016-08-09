@@ -10,6 +10,7 @@ var Station = require ('./station.js');
 var Wormhole = require ('./wormhole.js');
 var Team = require('./team.js');
 var Pack = require('./../data/pack.js');
+var Storage = require('./../items/storage');
 
 //Player Object
 var Player = function(id, user) {
@@ -18,7 +19,9 @@ var Player = function(id, user) {
 
     //Client ID
     self.id         = id;
-    self.username   = user.username;
+    self.name   = user.username;
+
+    self.storage = new Storage(self);
 
     self.w = 30;
     self.h = 15;
@@ -98,7 +101,7 @@ var Player = function(id, user) {
             g: self.g,
             b: self.b,
             shields: self.shields,
-            storage: self.storage,
+            storage: self.storage.contents,
             angle: self.angle,
             area: self.area,
             docked: self.docked
@@ -314,7 +317,7 @@ Player.getAllPacks = function() {
 Player.onDisconnect = function(socket) {
     if(Player.list[socket.id] != undefined)
         db.savePlayer(Player.list[socket.id]);
-    
+
     Pack.delPack.players.push(socket.id);
     delete Player.list[socket.id];
 };

@@ -39,7 +39,7 @@ module.exports = function() {
     };
 
     this.newUser = function(pack, callback) {
-        db.account.insert({username:pack.username}, function(error) {
+        db.account.insert({username:pack.username, x: 0, y: 0, storage: {}}, function(error) {
             callback();
         });
         /*
@@ -59,14 +59,20 @@ module.exports = function() {
     };
 
     this.savePlayer = function(player) {
-        db.account.update( {
-            username: player.username
+       db.account.remove({
+            username: player.name
+        });
+        
+        db.account.update({
+            username: player.name
         },
             {
-                username: player.username,
-                password: player.password,
+                username: player.name,
                 x: Math.floor(player.x),
-                y: Math.floor(player.y)
-            })
+                y: Math.floor(player.y),
+                storage: player.storage.contents
+            }, {
+                upsert:true
+            });
     };
 };

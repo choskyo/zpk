@@ -1,8 +1,10 @@
 /**
  * Created by will on 23/07/16.
  */
+var Storage = require('../items/storage.js');
 var Entity = function() {
     var self = {
+        name: "",
         x: 255,
         y: 255,
         w: 0,
@@ -17,20 +19,7 @@ var Entity = function() {
         docked: false
     };
 
-    self.storage = {
-        kaching: {
-            name: 'kaching',
-            amount: 10
-        },
-        pew: {
-            name: 'pew',
-            amount: 5
-        },
-        zoom: {
-            name: 'zoom',
-            amount: 2
-        }
-    };
+    self.storage = {};
 
     self.intersects = function(e) {
         return !(e.x > self.x + self.w ||
