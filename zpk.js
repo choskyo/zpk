@@ -49,9 +49,8 @@ io.sockets.on('connection', function(socket){
 			if(r) {
 				Player.onConnect(socket, user);
 				socket.emit('loginResponse', {success: true});
-				var username = ("" + socket.id).slice(2, 7);
 				for(var u in socketList) {
-					socketList[u].emit('serverMessage', '[' + username + '] has connected.');
+					socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ') has connected.');
 				}
 			}
 			else {
@@ -72,11 +71,13 @@ io.sockets.on('connection', function(socket){
 		})
 	});
 	socket.on('disconnect',function(){
-		Player.onDisconnect(socket);
-		var username = ("" + socket.id).slice(2, 7);
-		for(var u in socketList) {
-			socketList[u].emit('serverMessage', '[' + username + '] has left the game.');
+		if(Player.list[socket.id] != undefined) {
+			for(var u in socketList) {
+				socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ') has left the game.');
+			}
 		}
+		Player.onDisconnect(socket);
+
 		delete socketList[socket.id];
 	});
 
@@ -98,9 +99,8 @@ io.sockets.on('connection', function(socket){
 			Player.list[socket.id].setSafe();
 			return;
 		}
-		var username = ("" + socket.id).slice(2, 7);
 		for(var u in socketList) {
-			socketList[u].emit('serverMessage', '[' + username + ']' + message);
+			socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ')' + message);
 		}
 	})
 });
