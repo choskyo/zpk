@@ -8,6 +8,9 @@ var canvas = document.getElementById("canvas");
 var ctx = document.getElementById("canvas").getContext("2d");
 ctx.font = '30px Arial';
 
+var bgCanvas = document.getElementById("bgCanvas");
+var bgCtx = document.getElementById("bgCanvas").getContext("2d");
+
 document.onmousedown = function(event){
     socket.emit('kP',{input:'attack',state:true});
 };
@@ -104,6 +107,8 @@ socket.on('updatePack', function(pack) {
                 player.b = p.b;
             if(p.docked != undefined)
                 player.docked = p.docked;
+            if(p.credits != undefined)
+                player.credits = p.credits;
         }
     }
 
@@ -186,3 +191,22 @@ setInterval(function() {
         Team.list[te].draw();
 
 }, 40);
+
+
+/*setInterval(function() {
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = window.innerHeight;
+    drawStars();
+}, 1000);
+*/
+
+drawStars = function() {
+    bgCtx.fillStyle = "#FFF";
+    for(var i = 0; i < bgCanvas.width; i += Math.random()*15) {
+        bgCtx.fillRect(i, Math.random()*bgCanvas.height, Math.random()*4, Math.random()*4);
+    }
+
+};
+bgCanvas.width = window.innerWidth;
+bgCanvas.height = window.innerHeight;
+drawStars();

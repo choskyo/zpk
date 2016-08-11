@@ -28,8 +28,8 @@ var socketList = {};
 
 //Fetch permanent entities from db
 db.getStations();
-new Wormhole('WormholeB', 80, 80, 'qwe', 'testy');
-new Wormhole('WormholeC', 0, 0, 'testy', 'qwe');
+new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
+new Wormhole('WormholeC', 0, -500, 'testy', 'qwe');
 var red = new Team('red', true);
 var blue = new Team('blue', true);
 var safe = new Team('safe', false);

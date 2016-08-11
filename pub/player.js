@@ -17,6 +17,7 @@ var Player = function (initPack) {
 
     self.shields = initPack.shields;
     self.maxShields = initPack.maxShields;
+    self.credits = initPack.credits;
 
     self.storage = initPack.storage;
 
@@ -25,6 +26,12 @@ var Player = function (initPack) {
     self.draw = function() {
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
+
+        //DRAW SUN(TEMP)
+        ctx.beginPath();
+        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 300, 0, 2*Math.PI);
+        ctx.fillStyle = "#FDB813";
+        ctx.fill();
 
         ctx.save();
         ctx.beginPath();
@@ -46,6 +53,8 @@ var Player = function (initPack) {
         ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,1000,0,2*Math.PI);
         ctx.strokeStyle = '#F00';
         ctx.stroke();
+
+
 
         var barWidth = 30 * self.shields / self.maxShields;
 
@@ -77,6 +86,8 @@ var Player = function (initPack) {
             storage.innerHTML += "<div style='font: 12pt arial bold'>" + '[' + Player.list[ownId].storage[i].amount + '] ' + Player.list[ownId].storage[i].name + "</div>";
         }
     };
+
+    
 
     Player.list[self.id] = self;
 

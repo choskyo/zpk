@@ -5,8 +5,8 @@ var Storage = require('../items/storage.js');
 var Entity = function() {
     var self = {
         name: "",
-        x: 255,
-        y: 255,
+        x: 0,
+        y: 0,
         w: 0,
         h: 0,
         speedX: 0,
