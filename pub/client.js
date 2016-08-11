@@ -172,15 +172,15 @@ setInterval(function() {
     for(var st in Station.list)
         Station.list[st].draw();
 
+    for(var wh in Wormhole.list)
+        Wormhole.list[wh].draw();
+
     for(var pl in Player.list) {
         Player.list[pl].draw();
     }
     
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
-
-    for(var wh in Wormhole.list)
-        Wormhole.list[wh].draw();
 
     for(var te in Team.list)
         Team.list[te].draw();
