@@ -47,11 +47,18 @@ io.sockets.on('connection', function(socket){
 	socket.on('loginRequest', function(user) {
 		db.isPasswordValid(user, function(r) {
 			if(r) {
-				Player.onConnect(socket, user);
+				db.getPlayer(user, function(savedData) {
+					if(savedData != null) {
+						Player.onConnect(socket, savedData);
+
+						for(var u in socketList) {
+							socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ') has connected.');
+						}
+					}
+				});
+
 				socket.emit('loginResponse', {success: true});
-				for(var u in socketList) {
-					socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ') has connected.');
-				}
+
 			}
 			else {
 				socket.emit('loginResponse', {success: false});

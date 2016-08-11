@@ -13,15 +13,24 @@ var Pack = require('./../data/pack.js');
 var Storage = require('./../items/storage');
 
 //Player Object
-var Player = function(id, user) {
+var Player = function(id, savedData) {
 
     var self = Entity();
 
     //Client ID
     self.id         = id;
-    self.name   = user.username;
+    self.name   = "";
 
     self.storage = new Storage(self);
+
+    if(savedData.username != undefined)
+        self.name = savedData.username;
+    if(savedData.x != undefined)
+        self.x = savedData.x;
+    if(savedData.y != undefined)
+        self.y = savedData.y;
+    if(savedData.storage != undefined)
+        self.storage = savedData.storage;
 
     self.w = 30;
     self.h = 15;

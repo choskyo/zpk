@@ -5,7 +5,6 @@ module.exports = function() {
     var mongojs = require("mongojs"); var Station = require('./../entities/station.js');
     var db = mongojs('localhost:27017/zpk1', ['account', 'station']);
 
-
     this.isPasswordValid = function(pack, callback) {
         db.account.find({username:pack.username}, function(error, result) {
             if(result.length > 0) {
@@ -54,6 +53,17 @@ module.exports = function() {
                 for(var i = 0; i < result.length; i++) {
                     new Station(result[i].name, result[i].x, result[i].y, result[i].area);
                 }
+            }
+        });
+    };
+
+    this.getPlayer = function(player, callback) {
+        db.account.find({username:player.username}, function(error, result) {
+            if(result.length > 0) {
+                callback(result[0]);
+            }
+            else {
+                callback(null);
             }
         });
     };
