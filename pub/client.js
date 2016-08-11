@@ -202,7 +202,7 @@ setInterval(function() {
 
 drawStars = function() {
     bgCtx.fillStyle = "#FFF";
-    for(var i = 0; i < bgCanvas.width; i += Math.random()*15) {
+    for(var i = 0; i < bgCanvas.width; i += Math.random()*10) {
         bgCtx.fillRect(i, Math.random()*bgCanvas.height, Math.random()*4, Math.random()*4);
     }
 

@@ -143,3 +143,14 @@ setInterval(function(){
 	Pack.delPack.teams = [];
 
 },40);
+
+process.on('SIGINT', function() {
+	console.log('Saving players..');
+
+	for(var player in Player.list)
+		db.savePlayer(Player.list[player]);
+
+
+	console.log('Shutting down..');
+	process.exit();
+});
