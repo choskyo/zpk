@@ -4,6 +4,7 @@
 var Player = function (initPack) {
     var self = {};
     self.id = initPack.id;
+    self.name = initPack.name;
     self.x = initPack.x;
     self.y = initPack.y;
     self.w = initPack.w;
@@ -11,6 +12,7 @@ var Player = function (initPack) {
     self.angle = initPack.angle;
     self.docked = false;
     self.dockedAt = initPack.dockedAt;
+    self.flick = false;
 
     self.r = initPack.r;
     self.g = initPack.g;
@@ -55,8 +57,6 @@ var Player = function (initPack) {
         ctx.strokeStyle = '#F00';
         ctx.stroke();
 
-
-
         var barWidth = 30 * self.shields / self.maxShields;
 
         ctx.fillStyle = "darkblue";
@@ -72,9 +72,40 @@ var Player = function (initPack) {
     };
 
     self.drawStationScreen = function() {
-        if(self.docked)
+        if(self.docked && self.flick == false) {
+            self.flick = true;
+            var dockedStation = Station.list[Player.list[ownId].dockedAt];
             stationScreen.style.display = 'inline';
+
+            stationBuy.innerHTML = "";
+            stationSell.innerHTML = "";
+
+            stationName = dockedStation.name;
+            stationPlayerName = Player.list[ownId].name;
+
+            for(var commod in dockedStation.storage) {
+                stationBuy.innerHTML +=
+                    "<div class='radio'>" +
+                    "<label>" +
+                    "<input type='radio' name='buyCommod' id='optionsRadios1' value='money' checked/>" +
+                    dockedStation.storage[commod].name +
+                    '</label>' +
+                    '</div>';
+            }
+
+            for(var commod in Player.list[ownId].storage) {
+                stationSell.innerHTML +=
+                    "<div class='radio'>" +
+                    "<label>" +
+                    "<input type='radio' name='optionsRadios' id='optionsRadios1' value='money' checked/>" +
+                    Player.list[ownId].storage[commod].name +
+                    '</label>' +
+                    '</div>';
+            }
+        }
+
         else if(!self.docked) {
+            self.flick = false;
             stationScreen.style.display = 'none';
         }
 

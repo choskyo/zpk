@@ -42,15 +42,6 @@ var Station = function(initPack) {
         ctx.restore();
     };
 
-    /*'<div class="radio">
-    <label>
-    <input type="radio" name="optionsRadios" id="optionsRadios1" value="money" checked>
-    Money
-    </label>
-    </div>'
-*/
-
-
     Station.list[self.id] = self;
 
     return self;

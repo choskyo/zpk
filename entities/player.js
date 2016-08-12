@@ -74,6 +74,7 @@ var Player = function(id, savedData) {
     self.getInitPack = function() {
         return {
             id: self.id,
+            name: self.name,
             x: self.x,
             y: self.y,
             w: self.w,
@@ -125,7 +126,7 @@ var Player = function(id, savedData) {
 
             if(self.intersects(s) && self.area == s.area) {
                 self.docked = true;
-                self.dockedAt = s.name;
+                self.dockedAt = s.id;
             }
         }
     };

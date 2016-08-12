@@ -28,8 +28,10 @@ var Station = function(name, x, y, area) {
 
     //Pack funcs
     self.getInitPack = function() {
+        console.log(self.id + self.name);
         return {
             id: self.id,
+            name: self.name,
             x: self.x,
             y: self.y,
             w: self.w,
@@ -44,7 +46,6 @@ var Station = function(name, x, y, area) {
 
     self.getUpdatePack = function() {
         return {
-            id: self.id,
             x: self.x,
             y: self.y,
             storage: self.storage.contents
