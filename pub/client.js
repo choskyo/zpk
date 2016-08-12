@@ -107,6 +107,8 @@ socket.on('updatePack', function(pack) {
                 player.b = p.b;
             if(p.docked != undefined)
                 player.docked = p.docked;
+            if(p.dockedAt != undefined)
+                player.dockedAt = p.dockedAt;
             if(p.credits != undefined)
                 player.credits = p.credits;
         }
@@ -135,6 +137,8 @@ socket.on('updatePack', function(pack) {
                 station.x = r.x;
             if(r.y != undefined)
                 station.y = r.y;
+            if(r.storage != undefined)
+                station.storage = r.storage;
         }
     }
 
@@ -191,14 +195,6 @@ setInterval(function() {
         Team.list[te].draw();
 
 }, 40);
-
-
-/*setInterval(function() {
-    bgCanvas.width = window.innerWidth;
-    bgCanvas.height = window.innerHeight;
-    drawStars();
-}, 1000);
-*/
 
 drawStars = function() {
     bgCtx.fillStyle = "#FFF";

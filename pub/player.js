@@ -10,6 +10,7 @@ var Player = function (initPack) {
     self.h = initPack.h;
     self.angle = initPack.angle;
     self.docked = false;
+    self.dockedAt = initPack.dockedAt;
 
     self.r = initPack.r;
     self.g = initPack.g;

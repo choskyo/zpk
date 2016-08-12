@@ -2,7 +2,7 @@
  * Created by will on 09/08/16.
  */
 var Storage = function(owner) {
-    this.ownerId = owner.name;
+    this.ownerName = owner.name;
     this.contents = {
         example: {
             name: 'oneMillion',
@@ -37,7 +37,7 @@ var Storage = function(owner) {
         delete this.contents[object];
     };
 
-    var transfer = function(item, amount, target) {
+    this.transfer = function(item, amount, target) {
 
     }
 };

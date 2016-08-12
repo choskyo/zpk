@@ -19,7 +19,7 @@ var Entity = function() {
         docked: false
     };
 
-    self.storage = {};
+    self.storage = new Storage(self);
 
     self.intersects = function(e) {
         return !(e.x > self.x + self.w ||

@@ -49,6 +49,7 @@ var Player = function(id, savedData) {
     self.centerY = 0;
     self.docking = false;
     self.docked = false;
+    self.dockedAt = "";
     self.canShoot = true;
     self.canWarp = true;
     self.warping = false;
@@ -113,7 +114,8 @@ var Player = function(id, savedData) {
             storage: self.storage.contents,
             angle: self.angle,
             area: self.area,
-            docked: self.docked
+            docked: self.docked,
+            dockedAt : self.dockedAt
         }
     };
 
@@ -123,6 +125,7 @@ var Player = function(id, savedData) {
 
             if(self.intersects(s) && self.area == s.area) {
                 self.docked = true;
+                self.dockedAt = s.name;
             }
         }
     };
@@ -135,6 +138,7 @@ var Player = function(id, savedData) {
 
         if(!self.docking && self.docked) {
             self.docked = false;
+            self.dockedAt = "";
         }
 
         if(self.docking && !self.docked) {

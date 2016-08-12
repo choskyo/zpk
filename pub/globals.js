@@ -8,6 +8,7 @@ var respawn = document.getElementById("respawnButton");
 var teamScore = document.getElementById("teamScore");
 var btnUndock = document.getElementById('btnUndock');
 var stationScreen = document.getElementById('stationScreen');
+var stationBuy = document.getElementById('stationBuy');
 
 var mobileUI = document.getElementById("mobileMovement");
 var mobUp = document.getElementById("goUp");

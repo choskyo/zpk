@@ -97,19 +97,50 @@
 				Scores:
 			</div>
 
-			<div id="stationScreen" style="left:150px; top: 60px; right: 0; bottom: 200px; position:absolute; z-index: 2; background-color: #1b1b1b; display:none;">
-				<h1 id="stationTitle" style="margin: 10px 0 0 10px; width: 80%; background-color:#111111; float:left; ">
-					Station Title Placeholder
-				</h1>
-				<button id="btnUndock" class="btn btn-danger" style="float:right;margin: 15px 25px 0 25px">
-					Undock
-				</button>
+			<div id="stationScreen" style="left:150px; top: 60px; right: 0; bottom: 200px; position:absolute; z-index: 2; background-color: #1b1b1b; display:none; overflow-y:scroll">
+				<div class="row">
+					<h1 id="stationTitle" style="margin: 0 0 0 2%; width: 80%; background-color:#111111; float:left; ">
+						Station Title Placeholder
+					</h1>
+					<button id="btnUndock" class="btn btn-danger" style="float:right;margin: 0 0 0 0; width:15%">
+						Undock
+					</button>
+				</div>
+
+
+				<form id="stationBuy" class="form-group" style="display:inline-block; float:left; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px; background-color: #111">
+					<h3>Station</h3>
+
+					<button class="btn btn-success" style="float:right;margin-right: 20px">
+						Purchase
+					</button>
+				</form>
+
+				<form id="stationSell" class="form-group" style="display:inline-block; float:right; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px; background-color: #111">
+					<h3>PlayerName</h3>
+
+					<button class="btn btn-success" style="float:right; margin-right: 20px">
+						Sell
+					</button>
+				</form>
 			</div>
+
+
 
 		</div>
 	</body>
-
 </html>
+
+<script>
+/*	<div id="stationScreen" style="left:150px; top: 60px; right: 0; bottom: 200px; position:absolute; z-index: 2; background-color: #1b1b1b; display:none;">
+			<h1 id="stationTitle" style="margin: 10px 0 0 10px; width: 80%; background-color:#111111; float:left; ">
+			Station Title Placeholder
+	</h1>
+	<button id="btnUndock" class="btn btn-danger" style="float:right;margin: 15px 25px 0 25px">
+			Undock
+			</button>
+			</div>
+</script>
 
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>

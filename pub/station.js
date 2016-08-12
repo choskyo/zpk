@@ -4,6 +4,7 @@
 var Station = function(initPack) {
     var self = {};
     self.id = initPack.id;
+    self.name = initPack.name;
     self.x = initPack.x;
     self.y = initPack.y;
     self.w = initPack.w;
@@ -13,6 +14,7 @@ var Station = function(initPack) {
     self.b = initPack.b;
     self.angle = 1;
     self.area = initPack.area;
+    self.storage = initPack.storage;
 
     self.draw = function() {
 
@@ -40,6 +42,13 @@ var Station = function(initPack) {
         ctx.restore();
     };
 
+    /*'<div class="radio">
+    <label>
+    <input type="radio" name="optionsRadios" id="optionsRadios1" value="money" checked>
+    Money
+    </label>
+    </div>'
+*/
 
 
     Station.list[self.id] = self;
