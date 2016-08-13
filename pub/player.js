@@ -44,7 +44,6 @@ var Player = function (initPack) {
         ctx.lineTo(-self.w/2, -self.h/2);
         ctx.lineTo(-self.w/2, self.h/2);
         ctx.closePath();
-        //ctx.rect(-self.w / 2, -self.h / 2, self.w, self.h);
         ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.strokeStyle = '#FFF';
         ctx.lineWidth = 2;
@@ -81,13 +80,13 @@ var Player = function (initPack) {
             stationSell.innerHTML = "";
 
             stationName = dockedStation.name;
-            stationPlayerName = Player.list[ownId].name;
+            stationPlayerName.innerHTML = Player.list[ownId].name;
 
             for(var commod in dockedStation.storage) {
                 stationBuy.innerHTML +=
                     "<div class='radio'>" +
                     "<label>" +
-                    "<input type='radio' name='buyCommod' id='optionsRadios1' value='money' checked/>" +
+                    "<input type='radio' name='buyCommod' value='" + JSON.stringify(dockedStation.storage[commod]) + "' checked/>" +
                     dockedStation.storage[commod].name +
                     '</label>' +
                     '</div>';
@@ -97,11 +96,12 @@ var Player = function (initPack) {
                 stationSell.innerHTML +=
                     "<div class='radio'>" +
                     "<label>" +
-                    "<input type='radio' name='optionsRadios' id='optionsRadios1' value='money' checked/>" +
+                    "<input type='radio' name='sellCommod' value='" + JSON.stringify(Player.list[ownId].storage[commod]) + "' checked/>" +
                     Player.list[ownId].storage[commod].name +
                     '</label>' +
                     '</div>';
             }
+
         }
 
         else if(!self.docked) {

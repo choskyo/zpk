@@ -60,6 +60,18 @@ respawn.onclick = function() {
 btnUndock.onclick = function() {
     socket.emit('kP',{input:'dock', state:false});
 };
+btnBuy.onclick = function() {
+    var tempForm = document.getElementById('stationBuy');
+    socket.emit('purchase', {item: JSON.parse(tempForm.elements["buyCommod"].value),
+    stationId: Player.list[ownId].dockedAt,
+    playerId: Player.list[ownId].id});
+};
+btnSell.onclick = function() {
+    var tempForm = document.getElementById('stationSell');
+    socket.emit('sale', {item: JSON.parse(tempForm.elements["sellCommod"].value),
+    stationId: Player.list[ownId].dockedAt,
+    playerId: Player.list[ownId].id});
+};
 
 socket.on('initPack', function(pack) {
     if(pack.ownId)

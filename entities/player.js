@@ -30,7 +30,7 @@ var Player = function(id, savedData) {
     if(savedData.y != undefined)
         self.y = savedData.y;
     if(savedData.storage != undefined)
-        self.storage = savedData.storage;
+        self.storage.contents = savedData.storage;
 
     self.w = 30;
     self.h = 15;
@@ -311,6 +311,14 @@ Player.onConnect = function(socket, user) {
         else if(p.input == 'dock') {
             player.docking = p.state;
         }
+    });
+
+    socket.on('purchase', function(p) {
+        console.log(p.stationId + p.playerId + p.item);
+        Storage.Transfer(p.item, 1, Station.list[p.stationId], Player.list[p.playerId]);
+    });
+    socket.on('sale', function(p) {
+        Storage.Transfer(p.item, 1, Player.list[p.playerId], Station.list[p.stationId]);
     });
 
     socket.emit('initPack', {

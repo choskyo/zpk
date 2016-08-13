@@ -12,6 +12,8 @@ var stationBuy = document.getElementById('buyItemList');
 var stationSell = document.getElementById('sellItemList');
 var stationName = document.getElementById('stationName');
 var stationPlayerName = document.getElementById('stationPlayerName');
+var btnBuy = document.getElementById('btnBuy');
+var btnSell = document.getElementById('btnSell');
 
 var mobileUI = document.getElementById("mobileMovement");
 var mobUp = document.getElementById("goUp");
