@@ -32,8 +32,8 @@ var Player = function(id, savedData) {
         self.y = savedData.y;
     if(savedData.storage != undefined)
         self.storage.contents = savedData.storage;
-    //if(savedData.credits != undefined && !isNaN(savedData.credits))
-     //   self.credits = savedData.credits;
+    if(savedData.credits != undefined && !isNaN(savedData.credits))
+        self.credits = savedData.credits;
 
 
     self.w = 30;
