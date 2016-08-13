@@ -5,6 +5,7 @@ var Player = function (initPack) {
     var self = {};
     self.id = initPack.id;
     self.name = initPack.name;
+    self.credits = initPack.credits;
     self.x = initPack.x;
     self.y = initPack.y;
     self.w = initPack.w;
@@ -65,6 +66,7 @@ var Player = function (initPack) {
         ctx.fillRect(x, y - 30, barWidth, 6);
 
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
+        credits.innerHTML = "Credits: " + Player.list[ownId].credits.toString();
 
         self.drawInventory();
         self.drawStationScreen();

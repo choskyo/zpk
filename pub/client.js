@@ -99,6 +99,8 @@ socket.on('updatePack', function(pack) {
         var p = pack.players[i];
         var player = Player.list[p.id];
         if(player) {
+            if(p.credits != undefined)
+                player.credits = p.credits;
             if(p.x != undefined)
                 player.x = p.x;
             if(p.y != undefined)

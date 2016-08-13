@@ -78,6 +78,7 @@ module.exports = function() {
         },
             {
                 username: player.name,
+                credits: player.credits,
                 x: Math.floor(player.x),
                 y: Math.floor(player.y),
                 storage: player.storage.contents

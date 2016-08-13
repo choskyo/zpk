@@ -3,7 +3,6 @@
  */
 
 var Entity = require('./entity.js');
-var Pack = require('./../data/pack.js');
 
 var Station = function(name, x, y, area) {
 
@@ -12,6 +11,7 @@ var Station = function(name, x, y, area) {
     //Station Name
     self.id = Math.random();
     self.name = name;
+    self.credits = 999999999;
 
     self.x = x;
     self.y = y;

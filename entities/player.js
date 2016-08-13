@@ -22,6 +22,7 @@ var Player = function(id, savedData) {
     self.name   = "";
 
     self.storage = new Storage(self);
+    self.credits = 1000000;
 
     if(savedData.username != undefined)
         self.name = savedData.username;
@@ -31,6 +32,9 @@ var Player = function(id, savedData) {
         self.y = savedData.y;
     if(savedData.storage != undefined)
         self.storage.contents = savedData.storage;
+    //if(savedData.credits != undefined && !isNaN(savedData.credits))
+     //   self.credits = savedData.credits;
+
 
     self.w = 30;
     self.h = 15;
@@ -41,6 +45,7 @@ var Player = function(id, savedData) {
     self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
+
     self.team = Team.list['safe'];
     self.killCount = 0;
     self.maxShields = 4;
@@ -75,6 +80,7 @@ var Player = function(id, savedData) {
         return {
             id: self.id,
             name: self.name,
+            credits: self.credits,
             x: self.x,
             y: self.y,
             w: self.w,
@@ -113,6 +119,7 @@ var Player = function(id, savedData) {
             b: self.b,
             shields: self.shields,
             storage: self.storage.contents,
+            credits: self.credits,
             angle: self.angle,
             area: self.area,
             docked: self.docked,

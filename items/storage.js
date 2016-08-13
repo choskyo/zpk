@@ -7,7 +7,7 @@ var Storage = function(owner) {
         example: {
             name: 'oneMillion',
             type: 'commodity',
-            amount: 100,
+            amount: 1,
             equipped: false,
             value: 1000000
         },
@@ -29,33 +29,38 @@ var Storage = function(owner) {
         }
     };
 
-    this.addObject = function(object, storage) {
+    this.addObject = function(object, storage, creds) {
         console.log("ADDING" + object.name);
         for(var i in storage) {
             if(storage[i].name == object.name) {
                 storage[i].amount++;
-                return;
+                creds -= object.value;
+                return creds;
             }
 
         }
         storage[object.name] = object;
+        creds -= object.value;
+        return creds;
     };
 
-    this.removeObject = function(object, storage) {
+    this.removeObject = function(object, storage, creds) {
         console.log("REMOVING " + object.name)
         for(var i in storage) {
             if(storage[i].name == object.name) {
                 storage[i].amount--;
-                return;
+                if(storage[i].amount <= 0)
+                    delete storage[i];
+                creds += object.value;
+                return creds;
             }
         }
-        storage[object.name] = object;
     };
 };
 
 Storage.Transfer = function(item, amount, sender, recipient) {
-    sender.storage.removeObject(item, sender.storage.contents);
-    recipient.storage.addObject(item, recipient.storage.contents);
+    sender.credits = sender.storage.removeObject(item, sender.storage.contents, sender.credits);
+    recipient.credits = recipient.storage.addObject(item, recipient.storage.contents, recipient.credits);
 };
 
 module.exports = Storage;

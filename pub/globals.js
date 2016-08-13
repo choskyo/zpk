@@ -3,6 +3,7 @@
  */
 var ownId = null;
 var shields = document.getElementById("shieldsDisplay");
+var credits = document.getElementById("creditsDisplay");
 var storage = document.getElementById("playerStorage");
 var respawn = document.getElementById("respawnButton");
 var teamScore = document.getElementById("teamScore");
