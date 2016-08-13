@@ -84,7 +84,7 @@ var Player = function(id, savedData) {
             b: self.b,
             shields: self.shields,
             maxShields: self.maxShields,
-            storage: self.storage,
+            storage: self.storage.contents,
             area: self.area
         }
     };
@@ -314,7 +314,6 @@ Player.onConnect = function(socket, user) {
     });
 
     socket.on('purchase', function(p) {
-        console.log(p.stationId + p.playerId + p.item);
         Storage.Transfer(p.item, 1, Station.list[p.stationId], Player.list[p.playerId]);
     });
     socket.on('sale', function(p) {
