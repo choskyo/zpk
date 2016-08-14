@@ -7,7 +7,7 @@ var Storage = function(owner) {
         example: {
             name: 'oneMillion',
             type: 'commodity',
-            amount: 1,
+            amount: 10,
             equipped: false,
             value: 1000000
         },
@@ -15,7 +15,7 @@ var Storage = function(owner) {
             name: 'shootyGun',
             type: 'weapon',
             damage: 1,
-            amount: 1,
+            amount: 10,
             equipped: true,
             value: 100000
         },
@@ -23,7 +23,7 @@ var Storage = function(owner) {
             name: 'shootyGun2',
             type: 'weapon',
             damage: 2,
-            amount: 1,
+            amount: 10,
             equipped: false,
             value: 500000
         }
@@ -40,6 +40,7 @@ var Storage = function(owner) {
 
         }
         storage[object.name] = object;
+        storage[object.name].amount = 1;
         creds -= object.value;
         return creds;
     };

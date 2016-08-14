@@ -8,6 +8,7 @@ var chatForm = document.getElementById("chat-form");
 if(!isMobile) {
     socket.on('serverMessage', function(message) {
         chatOutput.innerHTML += "<p style='font: 18px bold arial'>" + message + "</p>"
+        chatDiv.scrollTop = chatDiv.scrollHeight;
     });
     chatForm.onsubmit = function(e) {
         e.preventDefault();
