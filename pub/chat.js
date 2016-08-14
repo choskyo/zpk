@@ -7,7 +7,7 @@ var chatInput = document.getElementById("chat-input");
 var chatForm = document.getElementById("chat-form");
 if(!isMobile) {
     socket.on('serverMessage', function(message) {
-        chatOutput.innerHTML += "<div STYLE='color:white; z-index: 2; opacity:1 ;font: 18px bold arial'>" + message + "</div>"
+        chatOutput.innerHTML += "<p style='font: 18px bold arial'>" + message + "</p>"
     });
     chatForm.onsubmit = function(e) {
         e.preventDefault();

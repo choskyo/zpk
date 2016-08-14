@@ -3,7 +3,7 @@
 	<head>
 		<title>ZPK</title>
 		<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+		<link href="/pub/css/bootstrap.min.css" rel="stylesheet">
 	</head>
 	<body style="margin: 0 0 200px; background-color: black; color:whitesmoke">
 		<div id="splashScreen">
@@ -11,9 +11,9 @@
 
 				<div style="text-align:center">
 					<h1 style="font-size:9em; font-family:'Bungee Shade', cursive;">
-						<span style="color:orange">z</span>
-						<span style="color:white">p</span>
-						<span style="color:lightblue">k</span>
+						<span style="color:#FF5300">z</span>
+						<span style="color:ghostwhite">p</span>
+						<span style="color:#08FFE9">k</span>
 					</h1>
 				</div>
 
@@ -31,16 +31,22 @@
 
 				<input id="password" type="password" class="form-control" disabled>
 
-				<button id="login" class="btn btn-success">Sign In</button>
-				<button id="register" class="btn btn-info">Register</button>
+				<button id="login" class="btn btn-primary">Sign In</button>
+				<button id="register" class="btn btn-default">Register</button>
 				<br/><br/>
-				<div class="card">
-					<h3 class="card-header">
-						Tips & Info
-					</h3>
-					<div class="card-block">
-						<p class="card-text text-danger">Please note usernames are now <strong>required</strong>, passwords are not.</p>
-						<p class="card-text text-info">zpk is best played in fullscreen (F11).</p>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Tips & Info
+						</h3>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>Usernames are now <strong>required</strong>, passwords are not.</li>
+							<li>zpk is best played in fullscreen (F11).</li>
+							<li>A list of known bugs would be pages long but tell me about them anyway.</li>
+						</ul>
+
 					</div>
 				</div>
 			</div>
@@ -57,21 +63,23 @@
 				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
 			</canvas>
 
-			<div id="chat" style=" left:0; bottom:0; height:200px; width:100%; background-color: rgb(0, 0, 255); opacity:0.8; position: absolute; z-index: 1">
-				<div id="chat-output" style="width:100%; margin: 0 0 10px 0; height:80%; opacity:1; overflow-y: scroll">
-					<div id="chatWelcome" STYLE="color:white; font: 18px bold arial">
+			<div id="chat" class="panel panel-primary" style="overflow-y: scroll; left:0; bottom:10px; height:200px; width:100%; opacity:0.8; position: absolute; z-index: 1">
+				<div class="panel-heading">
+					<div class="panel-title" id="chatWelcome">
 						<script>
 							setInterval(function() {
 								var d = new Date();
 								document.getElementById("chatWelcome").innerHTML = "[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "]";
 							}, 1000);
-							</script>
+						</script>
 					</div>
 				</div>
-				<form id="chat-form">
-					<input id="chat-input" type="text" style="width:100%; opacity:1; color:white; background-color:black"/>
-				</form>
+				<div id="chat-output" class="panel-body" style="width:100%; opacity:1; overflow-y: hidden">
+				</div>
 			</div>
+			<form id="chat-form">
+				<input class="form-control input-sm" id="chat-input" type="text" style="width:100%; opacity:1;background-color:#111; color: inherit; position:absolute; bottom:0"/>
+			</form>
 
 			<div id="shields" style="left: 0; top:0; height:60px; width:100%; background-color: blue; opacity: 1; position:absolute; z-index: 1">
 				<div id="shieldsDisplay" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial; display: inline">Shields: </div>
@@ -134,17 +142,8 @@
 	</body>
 </html>
 
-<script>
-/*	<div id="stationScreen" style="left:150px; top: 60px; right: 0; bottom: 200px; position:absolute; z-index: 2; background-color: #1b1b1b; display:none;">
-			<h1 id="stationTitle" style="margin: 10px 0 0 10px; width: 80%; background-color:#111111; float:left; ">
-			Station Title Placeholder
-	</h1>
-	<button id="btnUndock" class="btn btn-danger" style="float:right;margin: 15px 25px 0 25px">
-			Undock
-			</button>
-			</div>
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/pub/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="/pub/globals.js"></script>
