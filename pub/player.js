@@ -73,7 +73,7 @@ var Player = function (initPack) {
     };
 
     self.drawStationScreen = function() {
-        if(self.docked && self.flick == false) {
+        if(Player.list[ownId].docked && !Player.list[ownId].flick) {
             self.flick = true;
             var dockedStation = Station.list[Player.list[ownId].dockedAt];
             stationScreen.style.display = 'inline';
@@ -106,7 +106,7 @@ var Player = function (initPack) {
 
         }
 
-        else if(!self.docked) {
+        else if(!Player.list[ownId].docked) {
             self.flick = false;
             stationScreen.style.display = 'none';
         }
