@@ -114,10 +114,10 @@ var Player = function (initPack) {
     };
 
     self.drawInventory = function() {
-        storage.innerHTML = '<div id="items" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial">----items----</div>'
+        storage.innerHTML = '';
 
         for(var i in Player.list[ownId].storage) {
-            storage.innerHTML += "<div style='font: 12pt arial bold'>" + '[' + Player.list[ownId].storage[i].amount + '] ' + Player.list[ownId].storage[i].name + "</div>";
+            storage.innerHTML += "<li style='font: 12pt arial bold'>" + '[' + Player.list[ownId].storage[i].amount + '] ' + Player.list[ownId].storage[i].name + "</li>";
         }
     };
 

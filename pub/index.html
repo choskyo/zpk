@@ -63,6 +63,20 @@
 				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
 			</canvas>
 
+			<nav class="navbar navbar-inverse" style="position: absolute; left: 0; top: 0; z-index: 1; width:100%">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<div id="shieldsDisplay" class="navbar-brand" style="opacity: 1;">Shields: </div>
+						<div id="creditsDisplay" class="navbar-brand" style="opacity: 1;">Credits: </div>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" id="respawnButton">Respawn</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
 			<div id="chat" class="panel panel-primary" style="overflow-y: scroll; left:0; bottom:10px; height:200px; width:100%; opacity:0.8; position: absolute; z-index: 1">
 				<div class="panel-heading">
 					<div class="panel-title" id="chatWelcome">
@@ -81,14 +95,6 @@
 				<input class="form-control input-sm" id="chat-input" type="text" style="width:100%; opacity:1;background-color:#111; color: inherit; position:absolute; bottom:0"/>
 			</form>
 
-			<div id="shields" style="left: 0; top:0; height:60px; width:100%; background-color: blue; opacity: 1; position:absolute; z-index: 1">
-				<div id="shieldsDisplay" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial; display: inline">Shields: </div>
-				<div id="creditsDisplay" style="opacity: 1; color: white; margin: 10px 0 0 100px; font:18pt bold arial; display:inline">Credits: </div>
-			</div>
-
-
-			<div id="respawnButton" style="right:0; top:0; border:1px dashed white; z-index: 2; padding: 10px 10px 10px 10px; position:absolute; font: 18pt arial bold; color:white; margin: 10px 0 0 0">RESPAWN</div>
-
 			<div id="mobileMovement" style=" left:0; bottom:0; height:100px; width:100%; background-color: rgb(0, 0, 255); opacity:0.8; position: absolute; z-index: 1">
 				<div id="goUp" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">UP</div>
 				<div id="goDown" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">DOWN</div>
@@ -98,8 +104,15 @@
 
 			</div>
 
-			<div id="playerStorage" style="left: 0; top:60px; bottom:200px; width:150px; background-color: blue; opacity: 1; position:absolute; z-index: 1">
-				<div id="Items" style="opacity: 1; color: white; margin: 10px 0 0 0; font:18pt bold arial">----Items----</div>
+			<div class="panel panel-primary" style="left: 0; top:50px; bottom:210px; width:150px; opacity: 0.8; position:absolute; z-index: 1">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Storage
+					</h3>
+				</div>
+				<div class="panel-body" id="playerStorage">
+
+				</div>
 			</div>
 
 			<div id="teamScore" style="top: 70px; left: 160px; color:white; position:absolute; z-index: 1;">
