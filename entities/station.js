@@ -46,6 +46,7 @@ var Station = function(name, x, y, area) {
 
     self.getUpdatePack = function() {
         return {
+            id: self.id,
             x: self.x,
             y: self.y,
             storage: self.storage.contents
