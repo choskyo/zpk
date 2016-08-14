@@ -81,15 +81,14 @@ var Player = function (initPack) {
             stationBuy.innerHTML = "";
             stationSell.innerHTML = "";
 
-            stationName = dockedStation.name;
-            stationPlayerName.innerHTML = Player.list[ownId].name;
+            stationName.innerHTML = dockedStation.name;
 
             for(var commod in dockedStation.storage) {
                 stationBuy.innerHTML +=
                     "<div class='radio'>" +
                     "<label>" +
                     "<input type='radio' name='buyCommod' value='" + JSON.stringify(dockedStation.storage[commod]) + "' checked/>" +
-                    dockedStation.storage[commod].name +
+                    dockedStation.storage[commod].amount + " - " + dockedStation.storage[commod].name +
                     '</label>' +
                     '</div>';
             }
@@ -99,7 +98,7 @@ var Player = function (initPack) {
                     "<div class='radio'>" +
                     "<label>" +
                     "<input type='radio' name='sellCommod' value='" + JSON.stringify(Player.list[ownId].storage[commod]) + "' checked/>" +
-                    Player.list[ownId].storage[commod].name +
+                    Player.list[ownId].storage[commod].amount + " - " + Player.list[ownId].storage[commod].name +
                     '</label>' +
                     '</div>';
             }

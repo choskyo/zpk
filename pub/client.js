@@ -61,12 +61,16 @@ btnUndock.onclick = function() {
     socket.emit('kP',{input:'dock', state:false});
 };
 btnBuy.onclick = function() {
+    Player.list[ownId].flick = false;
+    Player.list[ownId].drawStationScreen();
     var tempForm = document.getElementById('stationBuy');
     socket.emit('purchase', {item: JSON.parse(tempForm.elements["buyCommod"].value),
     stationId: Player.list[ownId].dockedAt,
     playerId: Player.list[ownId].id});
 };
 btnSell.onclick = function() {
+    Player.list[ownId].flick = false;
+    Player.list[ownId].drawStationScreen();
     var tempForm = document.getElementById('stationSell');
     socket.emit('sale', {item: JSON.parse(tempForm.elements["sellCommod"].value),
     stationId: Player.list[ownId].dockedAt,

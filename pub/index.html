@@ -119,39 +119,52 @@
 				Scores:
 			</div>
 
-			<div id="stationScreen" style="left:150px; top: 60px; right: 0; bottom: 200px; position:absolute; z-index: 2; background-color: #1b1b1b; display:none; overflow-y:scroll">
-				<div class="row">
-					<h1 id="stationTitle" style="margin: 0 0 0 2%; width: 80%; background-color:#111111; float:left; ">
-						Station Title Placeholder
+			<div id="stationScreen" class="panel panel-primary" style="left:150px; top: 50px; right: 0; bottom: 210px; position:absolute; z-index: 2; display:none; overflow-y: scroll;">
+				<div class="panel-heading clearfix">
+					<h1 id="stationName" class="panel-title pull-left" style="font-size:2em">
+						Err, title should be here!
 					</h1>
-					<button id="btnUndock" class="btn btn-danger" style="float:right;margin: 0 0 0 0; width:15%">
+					<button id="btnUndock" class="btn btn-danger pull-right">
 						Undock
 					</button>
 				</div>
+				<div class="panel-body">
+					<div class="panel panel-primary" style="display:inline-block; float:left; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px;">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								Buy
+							</h3>
+						</div>
+						<div class="panel-body">
+							<form id="stationBuy" class="form-group">
+								<div id="buyItemList">
 
+								</div>
 
-				<form id="stationBuy" class="form-group" style="display:inline-block; float:left; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px; background-color: #111">
-					<h3 id="stationName">Station</h3>
-					<div id="buyItemList">
-
+								<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
+							</form>
+						</div>
 					</div>
 
-					<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
-				</form>
+					<div class="panel panel-primary" style="display:inline-block; float:right; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px;">
+						<div class="panel-heading">
+							<h3 class="panel-title">
+								Sell
+							</h3>
+						</div>
+						<div class="panel-body">
+							<form id="stationSell" class="form-group">
+								<div id="sellItemList">
 
-				<form id="stationSell" class="form-group" style="display:inline-block; float:right; margin: 2% 0 20px 2%; width: 35%; height:80%; min-width:350px; min-height: 600px; background-color: #111">
-					<h3 id="stationPlayerName">PlayerName</h3>
-					<div id="sellItemList">
+								</div>
 
+								<input type="button" value="Sell" id="btnSell" class="btn btn-success" style="float:right;margin-right: 20px"/>
+							</form>
+						</div>
 					</div>
-
-					<input type="button" value="Sell" id="btnSell" class="btn btn-success" style="float:right; margin-right: 20px"/>
-				</form>
+				</div>
 			</div>
 
-
-
-		</div>
 	</body>
 </html>
 
