@@ -215,8 +215,7 @@ socket.on('delPack', function(pack) {
 setInterval(function() {
     if(!ownId)
         return;
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     for(var st in Station.list)
@@ -225,9 +224,8 @@ setInterval(function() {
     for(var wh in Wormhole.list)
         Wormhole.list[wh].draw();
 
-    for(var pl in Player.list) {
+    for(var pl in Player.list)
         Player.list[pl].draw();
-    }
     
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
@@ -236,6 +234,17 @@ setInterval(function() {
         Team.list[te].draw();
 }, 40);
 
+window.addEventListener("resize",() => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = window.innerHeight;
+    drawStars();
+});
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+bgCanvas.width = window.innerWidth;
+bgCanvas.height = window.innerHeight;
 drawStars = function() {
     bgCtx.fillStyle = "#FFF";
     for(var i = 0; i < bgCanvas.width; i += Math.random()*10) {
@@ -243,6 +252,4 @@ drawStars = function() {
     }
 
 };
-bgCanvas.width = window.innerWidth;
-bgCanvas.height = window.innerHeight;
 drawStars();
