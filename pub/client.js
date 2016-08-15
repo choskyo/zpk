@@ -19,87 +19,6 @@ function sound(src) {
 var soClick = new sound('./pub/click.wav');
 soClick.sound.volume = 0.5;
 
-var socket = io('http://localhost:3001/');
-
-var canvas = document.getElementById("canvas");
-var ctx = document.getElementById("canvas").getContext("2d");
-ctx.font = '30px Arial';
-
-var bgCanvas = document.getElementById("bgCanvas");
-var bgCtx = document.getElementById("bgCanvas").getContext("2d");
-
-document.onmousedown = function(event){
-    if(!Player.list[ownId].docked) {
-        socket.emit('kP',{input:'attack',state:true});
-    } else {
-        soClick.play();
-    }
-};
-document.onmouseup = function(event){
-    socket.emit('kP',{input:'attack',state:false});
-};
-document.onmousemove = function(event){
-    var co = {
-        x: event.clientX,
-        y: event.clientY,
-        centerX: window.innerWidth/2,
-        centerY: window.innerHeight/2
-    };
-
-    socket.emit('kP',{input:'mousePos',co});
-};
-document.onkeydown = function(event){
-    if(event.keyCode === 68)	//d
-        socket.emit('kP',{input:'right',state:true});
-    else if(event.keyCode === 83)	//s
-        socket.emit('kP',{input:'down',state:true});
-    else if(event.keyCode === 65) //a
-        socket.emit('kP',{input:'left',state:true});
-    else if(event.keyCode === 87) // w
-        socket.emit('kP',{input:'up',state:true});
-    else if(event.keyCode === 70)
-        socket.emit('kP',{input:'warp', state:true});
-    else if(event.keyCode === 82)
-        socket.emit('kP',{input:'dock', state:true});
-};
-document.onkeyup = function(event){
-    if(event.keyCode === 68)	//d
-        socket.emit('kP',{input:'right',state:false});
-    else if(event.keyCode === 83)	//s
-        socket.emit('kP',{input:'down',state:false});
-    else if(event.keyCode === 65) //a
-        socket.emit('kP',{input:'left',state:false});
-    else if(event.keyCode === 87) // w
-        socket.emit('kP',{input:'up',state:false});
-    else if(event.keyCode === 70)
-        socket.emit('kP',{input:'warp', state:false});
-};
-
-respawn.onclick = function() {
-    socket.emit('respawnRequest', ownId);
-};
-btnUndock.onclick = function() {
-    socket.emit('kP',{input:'dock', state:false});
-};
-btnBuy.onclick = function() {
-    var tempForm = document.getElementById('stationBuy');
-    socket.emit('purchase', {item: JSON.parse(tempForm.elements["buyCommod"].value),
-    stationId: Player.list[ownId].dockedAt,
-    playerId: Player.list[ownId].id});
-
-    Player.list[ownId].flick = false;
-    Player.list[ownId].drawStationScreen();
-};
-btnSell.onclick = function() {
-    var tempForm = document.getElementById('stationSell');
-    socket.emit('sale', {item: JSON.parse(tempForm.elements["sellCommod"].value),
-    stationId: Player.list[ownId].dockedAt,
-    playerId: Player.list[ownId].id});
-
-    Player.list[ownId].flick = false;
-    Player.list[ownId].drawStationScreen();
-};
-
 socket.on('initPack', function(pack) {
     if(pack.ownId)
         ownId = pack.ownId;
@@ -212,7 +131,7 @@ socket.on('delPack', function(pack) {
         delete Projectile.list[pack.projectiles[j]];
 });
 
-setInterval(function() {
+setInterval(() => {
     if(!ownId)
         return;
 
@@ -234,22 +153,9 @@ setInterval(function() {
         Team.list[te].draw();
 }, 40);
 
-window.addEventListener("resize",() => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    bgCanvas.width = window.innerWidth;
-    bgCanvas.height = window.innerHeight;
+window.onresize = () => {
+    setSizes();
     drawStars();
-});
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-bgCanvas.width = window.innerWidth;
-bgCanvas.height = window.innerHeight;
-drawStars = function() {
-    bgCtx.fillStyle = "#FFF";
-    for(var i = 0; i < bgCanvas.width; i += Math.random()*10) {
-        bgCtx.fillRect(i, Math.random()*bgCanvas.height, Math.random()*4, Math.random()*4);
-    }
-
 };
+setSizes();
 drawStars();

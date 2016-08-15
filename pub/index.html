@@ -5,15 +5,15 @@
 		<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
 		<link href="/pub/css/bootstrap.min.css" rel="stylesheet">
 	</head>
-	<body style="margin: 0 0 200px; background-color: black; color:whitesmoke">
-		<div id="splashScreen">
-			<div class="col-md-4 col-md-offset-4" style="margin-top:10%;">
+	<body style="margin: 0 0 200px; background:black; color:whitesmoke">
+		<div id="splashScreen" style="position:absolute; width:100%; height: 100%; z-index:10">
+			<div style="left: 0; top:50%; width:50%; margin: 10% auto">
 
 				<div style="text-align:center">
 					<h1 style="font-size:9em; font-family:'Bungee Shade', cursive;">
-						<span style="color:#FF5300">z</span>
-						<span style="color:ghostwhite">p</span>
-						<span style="color:#08FFE9">k</span>
+						<span style="color:#08FFE9">z</span>
+						<span style="color:#FF5300">p</span>
+						<span style="color:greenyellow">k</span>
 					</h1>
 				</div>
 
@@ -33,6 +33,7 @@
 
 				<button id="login" class="btn btn-primary">Sign In</button>
 				<button id="register" class="btn btn-default">Register</button>
+				<button id="goFull" class="btn btn-default">Fullscreen</button>
 				<br/><br/>
 				<div class="panel panel-info">
 					<div class="panel-heading">
@@ -51,14 +52,13 @@
 				</div>
 			</div>
 
-
 		</div>
 
+		<canvas id ="bgCanvas" style="position:absolute;">
+
+		</canvas>
 
 		<div id="gameDiv" style="display:none;">
-			<canvas id ="bgCanvas" style="position:absolute">
-
-			</canvas>
 			<canvas id="canvas" style="position:absolute">
 				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
 			</canvas>
@@ -172,7 +172,9 @@
 <script src="/pub/js/bootstrap.min.js"></script>
 
 <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
 <script src="/pub/globals.js"></script>
+<script src="/pub/controls.js"></script>
 <script src="/pub/team.js"></script>
 <script src="/pub/wormhole.js"></script>
 <script src="/pub/station.js"></script>

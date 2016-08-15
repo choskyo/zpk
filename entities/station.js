@@ -20,9 +20,9 @@ var Station = function(name, x, y, area) {
     self.h = 200;
 
     //Colour (Temporary!)
-    self.r = Math.floor(Math.random() * (255) + 1);
-    self.g = Math.floor(Math.random() * (255) + 1);
-    self.b = Math.floor(Math.random() * (255) + 1);
+    self.r = 70;
+    self.g = 78;
+    self.b = 88;
 
     self.area = area;
 

@@ -1,6 +1,16 @@
 /**
  * Created by will on 04/08/16.
  */
+var socket = io('http://82.45.35.98:3001/');
+
+var canvas = document.getElementById("canvas");
+canvas.oncontextmenu = (e) => e.preventDefault();
+var ctx = document.getElementById("canvas").getContext("2d");
+ctx.font = '30px Arial';
+
+var bgCanvas = document.getElementById("bgCanvas");
+var bgCtx = document.getElementById("bgCanvas").getContext("2d");
+
 var ownId = null;
 var shields = document.getElementById("shieldsDisplay");
 var credits = document.getElementById("creditsDisplay");
@@ -12,7 +22,6 @@ var stationScreen = document.getElementById('stationScreen');
 var stationBuy = document.getElementById('buyItemList');
 var stationSell = document.getElementById('sellItemList');
 var stationName = document.getElementById('stationName');
-var stationPlayerName = document.getElementById('stationPlayerName');
 var btnBuy = document.getElementById('btnBuy');
 var btnSell = document.getElementById('btnSell');
 
@@ -30,3 +39,47 @@ var check = function() {
     return check;
 };
 var isMobile = check();
+
+var btnFull = document.getElementById('goFull');
+btnFull.onclick = (e) => {
+    e.preventDefault();
+    toggleFullScreen();
+};
+
+//thank you mozilla for this function
+function toggleFullScreen() {
+    var doc = window.document;
+    var docEl = doc.documentElement;
+
+    var requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
+    var cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+
+    if(!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
+        requestFullScreen.call(docEl);
+    }
+    else {
+        cancelFullScreen.call(doc);
+    }
+}
+
+setSizes = () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    bgCanvas.width = window.innerWidth;
+    bgCanvas.height = window.innerHeight;
+};
+drawStars = () => {
+    bgCtx.fillStyle = "#FFF";
+    if(!ownId) {
+        for(var i = 0; i < bgCanvas.width; i += Math.random()*10) {
+            bgCtx.fillRect(Math.random()*window.innerWidth, Math.random()*window.innerHeight, Math.random()*4, Math.random()*4);
+        }
+    }
+    else {
+        for(var i = 0; i < bgCanvas.width; i += Math.random()*10) {
+            bgCtx.fillRect(i, Math.random()*bgCanvas.height, Math.random()*4, Math.random()*4);
+        }
+    }
+
+
+};

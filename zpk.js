@@ -27,7 +27,9 @@ console.log("Server started.");
 var socketList = {};
 
 //Fetch permanent entities from db
-db.getStations();
+//db.getStations();
+new Station('Station A', -700, -300, 'testy');
+new Station('Station B', 500, 200, 'qwe');
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -500, 'testy', 'qwe');
 var red = new Team('red', true);
