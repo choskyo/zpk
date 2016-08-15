@@ -2,6 +2,23 @@
  * Created by will on 14/07/16.
  */
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    };
+    this.stop = function () {
+        this.sound.pause();
+    }
+}
+var soClick = new sound('./pub/click.wav');
+soClick.sound.volume = 0.5;
+
 var socket = io('http://localhost:3001/');
 
 var canvas = document.getElementById("canvas");
@@ -12,7 +29,11 @@ var bgCanvas = document.getElementById("bgCanvas");
 var bgCtx = document.getElementById("bgCanvas").getContext("2d");
 
 document.onmousedown = function(event){
-    socket.emit('kP',{input:'attack',state:true});
+    if(!Player.list[ownId].docked) {
+        socket.emit('kP',{input:'attack',state:true});
+    } else {
+        soClick.play();
+    }
 };
 document.onmouseup = function(event){
     socket.emit('kP',{input:'attack',state:false});
@@ -74,7 +95,7 @@ btnSell.onclick = function() {
     socket.emit('sale', {item: JSON.parse(tempForm.elements["sellCommod"].value),
     stationId: Player.list[ownId].dockedAt,
     playerId: Player.list[ownId].id});
-    
+
     Player.list[ownId].flick = false;
     Player.list[ownId].drawStationScreen();
 };
@@ -213,7 +234,6 @@ setInterval(function() {
 
     for(var te in Team.list)
         Team.list[te].draw();
-
 }, 40);
 
 drawStars = function() {
