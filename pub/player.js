@@ -27,15 +27,11 @@ var Player = function (initPack) {
 
     self.area = initPack.area;
 
-    self.draw = function() {
+    self.draw = () => {
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
-        //DRAW SUN(TEMP)
-        ctx.beginPath();
-        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 300, 0, 2*Math.PI);
-        ctx.fillStyle = "#FDB813";
-        ctx.fill();
+
 
         ctx.save();
         ctx.beginPath();
@@ -53,7 +49,7 @@ var Player = function (initPack) {
         ctx.restore();
 
         ctx.beginPath();
-        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,1000,0,2*Math.PI);
+        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,2000,0,2*Math.PI);
         ctx.strokeStyle = '#F00';
         ctx.stroke();
 
@@ -72,7 +68,7 @@ var Player = function (initPack) {
         self.drawStationScreen();
     };
 
-    self.drawStationScreen = function() {
+    self.drawStationScreen = () => {
         if(Player.list[ownId].docked && !Player.list[ownId].flick) {
             self.flick = true;
             var dockedStation = Station.list[Player.list[ownId].dockedAt];
@@ -83,24 +79,23 @@ var Player = function (initPack) {
 
             stationName.innerHTML = dockedStation.name;
 
+            var i = 0;
+
             for(var commod in dockedStation.storage) {
-                stationBuy.innerHTML +=
-                    "<div class='radio'>" +
-                    "<label>" +
-                    "<input type='radio' name='buyCommod' value='" + JSON.stringify(dockedStation.storage[commod]) + "' checked/>" +
-                    dockedStation.storage[commod].amount + " - " + dockedStation.storage[commod].name +
-                    '</label>' +
-                    '</div>';
+                i++;
+                stationBuy.innerHTML += "<tr><td><input type='radio' name='buyCommod' value='" + JSON.stringify(dockedStation.storage[commod]) + "' checked style='display:hidden'; id='sellCommod" + i + "'/>" + "</td>" +
+                    "<td>" + dockedStation.storage[commod].amount + "</td>" +
+                    "<td><label for='buyCommod" + i + "'>" + dockedStation.storage[commod].name + "</label></td>" +
+                    "</tr>";
             }
 
+            i = 0;
+
             for(var commod in Player.list[ownId].storage) {
-                stationSell.innerHTML +=
-                    "<div class='radio'>" +
-                    "<label>" +
-                    "<input type='radio' name='sellCommod' value='" + JSON.stringify(Player.list[ownId].storage[commod]) + "' checked/>" +
-                    Player.list[ownId].storage[commod].amount + " - " + Player.list[ownId].storage[commod].name +
-                    '</label>' +
-                    '</div>';
+                stationSell.innerHTML += "<tr><td><input type='radio' name='sellCommod' value='" + JSON.stringify(Player.list[ownId].storage[commod]) + "' checked style='display:hidden'; id='sellCommod" + i + "'/>" + "</td>" +
+                    "<td>" + Player.list[ownId].storage[commod].amount + "</td>" +
+                    "<td><label for='sellCommod" + i + "'>" + Player.list[ownId].storage[commod].name + "</label></td>" +
+                    "</tr>";
             }
 
         }
@@ -112,15 +107,20 @@ var Player = function (initPack) {
 
     };
 
-    self.drawInventory = function() {
+    self.drawInventory = () => {
         storage.innerHTML = '';
 
         for(var i in Player.list[ownId].storage) {
-            storage.innerHTML += "<li style='font: 12pt arial bold'>" + '[' + Player.list[ownId].storage[i].amount + '] ' + Player.list[ownId].storage[i].name + "</li>";
+            storage.innerHTML += "<tr><td>" + Player.list[ownId].storage[i].amount + "</td><td>" + Player.list[ownId].storage[i].name + "</td> </tr>";
         }
     };
 
-    
+    self.intersects = function(e) {
+        return !(e.x > self.x + self.w ||
+        e.x + e.w < self.x ||
+        e.y > self.y + self.h ||
+        e.y + e.h < self.y);
+    };
 
     Player.list[self.id] = self;
 

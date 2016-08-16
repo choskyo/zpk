@@ -33,7 +33,7 @@
 
 				<button id="login" class="btn btn-primary">Sign In</button>
 				<button id="register" class="btn btn-default">Register</button>
-				<button id="goFull" class="btn btn-default">Fullscreen</button>
+
 				<br/><br/>
 				<div class="panel panel-info">
 					<div class="panel-heading">
@@ -44,7 +44,7 @@
 					<div class="panel-body">
 						<ul>
 							<li>Usernames are now <strong>required</strong>, passwords are not.</li>
-							<li>zpk is best played in fullscreen (F11).</li>
+							<li>zpk is best played in fullscreen (there'll be a button after you log in).</li>
 							<li>A list of known bugs would be pages long but tell me about them anyway.</li>
 						</ul>
 
@@ -73,6 +73,9 @@
 						<li>
 							<a href="#" id="respawnButton">Respawn</a>
 						</li>
+						<li>
+							<a href="#" id="goFull">Fullscreen</a>
+						</li>
 					</ul>
 				</div>
 			</nav>
@@ -95,27 +98,38 @@
 				<input class="form-control input-sm" id="chat-input" type="text" style="width:100%; opacity:1;background-color:#111; color: inherit; position:absolute; bottom:0"/>
 			</form>
 
-			<div id="mobileMovement" style=" left:0; bottom:0; height:100px; width:100%; background-color: rgb(0, 0, 255); opacity:0.8; position: absolute; z-index: 1">
-				<div id="goUp" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">UP</div>
-				<div id="goDown" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">DOWN</div>
-				<div id="goLeft" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">LEFT</div>
-				<div id="goRight" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">RIGHT</div>
-				<div id="shoot" style="width:20%; background-color:red; float:left; height:100%; text-align:center; font:32pt bold arial">SHOOT</div>
-
+			<div id="mobileMovement" style=" left:0; bottom:0; height:100%; width:100%; background-color: rgb(0, 0, 255); opacity:0.1; position: absolute; z-index: 1">
+				<div id="goUp" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:100px">UP</div>
+				<div id="goDown" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:0">DOWN</div>
+				<div id="goLeft" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:100px">LEFT</div>
+				<div id="goRight" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:0">RIGHT</div>
+				<div id="action" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:200px">SHOOT</div>
 			</div>
 
-			<div class="panel panel-primary" style="left: 0; top:50px; bottom:210px; width:150px; opacity: 0.8; position:absolute; z-index: 1">
+			<div class="panel panel-primary" style="left: 0; top:50px; bottom:210px; width:225px; opacity: 0.8; position:absolute; z-index: 1">
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						Storage
 					</h3>
 				</div>
-				<div class="panel-body" id="playerStorage">
+				<div class="panel-body">
+					<table class="table table-striped table-hover" style="margin: 0 0 0 0; width:100%;">
+						<thead>
+						<th>
+							#
+						</th>
+						<th>
+							Name
+						</th>
+						</thead>
+						<tbody id="playerStorage">
 
+						</tbody>
+					</table>
 				</div>
 			</div>
 
-			<div id="teamScore" style="top: 70px; left: 160px; color:white; position:absolute; z-index: 1;">
+			<div id="teamScore" style="top: 70px; left: 250px; color:white; position:absolute; z-index: 1;">
 				Scores:
 			</div>
 
@@ -137,9 +151,22 @@
 						</div>
 						<div class="panel-body">
 							<form id="stationBuy" class="form-group">
-								<div id="buyItemList">
+								<table class="table table-hover">
+									<thead>
+										<th>
 
-								</div>
+										</th>
+										<th>
+											#
+										</th>
+										<th>
+											Name
+										</th>
+									</thead>
+									<tbody id="buyItemList">
+
+									</tbody>
+								</table>
 
 								<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
 							</form>
@@ -154,9 +181,22 @@
 						</div>
 						<div class="panel-body">
 							<form id="stationSell" class="form-group">
-								<div id="sellItemList">
+								<table class="table table-hover">
+									<thead>
+									<th>
 
-								</div>
+									</th>
+									<th>
+										#
+									</th>
+									<th>
+										Name
+									</th>
+									</thead>
+									<tbody id="sellItemList">
+
+									</tbody>
+								</table>
 
 								<input type="button" value="Sell" id="btnSell" class="btn btn-success" style="float:right;margin-right: 20px"/>
 							</form>
@@ -183,4 +223,3 @@
 <script src="/pub/client.js"></script>
 <script src="/pub/splash.js"></script>
 <script src="/pub/chat.js"></script>
-<script src="/pub/mobileUI.js"></script>

@@ -1,24 +1,6 @@
 /**
  * Created by will on 14/07/16.
  */
-
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    };
-    this.stop = function () {
-        this.sound.pause();
-    }
-}
-var soClick = new sound('./pub/click.wav');
-soClick.sound.volume = 0.5;
-
 socket.on('initPack', function(pack) {
     if(pack.ownId)
         ownId = pack.ownId;
@@ -137,6 +119,12 @@ setInterval(() => {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    //DRAW SUN(TEMP)
+    ctx.beginPath();
+    ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 300, 0, 2*Math.PI);
+    ctx.fillStyle = "#FDB813";
+    ctx.fill();
+
     for(var st in Station.list)
         Station.list[st].draw();
 
@@ -159,3 +147,20 @@ window.onresize = () => {
 };
 setSizes();
 drawStars();
+
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function () {
+        this.sound.play();
+    };
+    this.stop = function () {
+        this.sound.pause();
+    }
+}
+var soClick = new sound('./pub/click.wav');
+soClick.sound.volume = 0.5;

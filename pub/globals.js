@@ -30,7 +30,7 @@ var mobUp = document.getElementById("goUp");
 var mobDown = document.getElementById("goDown");
 var mobLeft = document.getElementById("goLeft");
 var mobRight = document.getElementById("goRight");
-var mobShoot = document.getElementById("shoot");
+var mobAction = document.getElementById("action");
 
 //borrowed from http://stackoverflow.com/questions/11381673/detecting-a-mobile-browser
 var check = function() {

@@ -82,3 +82,68 @@ btnSell.onclick = () => {
     Player.list[ownId].flick = false;
     Player.list[ownId].drawStationScreen();
 };
+
+
+
+//MOBILE
+if(isMobile) {
+    mobileUI.style.display = 'absolute'
+} else {
+    mobileUI.style.display = 'none'
+}
+
+mobUp.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'up',state:true});
+}, false);
+mobDown.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'down',state:true});
+}, false);
+mobLeft.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'left',state:true});
+}, false);
+mobRight.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'right',state:true});
+}, false);
+mobAction.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    for(var w in Wormhole.list) {
+        if(Player.list[ownId].intersects(w)) {
+            socket.emit('kP',{input:'warp', state:true});
+            return;
+        }
+    }
+    for(var s in Station.list) {
+        if(Player.list[ownId].intersects(s)) {
+            socket.emit('kP',{input:'dock', state:true});
+            return;
+        }
+    }
+
+    socket.emit('kP',{input:'attack',state:true});
+}, false);
+
+mobUp.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'up',state:false});
+}, false);
+mobDown.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'down',state:false});
+}, false);
+mobLeft.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'left',state:false});
+}, false);
+mobRight.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'right',state:false});
+}, false);
+mobAction.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    socket.emit('kP',{input:'warp', state:false});
+    socket.emit('kP',{input:'attack',state:false});
+}, false);
