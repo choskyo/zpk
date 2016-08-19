@@ -6,7 +6,8 @@ exports.initPack = {
     projectiles:[],
     stations:[],
     wormholes:[],
-    teams: []
+    teams: [],
+    planets: []
 };
 
 exports.delPack = {
@@ -14,5 +15,6 @@ exports.delPack = {
     projectiles:[],
     stations:[],
     wormholes:[],
-    teams:[]
+    teams:[],
+    planets: []
 };

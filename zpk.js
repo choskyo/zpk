@@ -9,6 +9,7 @@ var Station = require('./entities/station.js');
 var Projectile = require('./entities/projectile.js');
 var Wormhole = require('./entities/wormhole.js');
 var Team = require('./entities/team.js');
+var Planet = require('./entities/planet.js');
 //All packs should be defined in below file
 var Pack = require('./data/pack.js');
 
@@ -28,10 +29,12 @@ var socketList = {};
 
 //Fetch permanent entities from db
 //db.getStations();
-new Station('Station A', -700, -300, 'testy');
+new Planet('Planet One', 1800, 350, 0, 0, 0.00125, 'testy');
+new Planet('Planet Two', 1100, 150, 0, 0, 0.0025, 'testy');
+new Station('Station A', -650, -650, 'testy');
 new Station('Station B', 500, 200, 'qwe');
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
-new Wormhole('WormholeC', 0, -500, 'testy', 'qwe');
+new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
 var red = new Team('red', true);
 var blue = new Team('blue', true);
 var safe = new Team('safe', false);
@@ -122,7 +125,8 @@ setInterval(function(){
 		projectiles: Projectile.update(),
 		stations: Station.update(),
 		wormholes: Wormhole.update(),
-		teams: Team.update()
+		teams: Team.update(),
+		planets: Planet.update()
 	};
 
 	for(var s in socketList){
@@ -137,12 +141,14 @@ setInterval(function(){
 	Pack.initPack.stations = [];
 	Pack.initPack.wormholes = [];
 	Pack.initPack.teams = [];
+	Pack.initPack.planets = [];
 
 	Pack.delPack.players = [];
 	Pack.delPack.projectiles = [];
 	Pack.delPack.stations = [];
 	Pack.delPack.wormholes = [];
 	Pack.delPack.teams = [];
+	Pack.delPack.planets = [];
 
 },40);
 

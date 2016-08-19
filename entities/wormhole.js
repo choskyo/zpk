@@ -14,8 +14,8 @@ var Wormhole = function(name, x, y, area, destination) {
     self.x = x;
     self.y = y;
 
-    self.w = 40;
-    self.h = 40;
+    self.w = 80;
+    self.h = 80;
 
     //Colour (Temporary!)
     self.r = 128;

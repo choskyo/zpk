@@ -20,6 +20,9 @@ socket.on('initPack', function(pack) {
     for(var t = 0; t < pack.teams.length; t++) {
         new Team(pack.teams[t]);
     }
+    for(var p = 0; p < pack.planets.length; p++) {
+        new Planet(pack.planets[p]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
@@ -103,6 +106,17 @@ socket.on('updatePack', function(pack) {
                 team.score = u.score;
         }
     }
+
+    for(var z = 0; z < pack.planets.length; z++) {
+        var pl = pack.planets[z];
+        var planet = Planet.list[pl.id];
+        if(planet) {
+            if(pl.x != undefined)
+                planet.x = pl.x;
+            if(pl.y != undefined)
+                planet.y = pl.y;
+        }
+    }
 });
 
 socket.on('delPack', function(pack) {
@@ -121,9 +135,12 @@ setInterval(() => {
 
     //DRAW SUN(TEMP)
     ctx.beginPath();
-    ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 300, 0, 2*Math.PI);
+    ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 500, 0, 2*Math.PI);
     ctx.fillStyle = "#FDB813";
     ctx.fill();
+
+    for(var pl2 in Planet.list)
+        Planet.list[pl2].draw();
 
     for(var st in Station.list)
         Station.list[st].draw();
@@ -139,6 +156,8 @@ setInterval(() => {
 
     for(var te in Team.list)
         Team.list[te].draw();
+
+
 }, 40);
 
 window.onresize = () => {

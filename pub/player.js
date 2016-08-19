@@ -49,7 +49,7 @@ var Player = function (initPack) {
         ctx.restore();
 
         ctx.beginPath();
-        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,2000,0,2*Math.PI);
+        ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2,2500,0,2*Math.PI);
         ctx.strokeStyle = '#F00';
         ctx.stroke();
 
