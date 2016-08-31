@@ -36,7 +36,6 @@ var Planet = function(name, pathRad, rad, cX, cY, speed, area) {
 
     //Pack funcs
     self.getInitPack = function() {
-        console.log(self.id + self.name);
         return {
             id: self.id,
             name: self.name,

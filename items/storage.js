@@ -1,43 +1,20 @@
 /**
  * Created by will on 09/08/16.
  */
+var items = require('./item');
 var Storage = function(owner) {
     this.ownerName = owner.name;
     this.contents = {
-        example: {
-            name: 'oneMillion',
-            type: 'commodity',
-            amount: 10,
-            equipped: false,
-            value: 1000000
-        },
-        exampleWeapon: {
-            name: 'shootyGun',
-            type: 'weapon',
-            damage: 1,
-            amount: 10,
-            equipped: true,
-            value: 100000
-        },
-        exampleWeapon2: {
-            name: 'shootyGun2',
-            type: 'weapon',
-            damage: 2,
-            amount: 10,
-            equipped: false,
-            value: 500000
-        }
+        testy: new items.Item('testy', 10, 1, 'commodity', false, 50)
     };
 
     this.addObject = function(object, storage, creds) {
-        console.log("ADDING" + object.name);
         for(var i in storage) {
             if(storage[i].name == object.name) {
                 storage[i].amount++;
-                creds -= object.value;
+                creds -= object.rval;
                 return creds;
             }
-
         }
         storage[object.name] = object;
         storage[object.name].amount = 1;
@@ -46,13 +23,12 @@ var Storage = function(owner) {
     };
 
     this.removeObject = function(object, storage, creds) {
-        console.log("REMOVING " + object.name)
         for(var i in storage) {
             if(storage[i].name == object.name) {
                 storage[i].amount--;
                 if(storage[i].amount <= 0)
                     delete storage[i];
-                creds += object.value;
+                creds += object.rval;
                 return creds;
             }
         }

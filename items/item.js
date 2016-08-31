@@ -1,40 +1,48 @@
 /**
  * Created by will on 31/08/16.
  */
-var Item = function(name, amt, size, type, gear, bval) {
-    var self = {
-        name: "",
-        amt: 0,
-        type: "",
-        gear: false,
-        bval: 0,
-        size: 0
-    };
+module.exports = {
+    Item: function(name, amt, size, type, gear, bval) {
+        var self = {
+            name: "",
+            type: "",
+            amount: 1,
+            gear: false,
+            rval: 0,
+            bval: 0,
+            maxval: 0,
+            minval: 0,
+            size: 0
+        };
 
-    if(name != null)
-        self.name = name;
-    if(amt != null)
-        self.amt = amt;
-    if(type != null)
-        self.type = type;
-    if(gear  != null)
-        self.gear = gear;
-    if(bval != null)
-        self.bval = bval;
-    if(size != null)
-        self.size = size;
+        if(name != null)
+            self.name = name;
+        if(amt != null)
+            self.amount = amt;
+        if(type != null)
+            self.type = type;
+        if(gear  != null)
+            self.gear = gear;
+        if(bval != null)
+            self.bval = bval;
+        if(size != null)
+            self.size = size;
 
-    self.addItem = function(amount) {
-        self.amt += amount;
-    };
-    self.remItem = function(amount) {
-        self.amt -= amount;
-    };
+        self.rval = self.bval;
+        self.maxval = self.bval*1.40;
+        self.minval = self.bval*0.60;
 
-    return self;
-};
+        self.addItem = function(amount) {
+            self.amt += amount;
+        };
+        self.remItem = function(amount) {
+            self.amt -= amount;
+        };
 
-var Equippable = function() {
+        return self;
+    },
+
+    Equippable: function() {
     var self = Item();
 
     self.gear = true;
@@ -46,19 +54,28 @@ var Equippable = function() {
     self.equip = function() {
         self.equipped = true;
     };
-};
+},
 
-var Weapon = function() {
+    Weapon: function() {
     var self = Equippable();
 
     self.damage = 0;
     //ms
     self.rof = 1000;
-};
+},
 
-var Shield = function() {
-    var self = Item();
+    Shield: function() {
+    var self = Equippable();
 
     self.bank = 10;
     self.recharge = 0.5;
+},
+
+    Engine: function() {
+    var self = Equippable();
+
+    self.maxSpeed = 5;
+    self.accel = 1;
+    self.turning = 1;
+}
 };

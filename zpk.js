@@ -29,8 +29,8 @@ var socketList = {};
 
 //Fetch permanent entities from db
 //db.getStations();
-new Planet('Planet One', 1800, 350, 0, 0, 0.00125, 'testy');
-new Planet('Planet Two', 1100, 150, 0, 0, 0.0025, 'testy');
+new Planet('Planet One', 1800, 350, 0, 0, 0.0002, 'testy');
+new Planet('Planet Two', 1100, 150, 0, 0, 0.0005, 'testy');
 new Station('Station A', -650, -650, 'testy');
 new Station('Station B', 500, 200, 'qwe');
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');

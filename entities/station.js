@@ -53,11 +53,26 @@ var Station = function(name, x, y, area) {
         }
     };
 
+    self.calculateValues = function() {
+        for(var i in self.storage.contents) {
+            var item = self.storage.contents[i];
+            if(item.amount > 1) {
+                if(item.rval > item.minval && item.rval < item.maxval) {
+                    item.rval = item.bval - Math.floor((item.amount * (item.bval/1000)+0.5));
+                    if(item.rval <= 0)
+                        item.rval = item.minval;
+                }
+            } else {
+                item.rval = item.bval;
+            }
+        }
+    };
     //Functions
     var superUpdate = self.update;
 
     self.update = function() {
         superUpdate();
+        self.calculateValues();
     };
 
     Station.list[self.id] = self;
