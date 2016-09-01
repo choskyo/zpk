@@ -12,6 +12,7 @@ var Team = require('./team.js');
 var Pack = require('./../data/pack.js');
 var Storage = require('./../items/storage');
 var Planet = require('./planet');
+var Enemy = require('./enemy');
 
 //Player Object
 var Player = function(id, savedData) {
@@ -335,7 +336,8 @@ Player.onConnect = function(socket, user) {
         stations: Station.getAllPacks(),
         wormholes: Wormhole.getAllPacks(),
         teams: Team.getAllPacks(),
-        planets: Planet.getAllPacks()
+        planets: Planet.getAllPacks(),
+        enemies: Enemy.getAllPacks()
     });
 };
 Player.getAllPacks = function() {

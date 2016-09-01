@@ -28,7 +28,6 @@ var Station = function(name, x, y, area) {
 
     //Pack funcs
     self.getInitPack = function() {
-        console.log(self.id + self.name);
         return {
             id: self.id,
             name: self.name,

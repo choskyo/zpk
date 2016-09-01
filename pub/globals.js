@@ -10,6 +10,7 @@ ctx.font = '30px Arial';
 
 var bgCanvas = document.getElementById("bgCanvas");
 var bgCtx = document.getElementById("bgCanvas").getContext("2d");
+var htmlBody = document.getElementById("body");
 
 var ownId = null;
 var shields = document.getElementById("shieldsDisplay");

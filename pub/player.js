@@ -61,6 +61,14 @@ var Player = function (initPack) {
         ctx.fillStyle = "lightblue";
         ctx.fillRect(x, y - 30, barWidth, 6);
 
+        ctx.font = "bold 18pt Arial";
+        ctx.fillStyle="white";
+        ctx.strokeStyle="black";
+        ctx.lineWidth=1;
+        ctx.textAlign = 'center';
+        ctx.fillText(self.name, x, y + 50);
+        ctx.strokeText(self.name, x, y + 50);
+
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
         credits.innerHTML = "Credits: " + Player.list[ownId].credits.toString();
 

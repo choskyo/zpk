@@ -26,6 +26,14 @@ var Wormhole = function(initPack) {
         ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
         ctx.arc(x, y,self.w,0,2*Math.PI);
         ctx.fill();
+
+        ctx.font = "bold 18pt Arial";
+        ctx.fillStyle="white";
+        ctx.strokeStyle="black";
+        ctx.lineWidth=1;
+        ctx.textAlign = 'center';
+        ctx.fillText(self.destination, x, y + 50);
+        ctx.strokeText(self.destination, x, y + 50);
     };
 
     Wormhole.list[self.id] = self;

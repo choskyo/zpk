@@ -28,6 +28,15 @@ var Entity = function() {
         e.y + e.h < self.y);
     };
 
+    self.getAngle = function(e) {
+        var angle = Math.atan2(e.y - self.y, e.x - self.x) * 180/Math.PI;
+        if(angle < 0)
+        {
+            angle = 360 - (-angle);
+        }
+        return angle;
+    };
+
     self.getDistance = function(e) {
         return Math.hypot(e.x - self.x, e.y - self.y);
     };

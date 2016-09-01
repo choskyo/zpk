@@ -23,6 +23,9 @@ socket.on('initPack', function(pack) {
     for(var p = 0; p < pack.planets.length; p++) {
         new Planet(pack.planets[p]);
     }
+    for(var e = 0; e < pack.enemies.length; e++) {
+        new Enemy(pack.enemies[e]);
+    }
 });
 
 socket.on('updatePack', function(pack) {
@@ -71,6 +74,31 @@ socket.on('updatePack', function(pack) {
                 projectile.shields = q.shields;
             if(q.area != undefined)
                 projectile.area = q.area;
+        }
+    }
+
+    for(var e = 0; e < pack.enemies.length; e++) {
+        var pe = pack.enemies[e];
+        var le = Enemy.list[pe.id];
+        if(le) {
+            if(pe.x != undefined)
+                le.x = pe.x;
+            if(pe.y != undefined)
+                le.y = pe.y;
+            if(pe.r != undefined)
+                le.r = pe.r;
+            if(pe.g != undefined)
+                le.g = pe.g;
+            if(pe.b != undefined)
+                le.b = pe.b;
+            if(pe.shields != undefined)
+                le.shields = pe.shields;
+            if(pe.storage != undefined)
+                le.storage = pe.storage;
+            if(pe.credits != undefined)
+                le.credits = pe.credits;
+            if(pe.angle != undefined)
+                le.angle = pe.angle;
         }
     }
 
@@ -125,6 +153,9 @@ socket.on('delPack', function(pack) {
 
     for(var j = 0; j < pack.projectiles.length; j++)
         delete Projectile.list[pack.projectiles[j]];
+
+    for(var e = 0; e < pack.enemies.length; e++)
+        delete Enemy.list[pack.enemies[e]];
 });
 
 setInterval(() => {
@@ -150,6 +181,9 @@ setInterval(() => {
 
     for(var pl in Player.list)
         Player.list[pl].draw();
+
+    for(var en in Enemy.list)
+        Enemy.list[en].draw();
     
     for(var pr in Projectile.list)
         Projectile.list[pr].draw();
