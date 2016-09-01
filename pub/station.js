@@ -40,6 +40,14 @@ var Station = function(initPack) {
         ctx.strokeRect(-self.w / 2, -self.h / 2, self.w, self.h);
         ctx.fill();
         ctx.restore();
+
+        ctx.font = "bold 18pt Arial";
+        ctx.fillStyle="white";
+        ctx.strokeStyle="black";
+        ctx.lineWidth=1;
+        ctx.textAlign = 'center';
+        ctx.fillText(self.name, x + self.w/2, y + 50);
+        ctx.strokeText(self.name, x + self.w/2, y + 50);
     };
 
     Station.list[self.id] = self;
