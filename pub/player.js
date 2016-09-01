@@ -74,30 +74,22 @@ var Player = function (initPack) {
             var dockedStation = Station.list[Player.list[ownId].dockedAt];
             stationScreen.style.display = 'inline';
 
-            stationBuy.innerHTML = "";
-            stationSell.innerHTML = "";
+            stationTrade.innerHTML = "";
 
             stationName.innerHTML = dockedStation.name;
 
             var i = 0;
 
-            for(var commod in dockedStation.storage) {
+            for(var c in dockedStation.storage) {
+                var commod = dockedStation.storage[c];
                 i++;
-                stationBuy.innerHTML += "<tr><td><input type='radio' name='buyCommod' value='" + JSON.stringify(dockedStation.storage[commod]) + "' checked style='display:hidden'; id='sellCommod" + i + "'/>" + "</td>" +
-                    "<td>" + dockedStation.storage[commod].amount + "</td>" +
-                    "<td><label for='buyCommod" + i + "'>" + dockedStation.storage[commod].name + "</label></td>" +
+                stationTrade.innerHTML += "<tr><td><input type='radio' name='tradeCommod' value='" + JSON.stringify(commod) + "' checked style='display:hidden' id='tradeCommod" + i + "'/>" + "</td>" +
+                    "<td>" + commod.amount + "</td>" +
+                    "<td>" + Player.list[ownId].storage[c].amount +"</td>" +
+                    "<td>" + commod.rval +"</td>" +
+                    "<td><label for='tradeCommod" + i + "'>" + commod.name + "</label></td>" +
                     "</tr>";
             }
-
-            i = 0;
-
-            for(var commod in Player.list[ownId].storage) {
-                stationSell.innerHTML += "<tr><td><input type='radio' name='sellCommod' value='" + JSON.stringify(Player.list[ownId].storage[commod]) + "' checked style='display:hidden'; id='sellCommod" + i + "'/>" + "</td>" +
-                    "<td>" + Player.list[ownId].storage[commod].amount + "</td>" +
-                    "<td><label for='sellCommod" + i + "'>" + Player.list[ownId].storage[commod].name + "</label></td>" +
-                    "</tr>";
-            }
-
         }
 
         else if(!Player.list[ownId].docked) {

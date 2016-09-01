@@ -65,8 +65,8 @@ respawn.onclick = () => socket.emit('respawnRequest', ownId);
 btnUndock.onclick = () => socket.emit('kP',{input:'dock', state:false});
 
 btnBuy.onclick = () => {
-    var tempForm = document.getElementById('stationBuy');
-    socket.emit('purchase', {item: JSON.parse(tempForm.elements["buyCommod"].value),
+    var tempForm = document.getElementById('stationTrade');
+    socket.emit('purchase', {item: JSON.parse(tempForm.elements["tradeCommod"].value),
         stationId: Player.list[ownId].dockedAt,
         playerId: Player.list[ownId].id});
 
@@ -74,8 +74,8 @@ btnBuy.onclick = () => {
     Player.list[ownId].drawStationScreen();
 };
 btnSell.onclick = () => {
-    var tempForm = document.getElementById('stationSell');
-    socket.emit('sale', {item: JSON.parse(tempForm.elements["sellCommod"].value),
+    var tempForm = document.getElementById('stationTrade');
+    socket.emit('sale', {item: JSON.parse(tempForm.elements["tradeCommod"].value),
         stationId: Player.list[ownId].dockedAt,
         playerId: Player.list[ownId].id});
 

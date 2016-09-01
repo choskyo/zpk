@@ -133,7 +133,7 @@
 				Scores:
 			</div>
 
-			<div id="stationScreen" class="panel panel-primary" style="left:150px; top: 50px; right: 0; bottom: 210px; position:absolute; z-index: 2; display:none; overflow-y: scroll;">
+			<div id="stationScreen" class="panel panel-primary" style="left:225px; top: 50px; right: 0; bottom: 210px; position:absolute; z-index: 2; display:none; overflow-y: scroll;">
 				<div class="panel-heading clearfix">
 					<h1 id="stationName" class="panel-title pull-left" style="font-size:2em">
 						Err, title should be here!
@@ -143,62 +143,42 @@
 					</button>
 				</div>
 				<div class="panel-body">
-					<div class="panel panel-primary" style="display:inline-block; float:left; margin: 2% 0 20px 2%; width: 40%; height:80%; min-width:350px; min-height: 500px;">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Buy
-							</h3>
+					<ul class="nav nav-tabs">
+						<li class="active"><a aria-expanded="true" href="#stWelc" data-toggle="tab">Welcome</a></li>
+						<li class=""><a aria-expanded="false" href="#stTrade" data-toggle="tab">Trade Bay</a></li>
+						<li class=""><a aria-expanded="false" href="" data-toggle="tab">Ship Customization</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade active in" id="stWelc">
+							<p style="margin-top: 10px">Welcome to ZPK.</p>
 						</div>
-						<div class="panel-body">
-							<form id="stationBuy" class="form-group">
-								<table class="table table-hover">
-									<thead>
-										<th>
-
-										</th>
-										<th>
-											#
-										</th>
-										<th>
-											Name
-										</th>
-									</thead>
-									<tbody id="buyItemList">
-
-									</tbody>
-								</table>
-
-								<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
-							</form>
-						</div>
-					</div>
-
-					<div class="panel panel-primary" style="display:inline-block; float:right; margin: 2% 0 20px 2%; width: 40%; height:80%; min-width:350px; min-height: 500px;">
-						<div class="panel-heading">
-							<h3 class="panel-title">
-								Sell
-							</h3>
-						</div>
-						<div class="panel-body">
-							<form id="stationSell" class="form-group">
+						<div class="tab-pane fade" id="stTrade">
+							<form id="stationTrade" class="form-group">
 								<table class="table table-hover">
 									<thead>
 									<th>
 
 									</th>
 									<th>
-										#
+										Amount
+									</th>
+									<th>
+										Owned
+									</th>
+									<th>
+										Value
 									</th>
 									<th>
 										Name
 									</th>
 									</thead>
-									<tbody id="sellItemList">
+									<tbody id="tradeItemList">
 
 									</tbody>
 								</table>
 
-								<input type="button" value="Sell" id="btnSell" class="btn btn-success" style="float:right;margin-right: 20px"/>
+								<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
+								<input type="button" value="Sell" id="btnSell" class="btn btn-primary" style="float:right; margin-right:20px"/>
 							</form>
 						</div>
 					</div>
