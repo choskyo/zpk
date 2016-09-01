@@ -33,6 +33,9 @@ new Planet('Planet One', 1800, 350, 0, 0, 0.0002, 'testy');
 new Planet('Planet Two', 1100, 150, 0, 0, 0.0005, 'testy');
 new Station('Station A', -650, -650, 'testy');
 new Station('Station B', 500, 200, 'qwe');
+for(var st in Station.list) {
+	Station.list[st].storage.contents = db.getItems();
+}
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
 var red = new Team('red', true);

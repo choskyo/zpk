@@ -82,10 +82,15 @@ var Player = function (initPack) {
 
             for(var c in dockedStation.storage) {
                 var commod = dockedStation.storage[c];
-                i++;
+                i++; var s = "";
+                if(Player.list[ownId].storage[c] != undefined) {
+                    s = "<td>" + Player.list[ownId].storage[c].amount +"</td>";
+                } else {
+                    s = "<td>0</td>";
+                }
                 stationTrade.innerHTML += "<tr><td><input type='radio' name='tradeCommod' value='" + JSON.stringify(commod) + "' checked style='display:hidden' id='tradeCommod" + i + "'/>" + "</td>" +
                     "<td>" + commod.amount + "</td>" +
-                    "<td>" + Player.list[ownId].storage[c].amount +"</td>" +
+                    s +
                     "<td>" + commod.rval +"</td>" +
                     "<td><label for='tradeCommod" + i + "'>" + commod.name + "</label></td>" +
                     "</tr>";
