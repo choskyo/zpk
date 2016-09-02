@@ -5,6 +5,8 @@
 var Entity = require('./entity.js');
 var Player = require('./player.js');
 var Pack = require('./../data/pack.js');
+var Enemy = require('./enemy');
+var Team = require('./team');
 
 var Projectile = function(p, ang) {
 
@@ -12,27 +14,26 @@ var Projectile = function(p, ang) {
 
     //Projectile ID
     self.id         = Math.random();
-    self.parentId = p;
+    self.parent = p;
+    self.parentId = p.id;
 
     self.w = 4;
     self.h = 4;
 
     //Overwrite speed vars
-    self.speedX = Math.cos(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedX;
-    self.speedY = Math.sin(Player.playerList[self.parentId].angle/180*Math.PI) * 20 + Player.playerList[self.parentId].speedY;
+    self.speedX = Math.cos(p.angle/180*Math.PI) * 10 + p.speedX;
+    self.speedY = Math.sin(p.angle/180*Math.PI) * 10 + p.speedY;
 
     //Colour (Temporary!)
-    self.r          = 255;
+    self.r          = 0;
     self.g          = 255;
-    self.b          = 255;
+    self.b          = 0;
 
     //Projectile specific
     self.timeToKill = 0;
     self.remove = 0;
     self.maxShields = 1;
     self.shields = 1;
-
-    self.team = 'safe';
 
     //Pack funcs
     self.getInitPack = function() {
@@ -66,19 +67,39 @@ var Projectile = function(p, ang) {
     self.update = function() {
         superUpdate();
 
-        for(var player in Player.playerList) {
-            var p = Player.playerList[player];
+        if(self.team != Team.list['players']) {
+            for(var player in Player.playerList) {
+                var p = Player.playerList[player];
 
-            if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP) {
-                p.shields -= 1;
-                self.remove = 1;
+                if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP) {
+                    p.shields -= 1;
 
-                if(p.shields <= 0) {
-                    Player.playerList[self.parentId].team.addScore();
-                    p.respawn();
+                    if(p.shields <= 0) {
+                        p.team.addScore();
+                        p.respawn();
+                    }
+
+                    self.remove = 1;
+                }
+            }
+        } else {
+            for(var e in Enemy.list) {
+                var enemy = Enemy.list[e];
+
+                if(self.intersects(enemy) && self.parentId != enemy.id && enemy.area == self.area && enemy.team != self.team) {
+                    enemy.shields -= 1;
+
+                    if(enemy.shields <= 0) {
+                        self.team.addScore();
+                        enemy.respawn();
+                    }
+
+                    self.remove = 1;
                 }
             }
         }
+
+
 
         if(self.timeToKill++ > 30) {
             self.remove = 1;
@@ -119,5 +140,4 @@ Projectile.update = function() {
     }
     return pack;
 };
-
 module.exports = Projectile;

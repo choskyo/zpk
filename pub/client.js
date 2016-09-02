@@ -192,7 +192,7 @@ setInterval(() => {
         Team.list[te].draw();
 
 
-}, 40);
+}, 1000/60);
 
 window.onresize = () => {
     setSizes();

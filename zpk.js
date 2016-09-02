@@ -39,11 +39,10 @@ for(var st in Station.list) {
 }
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
-var red = new Team('red', true);
-var blue = new Team('blue', true);
-var safe = new Team('safe', false);
+var safe = new Team('players', true);
 var pirates = new Team('pirates', true);
 var em1 = new Enemy();
+var em2 = new Enemy();
 
 //db.getDrones
 //db.getOtherStuff etc
@@ -159,7 +158,7 @@ setInterval(function(){
 	Pack.delPack.planets = [];
 	Pack.delPack.enemies = [];
 
-},40);
+},1000/30);
 
 process.on('SIGINT', function() {
 	console.log('Saving players..');

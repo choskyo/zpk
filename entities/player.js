@@ -42,13 +42,13 @@ var Player = function(id, savedData) {
     self.h = 15;
 
     //Colour (Temporary!)
-    self.r          = Math.floor(Math.random()*(255)+1);
-    self.g          = Math.floor(Math.random()*(255)+1);
+    self.r          = Math.floor(Math.random()*(55)+1);
+    self.g          = Math.floor(Math.random()*(55)+1);
     self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
 
-    self.team = Team.list['safe'];
+    self.team = Team.list['players'];
     self.killCount = 0;
     self.maxShields = 4;
     self.shields = 4;
@@ -75,7 +75,7 @@ var Player = function(id, savedData) {
     self.keyUp      = false;
     self.keyDown    = false;
     self.speed      = 0;
-    self.maxSpeed   = 8;
+    self.maxSpeed   = 5;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -183,7 +183,7 @@ var Player = function(id, savedData) {
     };
 
     self.pew = function(angle) {
-        var p = Projectile(self.id, angle);
+        var p = Projectile(self, angle);
         p.area = self.area;
         p.team = self.team;
         p.x = self.x + self.w/2;
