@@ -6,6 +6,10 @@ var Entity = require('./entity.js');
 
 var Station = function(name, x, y, area) {
 
+    var Enemy = require('./enemy');
+    var Team = require('./team.js');
+    var Projectile = require('./projectile.js');
+
     var self = Entity();
 
     //Station Name
@@ -25,6 +29,11 @@ var Station = function(name, x, y, area) {
     self.b = 88;
 
     self.area = area;
+
+    self.team = Team.list['players'];
+    self.playerNear = false;
+    self.target = null;
+    self.canShoot = true;
 
     //Pack funcs
     self.getInitPack = function() {
@@ -72,6 +81,44 @@ var Station = function(name, x, y, area) {
     self.update = function() {
         superUpdate();
         self.calculateValues();
+
+        self.checkForPlayer();
+
+        if(self.target != null && self.canShoot) {
+            self.angle = self.getAngle(self.target);
+
+            if(self.canShoot && self.target.shields < 100) {
+                self.pew(self.angle);
+                self.canShoot = false;
+                setTimeout(function() {
+                    self.canShoot = true;
+                }, 500);
+            }
+
+        }
+    };
+
+    self.checkForPlayer = function() {
+        for(var p in Enemy.list) {
+            if(self.area == Enemy.list[p].area && self.getDistance(Enemy.list[p]) < 500) {
+                self.playerNear = true;
+                self.target = Enemy.list[p];
+                return;
+            } else {
+                self.playerNear = false;
+            }
+        }
+        if(self.target != null && self.playerNear == false) {
+            self.target = null;
+        }
+    };
+
+    self.pew = function(angle) {
+        var p = Projectile(self, angle);
+        p.area = self.area;
+        p.team = Team.list['players'];
+        p.x = self.x + self.w/2;
+        p.y = self.y + self.h/2;
     };
 
     Station.list[self.id] = self;

@@ -34,7 +34,7 @@ var Enemy = function() {
     self.b          = 0;
 
     //Misc info
-    self.team = Team.list['pirate'];
+    self.team = Team.list['pirates'];
     self.maxShields = 3;
     self.shields = 3;
     self.canShoot = true;

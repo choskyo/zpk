@@ -71,7 +71,7 @@ var Projectile = function(p, ang) {
             for(var player in Player.playerList) {
                 var p = Player.playerList[player];
 
-                if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP) {
+                if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP && !p.docked) {
                     p.shields -= 1;
 
                     if(p.shields <= 0) {
