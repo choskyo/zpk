@@ -88,7 +88,7 @@ var Station = function(name, x, y, area) {
             self.angle = self.getAngle(self.target);
 
             if(self.canShoot && self.target.shields < 100) {
-                self.pew(self.angle);
+                //self.pew(self.angle);
                 self.canShoot = false;
                 setTimeout(function() {
                     self.canShoot = true;

@@ -72,7 +72,7 @@ var Projectile = function(p, ang) {
                 var p = Player.playerList[player];
 
                 if(self.intersects(p) && self.parentId != p.id && p.area == self.area && p.team != self.team && p.team.canPvP && !p.docked) {
-                    p.shields -= 1;
+                    p.shields -= self.parent.eqWeapon.damage;
 
                     if(p.shields <= 0) {
                         p.team.addScore();
@@ -87,7 +87,7 @@ var Projectile = function(p, ang) {
                 var enemy = Enemy.list[e];
 
                 if(self.intersects(enemy) && self.parentId != enemy.id && enemy.area == self.area && enemy.team != self.team) {
-                    enemy.shields -= 1;
+                    enemy.shields -= self.parent.eqWeapon.damage;
 
                     if(enemy.shields <= 0) {
                         self.team.addScore();
@@ -98,8 +98,6 @@ var Projectile = function(p, ang) {
                 }
             }
         }
-
-
 
         if(self.timeToKill++ > 30) {
             self.remove = 1;

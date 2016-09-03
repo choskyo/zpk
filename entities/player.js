@@ -59,19 +59,6 @@ var Player = function(id, savedData) {
     self.eqShield = null;
     self.eqEngine = null;
 
-    for(var itm in self.storage.contents) {
-        var ctn = self.storage.contents;
-        if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
-            self.eqWeapon = ctn[itm];
-        }
-        if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
-            self.eqShield = ctn[itm];
-        }
-        if(ctn[itm].type == 'engine' && ctn[itm].equipped == false) {
-            self.eqEngine = ctn[itm];
-        }
-    }
-
     self.team = Team.list['players'];
     self.killCount = 0;
     self.maxShields = 4;
@@ -101,7 +88,19 @@ var Player = function(id, savedData) {
     self.speed      = 0;
     self.maxSpeed   = 5;
 
-    //Pack funcs
+    for(var itm in self.storage.contents) {
+        var ctn = self.storage.contents;
+        if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
+            self.eqWeapon = ctn[itm];
+        }
+        if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
+            self.eqShield = ctn[itm];
+        }
+        if(ctn[itm].type == 'engine' && ctn[itm].equipped == false) {
+            self.eqEngine = ctn[itm];
+        }
+    }
+
     self.getInitPack = function() {
         return {
             id: self.id,
@@ -164,7 +163,6 @@ var Player = function(id, savedData) {
         }
     };
 
-    //Functions
     var superUpdate = self.update;
 
     self.update = function() {
@@ -197,7 +195,7 @@ var Player = function(id, savedData) {
             self.canShoot = false;
             setTimeout(function() {
                 self.canShoot = true;
-            }, 500);
+            }, self.eqWeapon.rof);
         }
 
         if(self.warping && self.canWarp) {

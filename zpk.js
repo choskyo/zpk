@@ -41,8 +41,7 @@ new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
 var safe = new Team('players', true);
 var pirates = new Team('pirates', true);
-var em1 = new Enemy();
-var em2 = new Enemy();
+new Enemy();
 
 //db.getDrones
 //db.getOtherStuff etc

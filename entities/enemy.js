@@ -1,6 +1,9 @@
 /**
  * Created by will on 01/09/16.
  */
+var Database = require('../data/database.js');
+var db = new Database();
+
 var Entity = require('./entity.js');
 var Team = require('./team.js');
 var Storage = require('./../items/storage');
@@ -20,6 +23,30 @@ var Enemy = function() {
     self.y = Math.random()*1000;
 
     self.storage = new Storage(self);
+    self.eqWeapon = null;
+
+    db.getWeapons(function(res) {
+        if(res) {
+            for(var i in res) {
+                self.storage.contents[i] = res[i];
+            }
+
+            for(var itm in self.storage.contents) {
+                var ctn = self.storage.contents;
+                if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
+                    self.eqWeapon = ctn[itm];
+                }
+                if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
+                    self.eqShield = ctn[itm];
+                }
+                if(ctn[itm].type == 'engine' && ctn[itm].equipped == false) {
+                    self.eqEngine = ctn[itm];
+                }
+            }
+            
+        }
+    });
+
     self.credits = Math.floor(Math.random()*500)+1;
 
     self.w = 30;
@@ -41,6 +68,8 @@ var Enemy = function() {
 
     self.speed      = 0;
     self.maxSpeed   = 4;
+
+
 
     //Pack funcs
     self.getInitPack = function() {
@@ -93,7 +122,7 @@ var Enemy = function() {
                 self.canShoot = false;
                 setTimeout(function() {
                     self.canShoot = true;
-                }, 500);
+                }, self.eqWeapon.rof);
             }
         }
     };
