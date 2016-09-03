@@ -7,6 +7,7 @@ var Storage = function(owner) {
     this.contents = {
         testy: new items.Item('testy', 100, 1, 'commodity', false, 50)
     };
+    this.capacity = 100;
 
     this.addObject = function(object, storage, creds) {
         for(var i in storage) {

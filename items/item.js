@@ -42,26 +42,30 @@ module.exports = {
         return self;
     },
 
-    Equippable: function() {
-    var self = Item();
+    Equippable: function(name, amt, size, type, gear, bval) {
+        var Item = require('./item.js').Item;
+        var self = Item(name, amt, size, type, gear, bval);
 
-    self.gear = true;
-    self.equipped = false;
-
-    self.unequip = function() {
+        self.gear = true;
         self.equipped = false;
-    };
-    self.equip = function() {
-        self.equipped = true;
-    };
+
+        self.unequip = function() {
+            self.equipped = false;
+        };
+        self.equip = function() {
+            self.equipped = true;
+        };
+        return self;
 },
 
-    Weapon: function() {
-    var self = Equippable();
+    Weapon: function(name, amt, size, type, gear, bval, dmg, rof) {
+        var Equippable = require('./item.js').Equippable;
+        var self = Equippable(name, amt, size, type, gear, bval);
 
-    self.damage = 0;
-    //ms
-    self.rof = 1000;
+        self.damage = dmg;
+        //ms
+        self.rof = rof;
+        return self;
 },
 
     Shield: function() {

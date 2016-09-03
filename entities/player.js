@@ -24,6 +24,7 @@ var Player = function(id, savedData) {
     self.name   = "";
 
     self.storage = new Storage(self);
+
     self.credits = 1000000;
 
     if(savedData.username != undefined)
@@ -37,6 +38,13 @@ var Player = function(id, savedData) {
     if(savedData.credits != undefined && !isNaN(savedData.credits))
         self.credits = savedData.credits;
 
+    db.getWeapons(function(r) {
+        if(r) {
+            for(var i in r) {
+                self.storage.contents[i] = r[i];
+            }
+        }
+    });
 
     self.w = 30;
     self.h = 15;
@@ -47,6 +55,22 @@ var Player = function(id, savedData) {
     self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
+    self.eqWeapon = null;
+    self.eqShield = null;
+    self.eqEngine = null;
+
+    for(var itm in self.storage.contents) {
+        var ctn = self.storage.contents;
+        if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
+            self.eqWeapon = ctn[itm];
+        }
+        if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
+            self.eqShield = ctn[itm];
+        }
+        if(ctn[itm].type == 'engine' && ctn[itm].equipped == false) {
+            self.eqEngine = ctn[itm];
+        }
+    }
 
     self.team = Team.list['players'];
     self.killCount = 0;

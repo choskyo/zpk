@@ -131,12 +131,12 @@ var Enemy = function() {
 
         if(self.angle >= self.getAngle(self.target) + 6) {
             if(self.angle < 360 && self.angle > -360)
-                self.angle -= 4;
+                self.angle -= 3;
             else
                 self.angle = 0;
         } else if (self.angle <= self.getAngle(self.target) - 6) {
             if(self.angle < 360 && self.angle > -360)
-                self.angle += 4;
+                self.angle += 3;
             else
                 self.angle = 0;
         } else {

@@ -1,0 +1,32 @@
+{
+  "name" : "gun1",
+  "type" : "weapon",
+  "damage": 1,
+  "rof"  : 1000,
+  "amount" : 1,
+  "gear" : true,
+  "bval" : 0,
+  "size" : 15
+}
+
+{
+  "name" : "gun2",
+  "type" : "weapon",
+  "damage": 2,
+  "rof"  : 1000,
+  "amount" : 1,
+  "gear" : true,
+  "bval" : 0,
+  "size" : 20
+}
+
+{
+  "name" : "gun3",
+  "type" : "weapon",
+  "damage": 1,
+  "rof"  : 100,
+  "amount" : 1,
+  "gear" : true,
+  "bval" : 0,
+  "size" : 25
+}

@@ -4,7 +4,7 @@
 module.exports = function() {
     var mongojs = require("mongojs"); var Station = require('./../entities/station.js');
     var items = require('./../items/item.js');
-    var db = mongojs('localhost:27017/zpk1', ['account', 'station', 'items']);
+    var db = mongojs('localhost:27017/zpk1', ['account', 'station', 'items', 'weapons']);
 
     this.isPasswordValid = function(pack, callback) {
         db.account.find({username:pack.username}, function(error, result) {
@@ -70,6 +70,19 @@ module.exports = function() {
             }
         });
         return itemList;
+    };
+
+    this.getWeapons = function(callback) {
+        db.weapons.find(function(error, result) {
+            if(result.length > 0) {
+                var wpList = {};
+                for(var i = 0; i < result.length; i++) {
+                    var it = result[i];
+                    wpList[it.name] = new items.Weapon(it.name, it.amount, it.size, it.type, it.gear, it.bval, it.damage, it.rof);
+                }
+                callback(wpList);
+            }
+        });
     };
 
     this.getPlayer = function(player, callback) {
