@@ -84,7 +84,6 @@ btnSell.onclick = () => {
 };
 
 
-
 //MOBILE
 if(isMobile) {
     mobileUI.style.display = 'absolute'

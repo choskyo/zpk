@@ -94,7 +94,6 @@ var Station = function(name, x, y, area) {
                     self.canShoot = true;
                 }, 500);
             }
-
         }
     };
 

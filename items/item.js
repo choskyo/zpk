@@ -49,11 +49,8 @@ module.exports = {
         self.gear = true;
         self.equipped = false;
 
-        self.unequip = function() {
-            self.equipped = false;
-        };
         self.equip = function() {
-            self.equipped = true;
+            self.equipped = !self.equipped;
         };
         return self;
 },

@@ -72,7 +72,7 @@ var Player = function (initPack) {
         shields.innerHTML = "Shields: " + Player.list[ownId].shields.toString();
         credits.innerHTML = "Credits: " + Player.list[ownId].credits.toString();
 
-        self.drawInventory();
+
         self.drawStationScreen();
     };
 
@@ -108,15 +108,27 @@ var Player = function (initPack) {
         else if(!Player.list[ownId].docked) {
             self.flick = false;
             stationScreen.style.display = 'none';
-        }
+            self.drawInventory();
 
+            $("input[name=weapon]:radio").change(function () {
+                var eqwpval = $('input[name=weapon]:checked').val();
+                console.log(eqwpval);
+                socket.emit('equip', {item: eqwpval});
+            });
+        }
     };
 
     self.drawInventory = () => {
         storage.innerHTML = '';
 
         for(var i in Player.list[ownId].storage) {
-            storage.innerHTML += "<tr><td>" + Player.list[ownId].storage[i].amount + "</td><td>" + Player.list[ownId].storage[i].name + "</td> </tr>";
+            var item = Player.list[ownId].storage[i];
+            if(item.gear) {
+                storage.innerHTML += "<tr><td><input type='radio' name='" + item.type + "' value='" + item.name + "'/></td><td>" + item.amount + "</td><td>" + "<label for='" + item.name + "'/>" + item.name + "</td> </tr>";
+
+            } else {
+                storage.innerHTML += "<tr><td>" + item.amount + "</td><td>" + item.name + "</td> </tr>";
+            }
         }
     };
 

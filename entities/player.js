@@ -90,7 +90,7 @@ var Player = function(id, savedData) {
 
     for(var itm in self.storage.contents) {
         var ctn = self.storage.contents;
-        if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
+        if(ctn[itm].type == 'weapon' && ctn[itm].equipped == true) {
             self.eqWeapon = ctn[itm];
         }
         if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
@@ -190,7 +190,7 @@ var Player = function(id, savedData) {
         //self.centerY = self.y+30;
         //self.mouseAngle = Math.atan2(self.mouseY - self.screenCenterY, self.mouseX - self.screenCenterX) * 180 / Math.PI;
 
-        if(self.click && self.canShoot) {
+        if(self.click && self.canShoot && self.eqWeapon != null) {
             self.pew(self.mouseAngle);
             self.canShoot = false;
             setTimeout(function() {
@@ -349,6 +349,10 @@ Player.onConnect = function(socket, user) {
     });
     socket.on('sale', function(p) {
         Storage.Transfer(p.item, 1, Player.list[p.playerId], Station.list[p.stationId]);
+    });
+    socket.on('equip', function(p) {
+        Player.list[socket.id].eqWeapon = Player.list[socket.id].storage.contents[p.item];
+        Player.list[socket.id].storage.contents[p.item].equip();
     });
 
     socket.emit('initPack', {
