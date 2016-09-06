@@ -13,6 +13,7 @@ var bgCtx = document.getElementById("bgCanvas").getContext("2d");
 var htmlBody = document.getElementById("body");
 
 var ownId = null;
+var me = null;
 var shields = document.getElementById("shieldsDisplay");
 var credits = document.getElementById("creditsDisplay");
 var storage = document.getElementById("playerStorage");

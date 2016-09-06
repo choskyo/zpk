@@ -5,6 +5,8 @@ socket.on('initPack', function(pack) {
     if(pack.ownId)
         ownId = pack.ownId;
 
+    me = Player.list[ownId];
+
     for(var i = 0 ; i < pack.players.length; i++){
         new Player(pack.players[i]);
     }
@@ -39,10 +41,23 @@ socket.on('updatePack', function(pack) {
                 player.x = p.x;
             if(p.y != undefined)
                 player.y = p.y;
-            if(p.shields != undefined)
-                player.shields = p.shields;
-            if(p.storage != undefined)
-                player.storage = p.storage;
+            if(p.shields != undefined) {
+                if(p.shields == player.shields) {
+                    player.shieldsChange = false;
+                } else {
+                    player.shields = p.shields;
+                    player.shieldsChange = true;
+                }
+            }
+            if(p.storage != undefined) {
+                if(JSON.stringify(p.storage)== JSON.stringify(player.storage)) {
+                    player.storageChange = false;
+                } else {
+                    player.storage = p.storage;
+                    player.storageChange = true;
+                }
+            }
+
             if(p.angle != undefined)
                 player.angle = p.angle;
             if(p.area != undefined)
@@ -57,8 +72,14 @@ socket.on('updatePack', function(pack) {
                 player.docked = p.docked;
             if(p.dockedAt != undefined)
                 player.dockedAt = p.dockedAt;
-            if(p.credits != undefined)
-                player.credits = p.credits;
+            if(p.credits != undefined) {
+                if(p.credits == player.credits) {
+                    player.creditsChange = false;
+                } else {
+                    player.credits = p.credits;
+                    player.creditsChange = true;
+                }
+            }
         }
     }
 
