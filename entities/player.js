@@ -46,8 +46,8 @@ var Player = function(id, savedData) {
         }
     });
 
-    self.w = 30;
-    self.h = 15;
+    self.w = 60;
+    self.h = 30;
 
     //Colour (Temporary!)
     self.r          = Math.floor(Math.random()*(55)+1);

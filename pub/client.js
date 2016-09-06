@@ -186,10 +186,7 @@ setInterval(() => {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     //DRAW SUN(TEMP)
-    ctx.beginPath();
-    ctx.arc(0-Player.list[ownId].x + canvas.width/2, - Player.list[ownId].y + canvas.height/2, 500, 0, 2*Math.PI);
-    ctx.fillStyle = "#FDB813";
-    ctx.fill();
+    ctx.drawImage(sun, 0-Player.list[ownId].x + canvas.width/2-500, - Player.list[ownId].y + canvas.height/2-500);
 
     for(var pl2 in Planet.list)
         Planet.list[pl2].draw();

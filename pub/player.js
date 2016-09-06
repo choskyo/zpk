@@ -76,18 +76,9 @@ var Player = function (initPack) {
 
     self.drawShip = (x, y) => {
         ctx.save();
-        ctx.beginPath();
-        ctx.translate(x + self.w/ 2, y + self.h/ 2);
+        ctx.translate(x + self.w/2, y + self.h/2);
         ctx.rotate(self.angle * Math.PI / 180);
-        ctx.moveTo(self.w/2, 0);
-        ctx.lineTo(-self.w/2, -self.h/2);
-        ctx.lineTo(-self.w/2, self.h/2);
-        ctx.closePath();
-        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
-        ctx.strokeStyle = '#FFF';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.fill();
+        ctx.drawImage(ship, 0-self.w/2, 0-self.h/2);
         ctx.restore();
     };
 
@@ -97,21 +88,21 @@ var Player = function (initPack) {
         ctx.strokeStyle="black";
         ctx.lineWidth=1;
         ctx.textAlign = 'center';
-        ctx.fillText(self.name, x, y + 50);
-        ctx.strokeText(self.name, x, y + 50);
+        ctx.fillText(self.name, x + self.w/2, y + self.h*2);
+        ctx.strokeText(self.name, x + self.w/2, y + self.h*2);
     };
 
     self.drawShields = (x, y) => {
-        var barWidth = 30 * self.shields / self.maxShields;
+        var barWidth = 50 * self.shields / self.maxShields;
 
         ctx.fillStyle = "darkblue";
-        ctx.fillRect(x, y - 30, 30, 6);
+        ctx.fillRect(x + self.w/2 - barWidth/2, y - 30, 50, 8);
 
         ctx.fillStyle = "lightblue";
-        ctx.fillRect(x, y - 30, barWidth, 6);
+        ctx.fillRect(x + self.w/2 - barWidth/2, y - 30, barWidth, 8);
 
         ctx.strokeStyle = "#FFF";
-        ctx.strokeRect(x, y -30, 30, 6);
+        ctx.strokeRect(x + self.w/2 - barWidth/2, y -30, 50, 8);
     };
 
     self.drawStationScreen = () => {

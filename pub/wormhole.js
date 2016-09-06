@@ -23,8 +23,7 @@ var Wormhole = function(initPack) {
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
         ctx.beginPath();
-        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
-        ctx.arc(x, y,self.w,0,2*Math.PI);
+        ctx.drawImage(wormhole, x - self.w/2, y-self.h/2);
         ctx.fill();
 
         ctx.font = "bold 18pt Arial";

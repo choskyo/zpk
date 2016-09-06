@@ -33,18 +33,9 @@ var Enemy = function(initPack) {
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
         ctx.save();
-        ctx.beginPath();
-        ctx.translate(x + self.w/ 2, y + self.h/ 2);
+        ctx.translate(x + self.w/2, y + self.h/2);
         ctx.rotate(self.angle * Math.PI / 180);
-        ctx.moveTo(self.w/2, 0);
-        ctx.lineTo(-self.w/2, -self.h/2);
-        ctx.lineTo(-self.w/2, self.h/2);
-        ctx.closePath();
-        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
-        ctx.strokeStyle = '#FFF';
-        ctx.lineWidth = 2;
-        ctx.stroke();
-        ctx.fill();
+        ctx.drawImage(ship, 0-self.w/2, 0-self.h/2);
         ctx.restore();
 
         var barWidth = 30 * self.shields / self.maxShields;

@@ -42,12 +42,8 @@ var Planet = function (initPack) {
         ctx.beginPath();
         ctx.lineWidth = 5;
         ctx.strokeStyle = '#FFF';
-        ctx.fillStyle = 'rgb(' + self.r + ',' + self.g + ',' + self.b + ')';
-        ctx.arc(x, y,self.rad,0,2*Math.PI);
+        ctx.drawImage(planet2, x - planet2.width/2, y - planet2.height/2);
         ctx.stroke();
-        ctx.fill();
-
-
 
     };
 
