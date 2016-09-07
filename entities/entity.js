@@ -2,7 +2,10 @@
  * Created by will on 23/07/16.
  */
 var Storage = require('../items/storage.js');
+
 var Entity = function() {
+    var whList = require ('./wormhole.js').list;
+    
     var self = {
         name: "",
         x: 0,
@@ -20,6 +23,21 @@ var Entity = function() {
     };
 
     self.storage = new Storage(self);
+
+    self.loadSave = function(savedData) {
+        if(savedData.username != undefined)
+            self.name = savedData.username;
+        if(savedData.x != undefined)
+            self.x = savedData.x;
+        if(savedData.y != undefined)
+            self.y = savedData.y;
+        if(savedData.area != undefined)
+            self.area = savedData.area;
+        if(savedData.storage != undefined)
+            self.storage.contents = savedData.storage;
+        if(savedData.credits != undefined && !isNaN(savedData.credits))
+            self.credits = savedData.credits;
+    };
 
     self.intersects = function(e) {
         return !(e.x > self.x + self.w ||
@@ -48,6 +66,20 @@ var Entity = function() {
     self.updatePos = function() {
         self.x += self.speedX;
         self.y += self.speedY;
+    };
+
+    self.zoom = function() {
+        for(var wh in whList) {
+            var w = whList[wh];
+
+            if(self.getDistance(w) < 80 && self.area == w.area) {
+                self.area = w.destination;
+                self.canWarp = false;
+                setTimeout(function() {
+                    self.canWarp = true;
+                }, 500);
+            }
+        }
     };
 
     return self;

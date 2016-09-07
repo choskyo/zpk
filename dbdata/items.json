@@ -1,6 +1,5 @@
 /* 1 */
 {
-    "_id" : ObjectId("57c84da3e1906e9412296c51"),
     "name" : "Metal",
     "amount" : 1000,
     "size" : 1,
@@ -11,7 +10,6 @@
 
 /* 2 */
 {
-    "_id" : ObjectId("57c84de7e1906e9412296c52"),
     "name" : "Food",
     "amount" : 5000,
     "size" : 2,
@@ -22,7 +20,6 @@
 
 /* 3 */
 {
-    "_id" : ObjectId("57c84e12e1906e9412296c53"),
     "name" : "Civilian",
     "amount" : 250,
     "size" : 10,

@@ -20,18 +20,6 @@ var Planet = function(name, pathRad, rad, cX, cY, speed, area) {
 
     self.angle = 0;
 
-    //Colour (Temporary!)
-    if(Math.random() < 0.5) {
-        self.r = 64;
-        self.g = 164;
-        self.b = 223;
-    } else {
-        self.r = 234;
-        self.g = 99;
-        self.b = 3;
-    }
-
-
     self.area = area;
 
     //Pack funcs
@@ -43,9 +31,6 @@ var Planet = function(name, pathRad, rad, cX, cY, speed, area) {
             y: self.y,
             cX: self.cX,
             cY: self.cY,
-            r: self.r,
-            g: self.g,
-            b: self.b,
             area: self.area,
             rad: self.rad,
             pathRad: self.pathRad

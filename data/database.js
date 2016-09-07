@@ -72,17 +72,30 @@ module.exports = function() {
         return itemList;
     };
 
-    this.getWeapons = function(callback) {
-        db.weapons.find(function(error, result) {
-            if(result.length > 0) {
-                var wpList = {};
-                for(var i = 0; i < result.length; i++) {
-                    var it = result[i];
-                    wpList[it.name] = new items.Weapon(it.name, it.amount, it.size, it.type, it.gear, it.bval, it.damage, it.rof);
+    this.getWeapons = function(callback, weapon) {
+        if(weapon != undefined) {
+            db.weapons.find({name: weapon}, function(error, result) {
+                if(result.length > 0) {
+                    var wpList = {};
+                    for(var i = 0; i < result.length; i++) {
+                        var it = result[i];
+                        wpList[it.name] = new items.Weapon(it.name, it.amount, it.size, it.type, it.gear, it.bval, it.damage, it.rof);
+                    }
+                    callback(wpList);
                 }
-                callback(wpList);
-            }
-        });
+            });
+        } else {
+            db.weapons.find(function(error, result) {
+                if(result.length > 0) {
+                    var wpList = {};
+                    for(var i = 0; i < result.length; i++) {
+                        var it = result[i];
+                        wpList[it.name] = new items.Weapon(it.name, it.amount, it.size, it.type, it.gear, it.bval, it.damage, it.rof);
+                    }
+                    callback(wpList);
+                }
+            });
+        }
     };
 
     this.getPlayer = function(player, callback) {
@@ -109,6 +122,7 @@ module.exports = function() {
                 credits: player.credits,
                 x: Math.floor(player.x),
                 y: Math.floor(player.y),
+                area: player.area,
                 storage: player.storage.contents
             }, {
                 upsert:true

@@ -104,15 +104,7 @@ io.sockets.on('connection', function(socket){
 	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
 		if(message == '/red') {
-			Player.list[socket.id].setRed();
-			return;
-		}
-		else if(message == '/blue') {
-			Player.list[socket.id].setBlue();
-			return;
-		}
-		else if(message == '/safe') {
-			Player.list[socket.id].setSafe();
+			//Player.list[socket.id].setRed();
 			return;
 		}
 		for(var u in socketList) {

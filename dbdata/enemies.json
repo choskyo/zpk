@@ -1,0 +1,25 @@
+{
+  "name": "pirate",
+  "ship": "shipName",
+  "credits": 100,
+  "x": 0,
+  "y": 0,
+  "area": "testy",
+  "storage": {
+    "gun1" : {
+      "name" : "gun1",
+      "type" : "weapon",
+      "amount" : 1,
+      "gear" : true,
+      "rval" : 0,
+      "bval" : 0,
+      "maxval" : 0,
+      "minval" : 0,
+      "size" : 15,
+      "equipped" : true,
+      "damage" : 1,
+      "rof" : 1000
+    }
+  }
+
+}

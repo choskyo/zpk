@@ -16,7 +16,6 @@ var Enemy = require('./enemy');
 
 //Player Object
 var Player = function(id, savedData) {
-
     var self = Entity();
 
     //Client ID
@@ -25,34 +24,20 @@ var Player = function(id, savedData) {
 
     self.storage = new Storage(self);
 
-    self.credits = 1000000;
+    self.credits = 1000;
 
-    if(savedData.username != undefined)
-        self.name = savedData.username;
-    if(savedData.x != undefined)
-        self.x = savedData.x;
-    if(savedData.y != undefined)
-        self.y = savedData.y;
-    if(savedData.storage != undefined)
-        self.storage.contents = savedData.storage;
-    if(savedData.credits != undefined && !isNaN(savedData.credits))
-        self.credits = savedData.credits;
+    self.loadSave(savedData);
 
-    db.getWeapons(function(r) {
+    /*db.getWeapons(function(r) {
         if(r) {
             for(var i in r) {
                 self.storage.contents[i] = r[i];
             }
         }
     });
-
+*/
     self.w = 60;
     self.h = 30;
-
-    //Colour (Temporary!)
-    self.r          = Math.floor(Math.random()*(55)+1);
-    self.g          = Math.floor(Math.random()*(55)+1);
-    self.b          = Math.floor(Math.random()*(255)+1);
 
     //Misc info
     self.eqWeapon = null;
@@ -110,9 +95,6 @@ var Player = function(id, savedData) {
             y: self.y,
             w: self.w,
             h: self.h,
-            r: self.r,
-            g: self.g,
-            b: self.b,
             shields: self.shields,
             maxShields: self.maxShields,
             storage: self.storage.contents,
@@ -120,28 +102,13 @@ var Player = function(id, savedData) {
         }
     };
 
-    self.zoom = function() {
-        for(var wh in Wormhole.list) {
-            var w = Wormhole.list[wh];
-
-            if(self.getDistance(w) < 40 && self.area == w.area) {
-                self.area = w.destination;
-                self.canWarp = false;
-                setTimeout(function() {
-                    self.canWarp = true;
-                }, 500);
-            }
-        }
-    };
+    
 
     self.getUpdatePack = function() {
         return {
             id: self.id,
             x: self.x,
             y: self.y,
-            r: self.r,
-            g: self.g,
-            b: self.b,
             shields: self.shields,
             storage: self.storage.contents,
             credits: self.credits,
@@ -283,27 +250,6 @@ var Player = function(id, savedData) {
         self.x = Math.random()*500;
         self.y = Math.random()*500;
         self.shields = self.maxShields;
-    };
-
-    self.setRed = function() {
-        self.team = Team.list['red'];
-        self.r = 255;
-        self.g = Math.floor(Math.random()*(75)+1);
-        self.b = Math.floor(Math.random()*(75)+1);
-    };
-
-    self.setBlue = function() {
-        self.team = Team.list['blue'];
-        self.r = Math.floor(Math.random()*(75)+1);
-        self.g = Math.floor(Math.random()*(75)+1);
-        self.b = 255;
-    };
-
-    self.setSafe = function() {
-        self.team = Team.list['safe'];
-        self.r = Math.floor(Math.random()*(75)+1);
-        self.g = Math.floor(Math.random()*(75)+1);
-        self.b = Math.floor(Math.random()*(75)+1);
     };
 
     Player.list[id] = self;

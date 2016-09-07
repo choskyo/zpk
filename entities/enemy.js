@@ -43,7 +43,6 @@ var Enemy = function() {
                     self.eqEngine = ctn[itm];
                 }
             }
-            
         }
     });
 
