@@ -264,6 +264,17 @@ exports.playerList = Player.list = {};
 Player.onConnect = function(socket, user) {
     var player = Player(socket.id, user);
 
+    socket.emit('initPack', {
+        ownId: socket.id,
+        players: Player.getAllPacks(),
+        projectiles: Projectile.getAllPacks(),
+        stations: Station.getAllPacks(),
+        wormholes: Wormhole.getAllPacks(),
+        teams: Team.getAllPacks(),
+        planets: Planet.getAllPacks(),
+        enemies: Enemy.getAllPacks()
+    });
+
     socket.on('kP', function(p) {
         if(p.input === 'left') {
             player.keyLeft = p.state;
@@ -298,20 +309,10 @@ Player.onConnect = function(socket, user) {
     });
     socket.on('equip', function(p) {
         Player.list[socket.id].eqWeapon = Player.list[socket.id].storage.contents[p.item];
-        Player.list[socket.id].storage.contents[p.item].equip();
-    });
-
-    socket.emit('initPack', {
-        ownId: socket.id,
-        players: Player.getAllPacks(),
-        projectiles: Projectile.getAllPacks(),
-        stations: Station.getAllPacks(),
-        wormholes: Wormhole.getAllPacks(),
-        teams: Team.getAllPacks(),
-        planets: Planet.getAllPacks(),
-        enemies: Enemy.getAllPacks()
+        //Player.list[socket.id].storage.contents[p.item].equip();
     });
 };
+
 Player.getAllPacks = function() {
     var players = [];
     for(var p in Player.list)
@@ -319,6 +320,7 @@ Player.getAllPacks = function() {
     return players;
 };
 Player.onDisconnect = function(socket) {
+    console.log("Client " + socket.id + " disconnected.");
     if(Player.list[socket.id] != undefined)
         db.savePlayer(Player.list[socket.id]);
 
