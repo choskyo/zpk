@@ -51,8 +51,8 @@ var Enemy = function(initPack) {
         ctx.strokeStyle="black";
         ctx.lineWidth=1;
         ctx.textAlign = 'center';
-        ctx.fillText(self.name, x, y + 50);
-        ctx.strokeText(self.name, x, y + 50);
+        ctx.fillText(self.name, x + self.w/2, y + self.h*3);
+        ctx.strokeText(self.name, x + self.w/2, y + self.h*3);
 
     };
 

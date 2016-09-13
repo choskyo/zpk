@@ -36,8 +36,8 @@ var Player = function(id, savedData) {
         }
     });
 */
-    self.w = 60;
-    self.h = 30;
+    self.w = 30;
+    self.h = 15;
 
     //Misc info
     self.eqWeapon = null;

@@ -20,8 +20,8 @@ var Station = function(name, x, y, area) {
     self.x = x;
     self.y = y;
 
-    self.w = 400;
-    self.h = 400;
+    self.w = 200;
+    self.h = 200;
 
     //Colour (Temporary!)
     self.r = 70;

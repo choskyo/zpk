@@ -55,7 +55,7 @@ io.sockets.on('connection', function(socket){
 
 	socket.on('loginRequest', function(user) {
 		db.isPasswordValid(user, function(r) {
-			if(r) {
+			if(r && user.username.length >= 3) {
 				db.getPlayer(user, function(savedData) {
 					if(savedData != null) {
 						Player.onConnect(socket, savedData);
@@ -65,7 +65,6 @@ io.sockets.on('connection', function(socket){
 						}
 					}
 				});
-
 				socket.emit('loginResponse', {success: true});
 
 			}
@@ -130,7 +129,8 @@ setInterval(function(){
 		var sock = socketList[s];
 		sock.emit('initPack', Pack.initPack);
 		sock.emit('updatePack', updatePack);
-		sock.emit('delPack', Pack.delPack);
+		if(Pack.delPack.players.length > 0 || Pack.delPack.projectiles.length > 0)
+			sock.emit('delPack', Pack.delPack);
 	}
 
 	Pack.initPack.players = [];
@@ -143,10 +143,6 @@ setInterval(function(){
 
 	Pack.delPack.players = [];
 	Pack.delPack.projectiles = [];
-	Pack.delPack.stations = [];
-	Pack.delPack.wormholes = [];
-	Pack.delPack.teams = [];
-	Pack.delPack.planets = [];
 	Pack.delPack.enemies = [];
 
 },1000/30);
@@ -159,5 +155,7 @@ process.on('SIGINT', function() {
 
 
 	console.log('Shutting down..');
-	process.exit();
+	setTimeout(()=> {
+		process.exit();
+	}, 5000);
 });

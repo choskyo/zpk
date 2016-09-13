@@ -5,8 +5,6 @@ socket.on('initPack', function(pack) {
     if(pack.ownId)
         ownId = pack.ownId;
 
-    me = Player.list[ownId];
-
     for(var i = 0 ; i < pack.players.length; i++){
         new Player(pack.players[i]);
     }
@@ -28,6 +26,8 @@ socket.on('initPack', function(pack) {
     for(var e = 0; e < pack.enemies.length; e++) {
         new Enemy(pack.enemies[e]);
     }
+
+    me = Player.list[ownId];
 });
 
 socket.on('updatePack', function(pack) {

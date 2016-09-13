@@ -2,7 +2,7 @@
  * Created by will on 06/09/16.
  */
 var ship = new Image;
-ship.src = ('/pub/img/ship.png');
+ship.src = ('/pub/img/ship2.png');
 
 var sun = new Image;
 sun.src = ('/pub/img/sun.png');
