@@ -323,9 +323,9 @@ Player.onDisconnect = function(socket) {
     console.log("Client " + socket.id + " disconnected.");
     if(Player.list[socket.id] != undefined)
         db.savePlayer(Player.list[socket.id]);
-
-    Pack.delPack.players.push(socket.id);
+    
     delete Player.list[socket.id];
+    Pack.delPack.players.push(socket.id);
 };
 Player.update = function() {
     var pack = [];
