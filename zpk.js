@@ -36,6 +36,14 @@ new Station('Station A', -650, -650, 'testy');
 new Station('Station B', 500, 200, 'qwe');
 for(var st in Station.list) {
 	Station.list[st].storage.contents = db.getItems();
+
+	db.getWeapons(function(r) {
+		if(r) {
+			for(var i in r) {
+				Station.list[st].storage.contents[i] = r[i];
+			}
+		}
+	});
 }
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');

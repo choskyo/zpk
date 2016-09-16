@@ -23,11 +23,6 @@ var Station = function(name, x, y, area) {
     self.w = 200;
     self.h = 200;
 
-    //Colour (Temporary!)
-    self.r = 70;
-    self.g = 78;
-    self.b = 88;
-
     self.area = area;
 
     self.team = Team.list['players'];
@@ -44,9 +39,6 @@ var Station = function(name, x, y, area) {
             y: self.y,
             w: self.w,
             h: self.h,
-            r: self.r,
-            g: self.g,
-            b: self.b,
             area: self.area,
             storage: self.storage.contents
         }
@@ -75,7 +67,7 @@ var Station = function(name, x, y, area) {
             }
         }
     };
-    //Functions
+    
     var superUpdate = self.update;
 
     self.update = function() {
