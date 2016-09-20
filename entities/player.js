@@ -320,7 +320,9 @@ Player.getAllPacks = function() {
     return players;
 };
 Player.onDisconnect = function(socket) {
-    console.log("Client " + socket.id + " disconnected.");
+    var d = new Date(); // for now
+    console.log("[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "] Client " + socket.id + " disconnected.");
+
     if(Player.list[socket.id] != undefined)
         db.savePlayer(Player.list[socket.id]);
     

@@ -32,15 +32,18 @@ var socketList = {};
 //db.getStations();
 new Planet('Planet One', 1800, 350, 0, 0, 0.0002, 'testy');
 new Planet('Planet Two', 1100, 150, 0, 0, 0.0005, 'testy');
-new Station('Station A', -650, -650, 'testy');
-new Station('Station B', 500, 200, 'qwe');
+var stA = new Station('Station A', -650, -650, 'testy');
+var stB = new Station('Station B', 500, 200, 'qwe');
 for(var st in Station.list) {
 	Station.list[st].storage.contents = db.getItems();
 
 	db.getWeapons(function(r) {
 		if(r) {
 			for(var i in r) {
-				Station.list[st].storage.contents[i] = r[i];
+				stA.storage.contents[i] = r[i];
+				stA.storage.contents[i].amount = 999;
+				stB.storage.contents[i] = r[i];
+				stB.storage.contents[i].amount = 999;
 			}
 		}
 	});
@@ -58,7 +61,8 @@ new Enemy();
 var io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
-	console.log("Client " + socket.id + " connected.");
+	var d = new Date(); // for now
+	console.log("[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "] Client " + socket.id + " connected.");
 	socketList[socket.id] = socket;
 
 	socket.on('loginRequest', function(user) {
