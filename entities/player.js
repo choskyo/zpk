@@ -221,24 +221,15 @@ var Player = function(id, savedData) {
             }
         }
         else if(self.keyDown) {
-            if(self.speedX > -self.maxSpeed && self.speedX < self.maxSpeed) {
-                self.speedX -= degX;
+            if(self.speedX > 0) {
+                self.speedX-= 0.1;
+            } else if(self.speedX < 0) {
+                self.speedX+=0.1;
             }
-            else if (self.speedX < -self.maxSpeed && degX < 0) {
-                self.speedX -= degX;
-            }
-            else if (self.speedX >= self.maxSpeed && degX > 0) {
-                self.speedX -= degX;
-            }
-
-            if(self.speedY > -self.maxSpeed && self.speedY < self.maxSpeed) {
-                self.speedY -= degY;
-            }
-            else if (self.speedY <= -self.maxSpeed && degY < 0) {
-                self.speedY -= degY;
-            }
-            else if (self.speedY >= self.maxSpeed && degY > 0) {
-                self.speedY -= degY;
+            if(self.speedY > 0) {
+                self.speedY-=0.1;
+            } else if(self.speedY< 0) {
+                self.speedY+=0.1;
             }
         }
 
