@@ -29,6 +29,7 @@ console.log("Server started.");
 var socketList = {};
 
 //Fetch permanent entities from db
+db.getSystems();
 //db.getStations();
 new Planet('Planet One', 1800, 350, 0, 0, 0.0002, 'testy');
 new Planet('Planet Two', 1100, 150, 0, 0, 0.0005, 'testy');

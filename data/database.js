@@ -4,6 +4,7 @@
 module.exports = function() {
     var mongojs = require("mongojs"); var Station = require('./../entities/station.js');
     var items = require('./../items/item.js');
+    var Area = require('./../areas/area.js');
     var db = mongojs('localhost:27017/zpk1', ['account', 'station', 'items', 'weapons']);
 
     this.isPasswordValid = function(pack, callback) {
@@ -46,6 +47,16 @@ module.exports = function() {
         db.account.insert({username:pack.username, password:pack.password}, function(error) {
             callback();
         });*/
+    };
+
+    this.getSystems = function () {
+        db.systems.find(function(error, result) {
+            if(result.length > 0) {
+                for(var i =0; i < result[0].systems.length; i++) {
+                    new Area(result[0].systems[i].name, result[0].systems[i].star, result[0].systems[i].planets);
+                }
+            }
+        })
     };
 
     this.getStations = function() {
