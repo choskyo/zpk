@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html style="position:relative; min-height: 100%;">
+	<head>
+		<title>ZPK</title>
+		<link href="https://fonts.googleapis.com/css?family=Bungee+Shade" rel="stylesheet">
+		<link href="/pub/css/bootstrap.min.css" rel="stylesheet">
+		<script src="jquery-1.12.4.min.js"></script>
+	</head>
+	<body id="body" style="margin: 0 0 200px; background:black; color:whitesmoke">
+		<div id="splashScreen" style="position:absolute; width:100%; height: 100%; z-index:10">
+			<div style="left: 0; top:50%; width:50%; margin: 10% auto">
+
+				<div style="text-align:center">
+					<h1 style="font-size:9em; font-family:'Bungee Shade', cursive;">
+						<span style="color:#08FFE9">z</span>
+						<span style="color:#FF5300">p</span>
+						<span style="color:greenyellow">k</span>
+					</h1>
+				</div>
+
+				<p id="loginResponse" class="text-danger" style="font-size:1.5em">
+
+				</p>
+				<label for="username">
+					Username:
+				</label>
+				<input id="username" type="text" class="form-control">
+				<label for="password">
+					Password:
+				</label>
+
+				<input id="password" type="password" class="form-control" disabled>
+
+				<button id="login" class="btn btn-primary">Sign In</button>
+				<button id="register" class="btn btn-default">Register</button>
+
+				<br/><br/>
+				<div class="panel panel-info">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							Tips & Info
+						</h3>
+					</div>
+					<div class="panel-body">
+						<ul>
+							<li>Usernames are now <strong>required</strong>, passwords are not.</li>
+							<li>zpk is best played in fullscreen (there'll be a button after you log in).</li>
+							<li>A list of known bugs would be pages long but tell me about them anyway.</li>
+						</ul>
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		<canvas id ="bgCanvas" style="position:absolute;">
+
+		</canvas>
+
+		<div id="gameDiv" style="display:none;">
+			<canvas id="canvas" style="position:absolute">
+				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
+			</canvas>
+
+			<nav class="navbar navbar-inverse" style="position: absolute; left: 0; top: 0; z-index: 1; width:100%">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<div id="shieldsDisplay" class="navbar-brand" style="opacity: 1;">Shields: </div>
+						<div id="creditsDisplay" class="navbar-brand" style="opacity: 1;">Credits: </div>
+					</div>
+					<ul class="nav navbar-nav navbar-right">
+						<li>
+							<a href="#" id="respawnButton">Respawn</a>
+						</li>
+						<li>
+							<a href="#" id="goFull">Fullscreen</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<div id="chat" class="panel panel-primary" style="overflow-y: scroll; left:0; bottom:10px; height:200px; width:100%; opacity:0.8; position: absolute; z-index: 1">
+				<div class="panel-heading">
+					<div class="panel-title" id="chatWelcome">
+						<script>
+							setInterval(function() {
+								var d = new Date();
+								document.getElementById("chatWelcome").innerHTML = "[" + d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds() + "]";
+							}, 1000);
+						</script>
+					</div>
+				</div>
+				<div id="chat-output" class="panel-body" style="width:100%; opacity:1; overflow-y: hidden">
+				</div>
+			</div>
+			<form id="chat-form">
+				<input class="form-control input-sm" id="chat-input" type="text" style="width:100%; opacity:1;background-color:#111; color: inherit; position:absolute; bottom:0"/>
+			</form>
+
+			<div id="mobileMovement" style=" left:0; bottom:0; height:100%; width:100%; background-color: rgb(0, 0, 255); opacity:0.1; position: absolute; z-index: 1">
+				<div id="goUp" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:100px">UP</div>
+				<div id="goDown" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:0">DOWN</div>
+				<div id="goLeft" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:100px">LEFT</div>
+				<div id="goRight" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:0">RIGHT</div>
+				<div id="action" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:200px">SHOOT</div>
+			</div>
+
+			<div class="panel panel-primary" style="left: 0; top:50px; bottom:210px; width:225px; opacity: 0.8; position:absolute; z-index: 1">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						Storage
+					</h3>
+				</div>
+				<div class="panel-body">
+					<table class="table table-hover" style="margin: 0 0 0 0; width:100%;">
+						<thead>
+						<th>
+
+						</th>
+						<th>
+							#
+						</th>
+						<th>
+							Name
+						</th>
+						</thead>
+						<tbody id="playerStorage">
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div id="teamScore" style="top: 70px; left: 250px; color:white; position:absolute; z-index: 1;">
+				Scores:
+			</div>
+
+			<div id="stationScreen" class="panel panel-primary" style="left:225px; top: 50px; right: 0; bottom: 210px; position:absolute; z-index: 2; display:none; overflow-y: scroll;">
+				<div class="panel-heading clearfix">
+					<h1 id="stationName" class="panel-title pull-left" style="font-size:2em">
+						Err, title should be here!
+					</h1>
+					<button id="btnUndock" class="btn btn-danger pull-right">
+						Undock
+					</button>
+				</div>
+				<div class="panel-body">
+					<ul class="nav nav-tabs">
+						<li class="active"><a aria-expanded="true" href="#stWelc" data-toggle="tab">Welcome</a></li>
+						<li class=""><a aria-expanded="false" href="#stTrade" data-toggle="tab">Trade Bay</a></li>
+						<li class=""><a aria-expanded="false" href="" data-toggle="tab">Ship Customization</a></li>
+					</ul>
+					<div id="myTabContent" class="tab-content">
+						<div class="tab-pane fade active in" id="stWelc">
+							<p style="margin-top: 10px">Welcome to ZPK.</p>
+						</div>
+						<div class="tab-pane fade" id="stTrade">
+							<form id="stationTrade" class="form-group">
+								<table class="table table-hover">
+									<thead>
+										<th>
+
+										</th>
+										<th>
+											Amount
+										</th>
+										<th>
+											Owned
+										</th>
+										<th>
+											Value
+										</th>
+										<th>
+											Name
+										</th>
+									</thead>
+									<tbody id="tradeItemList">
+
+									</tbody>
+								</table>
+
+								<input type="button" value="Purchase" id="btnBuy" class="btn btn-success" style="float:right;margin-right: 20px"/>
+								<input type="button" value="Sell" id="btnSell" class="btn btn-primary" style="float:right; margin-right:20px"/>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="/pub/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+
+<script src="/pub/globals.js"></script>
+<script src="/pub/images.js"></script>
+<script src="/pub/controls.js"></script>
+<script src="/pub/enemy.js"></script>
+<script src="/pub/planet.js"></script>
+<script src="/pub/team.js"></script>
+<script src="/pub/wormhole.js"></script>
+<script src="/pub/station.js"></script>
+<script src="/pub/player.js"></script>
+<script src="/pub/projectile.js"></script>
+<script src="/pub/client.js"></script>
+<script src="/pub/splash.js"></script>
+<script src="/pub/chat.js"></script>
