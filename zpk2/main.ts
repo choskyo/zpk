@@ -11,7 +11,10 @@ app.use('/pub',express.static(__dirname + '/pub'));
 server.listen(process.env.PORT || 3001);
 console.log('Listening..');
 
-let sockets:any = {};
+let sockets: any = {};
+
+import Player = require('./entities/player');
+import System = require('./entities/system');
 
 let io = require('socket.io')(server,{});
 io.sockets.on('connection', function(socket:any) {
@@ -36,7 +39,7 @@ io.sockets.on('connection', function(socket:any) {
         db.playerExists(packet, function(res:boolean) {
             if(res) {
                 db.getPlayer(packet, function(player:any) {
-                    //TODO: Load player data
+                    Player.onConnect(socket, player);
                     socket.emit('loginResponse', {
                         success: true
                     });
@@ -47,6 +50,26 @@ io.sockets.on('connection', function(socket:any) {
                 });
             }
         });
-
     });
+    socket.on('disconnect', function() {
+        console.log("[" + utils.getTime() + "] Client " + socket.id + " disconnected.");
+        delete sockets[socket.id];
+    });
+    socket.on('clientMessage', function(packet: any) {
+        io.emit('serverMessage', packet);
+    })
 });
+
+setInterval(function() {
+    
+    let update = {
+        players: Player.update()
+    };
+    
+    for(let i = 0; i < sockets.length; i++) {
+        let socket = sockets[i];
+        //TODO: send packets
+        socket.emit('updatePack', update);
+    }
+    
+}, 1000/30);

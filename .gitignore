@@ -1,6 +1,8 @@
-.idea/ 
-node_modules/
-.idea/*
+zpk/.idea
+zpk/node_modules
+zpk2/.idea
+zpk2/built
+zpk2/node_modules
  
 # Windows image file caches 
 Thumbs.db 

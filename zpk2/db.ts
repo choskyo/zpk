@@ -7,8 +7,10 @@ class Database {
             username: pack.username
         }, function(err:any, res:any) {
             if(res.length > 0) {
+                console.log("Registration: Username already taken.");
                 callback(false);
             } else {
+                console.log("Creating new account.");
                 Database.db.account.insert({
                     username: pack.username,
                     x: 0,
@@ -34,7 +36,15 @@ class Database {
     }
 
     public static getPlayer(pack: any, callback: any) {
-
+        Database.db.account.find({
+            username: pack.username
+        }, function(err:any, res:any) {
+            if(res.length > 0) {
+                callback(true);
+            } else {
+                callback(false);
+            }
+        })
     }
 }
 
