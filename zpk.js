@@ -1,8 +1,6 @@
-//Use db object as if it was a MVC repo
 var Database = require("./data/database.js");
 var db = new Database();
-
-//Fetch serverside game classes
+var items = require('./items/item.js');
 var Entity = require('./entities/entity.js');
 var Player = require('./entities/player.js');
 var Station = require('./entities/station.js');
@@ -11,10 +9,8 @@ var Wormhole = require('./entities/wormhole.js');
 var Team = require('./entities/team.js');
 var Planet = require('./entities/planet.js');
 var Enemy = require('./entities/enemy.js');
-//All packs should be defined in below file
 var Pack = require('./data/pack.js');
 
-//Standard nodejs setup
 var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
@@ -28,14 +24,17 @@ console.log("Server started.");
 
 var socketList = {};
 
-//Fetch permanent entities from db
-//db.getStations();
 new Planet('Planet One', 1800, 350, 0, 0, 0.0002, 'testy');
 new Planet('Planet Two', 1100, 150, 0, 0, 0.0005, 'testy');
 var stA = new Station('Station A', -650, -650, 'testy');
 var stB = new Station('Station B', 500, 200, 'qwe');
 for(var st in Station.list) {
 	Station.list[st].storage.contents = db.getItems();
+
+    new Item("Space Rations", 999, 1, "commod", false, 50);
+    new Item("Scrap Metal", 999, 1, "commod", false, 50);
+    new Item("Construction Materials", 999, 1, "commod", false, 50);
+
 
 	db.getWeapons(function(r) {
 		if(r) {
@@ -48,17 +47,17 @@ for(var st in Station.list) {
 		}
 	});
 }
+for(let i = 0; i < 5; i++) {
+    new Enemy();
+}
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
 var safe = new Team('players', true);
 var pirates = new Team('pirates', true);
 //new Enemy();
 
-//db.getDrones
-//db.getOtherStuff etc
 
-//Anything to do with receiving + sending packs to clients
-var io = require('socket.io')(serv,{});
+let io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
 	socket.id = Math.random();
 	var d = new Date(); // for now
@@ -124,7 +123,6 @@ io.sockets.on('connection', function(socket){
 	})
 });
 
-//25?FPS loop
 setInterval(function(){
 
 	var updatePack = {

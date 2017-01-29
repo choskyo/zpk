@@ -4,6 +4,12 @@
 var ship = new Image;
 ship.src = ('/pub/img/ship2.png');
 
+const pirate = new Image;
+pirate.src = ('/pub/img/pirate.png');
+
+const otherPlayers = new Image;
+otherPlayers.src = ('/pub/img/player.png');
+
 var sun = new Image;
 sun.src = ('/pub/img/sun.png');
 

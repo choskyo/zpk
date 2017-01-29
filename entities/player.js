@@ -3,7 +3,6 @@
  */
 var Database = require('../data/database.js');
 var db = new Database();
-
 var Entity = require('./entity.js');
 var Projectile = require ('./projectile.js');
 var Station = require ('./station.js');
@@ -101,8 +100,6 @@ var Player = function(id, savedData) {
             area: self.area
         }
     };
-
-    
 
     self.getUpdatePack = function() {
         return {

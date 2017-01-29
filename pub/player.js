@@ -31,13 +31,15 @@ var Player = function (initPack) {
         var x = self.x - Player.list[ownId].x + canvas.width/2 - Player.list[ownId].w/2;
         var y = self.y - Player.list[ownId].y + canvas.height/2 - Player.list[ownId].h/2;
 
-
-
         ctx.save();
         ctx.beginPath();
         ctx.translate(x + self.w/ 2, y + self.h/ 2);
         ctx.rotate(self.angle * Math.PI / 180);
-        ctx.drawImage(ship, 0-self.w/2, 0-self.h/2);
+        if(self.id == ownId) {
+            ctx.drawImage(ship, 0-self.w/2, 0-self.h/2);
+        } else {
+            ctx.drawImage(otherPlayers, 0-self.w/2, 0-self.h/2);
+        }
         ctx.restore();
 
         ctx.beginPath();

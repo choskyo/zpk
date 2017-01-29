@@ -23,28 +23,15 @@ var Enemy = function() {
     self.y = Math.random()*1000;
 
     self.storage = new Storage(self);
-    self.eqWeapon = null;
-
-    db.getWeapons(function(res) {
-        if(res) {
-            for(var i in res) {
-                self.storage.contents[i] = res[i];
-            }
-
-            for(var itm in self.storage.contents) {
-                var ctn = self.storage.contents;
-                if(ctn[itm].type == 'weapon' && ctn[itm].equipped == false) {
-                    self.eqWeapon = ctn[itm];
-                }
-                if(ctn[itm].type == 'shield' && ctn[itm].equipped == false) {
-                    self.eqShield = ctn[itm];
-                }
-                if(ctn[itm].type == 'engine' && ctn[itm].equipped == false) {
-                    self.eqEngine = ctn[itm];
-                }
-            }
-        }
-    });
+    self.eqWeapon = {
+        "name":"gun1",
+        "type":"weapon",
+        "amount":1,
+        "gear":true,
+        "equipped":true,
+        "damage":1,
+        "rof":1000
+    };
 
     self.credits = Math.floor(Math.random()*500)+1;
 

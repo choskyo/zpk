@@ -35,7 +35,7 @@ var Enemy = function(initPack) {
         ctx.save();
         ctx.translate(x + self.w/2, y + self.h/2);
         ctx.rotate(self.angle * Math.PI / 180);
-        ctx.drawImage(ship, 0-self.w/2, 0-self.h/2);
+        ctx.drawImage(pirate, 0-self.w/2, 0-self.h/2);
         ctx.restore();
 
         var barWidth = 30 * self.shields / self.maxShields;
