@@ -23,3 +23,6 @@ station.height = 200;
 
 var wormhole = new Image;
 wormhole.src = ('/pub/img/wormhole.png');
+
+var left = new Image;
+left.src = ('/pub/img/wormhole.png');

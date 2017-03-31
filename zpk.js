@@ -30,11 +30,10 @@ var stA = new Station('Station A', -650, -650, 'testy');
 var stB = new Station('Station B', 500, 200, 'qwe');
 for(var st in Station.list) {
 	Station.list[st].storage.contents = db.getItems();
-
-    new Item("Space Rations", 999, 1, "commod", false, 50);
-    new Item("Scrap Metal", 999, 1, "commod", false, 50);
-    new Item("Construction Materials", 999, 1, "commod", false, 50);
-
+    Station.list[st].storage.contents["Testy"] =new items.Item("Testy", 999, 1, "commod", false, 50);
+    Station.list[st].storage.contents["Rations"] = new items.Item("Space Rations", 999, 1, "commod", false, 50);
+    Station.list[st].storage.contents["Metal"] = new items.Item("Scrap Metal", 999, 1, "commod", false, 50);
+    Station.list[st].storage.contents["Construction Materials"]  =new items.Item("Construction Materials", 999, 1, "commod", false, 50);
 
 	db.getWeapons(function(r) {
 		if(r) {

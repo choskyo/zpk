@@ -1,7 +1,7 @@
 /**
  * Created by will on 04/08/16.
  */
-var socket = io('http://localhost:3001/');
+    var socket = io('http://192.168.0.2:3001/');
 
 var canvas = document.getElementById("canvas");
 canvas.oncontextmenu = (e) => e.preventDefault();

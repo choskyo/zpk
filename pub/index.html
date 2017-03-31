@@ -60,7 +60,7 @@
 
 		<div id="gameDiv" style="display:none;">
 			<canvas id="canvas" style="position:absolute">
-				The canvas hasn't loaded because Javascript is disabled or not supported in your browser.
+				The canvas hasn't loaded because Javascript is disabled or HTML5 is not supported in your browser.
 			</canvas>
 
 			<nav class="navbar navbar-inverse" style="position: absolute; left: 0; top: 0; z-index: 1; width:100%">
@@ -98,14 +98,13 @@
 				<input class="form-control input-sm" id="chat-input" type="text" style="width:100%; opacity:1;background-color:#111; color: inherit; position:absolute; bottom:0"/>
 			</form>
 
-			<div id="mobileMovement" style=" left:0; bottom:0; height:100%; width:100%; background-color: rgb(0, 0, 255); opacity:0.1; position: absolute; z-index: 1">
-				<div id="goUp" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:100px">UP</div>
-				<div id="goDown" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; left:0; bottom:0">DOWN</div>
-				<div id="goLeft" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:100px">LEFT</div>
-				<div id="goRight" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:0">RIGHT</div>
-				<div id="action" style="width:20%; background-color:red; height:100px; text-align:center; font:32pt bold arial; position:absolute; right:0; bottom:200px">SHOOT</div>
-			</div>
-
+<div id="mobileMovement" >
+  <img id="goUp" src="/pub/img/arrow.png" style="width:10%; height: 100px;background: none; position: absolute; left:0; bottom:100px"/>
+   <img id="goDown" src="/pub/img/arrow.png" style="transform:rotate(180deg); width:10%; height: 100px;background: none; position: absolute; left:0; bottom:0px"/>
+   <img id="goLeft" src="/pub/img/arrow.png" style="transform:rotate(270deg); width:10%; height: 100px;background: none; position: absolute; right:0; bottom:100px"/>
+   <img id="goRight" src="/pub/img/arrow.png" style="transform:rotate(90deg); width:10%; height: 100px;background: none; position: absolute; right:0; bottom:0px"/>
+   <img id="action" src="/pub/img/crosshair.png" style="width:10%; height: 100px;background: none; position: absolute; right:0; bottom:200px"/>
+   </div>
 			<div class="panel panel-primary" style="left: 0; top:50px; bottom:210px; width:225px; opacity: 0.8; position:absolute; z-index: 1">
 				<div class="panel-heading">
 					<h3 class="panel-title">
