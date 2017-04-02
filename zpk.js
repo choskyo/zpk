@@ -51,10 +51,10 @@ for(let i = 0; i < 5; i++) {
 }
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
+let red = new Team('Red', true);
+let blue = new Team('Blue', true);
 var safe = new Team('players', true);
-var pirates = new Team('pirates', true);
 //new Enemy();
-
 
 let io = require('socket.io')(serv,{});
 io.sockets.on('connection', function(socket){
@@ -112,8 +112,11 @@ io.sockets.on('connection', function(socket){
 
 	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
-		if(message == '/red') {
-			//Player.list[socket.id].setRed();
+		if(message == '/blue') {
+			Player.list[socket.id].setBlue();
+			return;
+		}if(message == '/red') {
+			Player.list[socket.id].setRed();
 			return;
 		}
 		for(var u in socketList) {

@@ -85,6 +85,16 @@ var Player = function(id, savedData) {
         }
     }
 
+    self.eqWeapon = {
+        "name":"gun1",
+        "type":"weapon",
+        "amount":1,
+        "gear":true,
+        "equipped":true,
+        "damage":1,
+        "rof":1000
+    };
+
     self.getInitPack = function() {
         return {
             id: self.id,
@@ -97,7 +107,8 @@ var Player = function(id, savedData) {
             shields: self.shields,
             maxShields: self.maxShields,
             storage: self.storage.contents,
-            area: self.area
+            area: self.area,
+            team: self.team
         }
     };
 
@@ -239,6 +250,14 @@ var Player = function(id, savedData) {
         self.y = Math.random()*500;
         self.shields = self.maxShields;
     };
+
+    self.setRed = function() {
+        self.team = Team.list['red'];
+    };
+    self.setBlue= function() {
+        self.team = Team.list['blue'];
+    };
+
 
     Player.list[id] = self;
 
