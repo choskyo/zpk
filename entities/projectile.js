@@ -75,7 +75,8 @@ var Projectile = function(p, ang) {
                     p.shields -= self.parent.eqWeapon.damage;
 
                     if(p.shields <= 0) {
-                        p.team.addScore();
+                        Team.list['pirates'].addScore();
+                        //self.team.addScore();
                         p.respawn();
                     }
 

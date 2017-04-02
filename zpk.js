@@ -51,9 +51,8 @@ for(let i = 0; i < 5; i++) {
 }
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
-let red = new Team('Red', true);
-let blue = new Team('Blue', true);
 var safe = new Team('players', true);
+var pirates = new Team('pirates', true);
 //new Enemy();
 
 let io = require('socket.io')(serv,{});
