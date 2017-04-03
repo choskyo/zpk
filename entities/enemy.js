@@ -3,7 +3,7 @@
  */
 var Database = require('../data/database.js');
 var db = new Database();
-
+var Pack = require('../data/pack.js');
 var Entity = require('./entity.js');
 var Team = require('./team.js');
 var Storage = require('./../items/storage');
@@ -19,8 +19,8 @@ var Enemy = function() {
     self.id         = Math.random();
     self.name   = "Pirate" + self.id.toString().slice(1,4);
 
-    self.x = Math.random()*1000;
-    self.y = Math.random()*1000;
+    self.x = 1*(Math.random()*250);
+    self.y = 1*(Math.random()*250);
 
     self.storage = new Storage(self);
     self.eqWeapon = {
@@ -190,7 +190,7 @@ var Enemy = function() {
     };
 
     Enemy.list[self.id] = self;
-
+    Pack.initPack.enemies.push(self.getInitPack());
     return self;
 };
 

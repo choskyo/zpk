@@ -32,6 +32,7 @@ socket.on('serverMessage', function(message) {
     };
 
 if(isMobile) {
-    chatDiv.style.left = "220px";
+    chatDiv.style.left = '15%';
+    chatDiv.style.height = '20%';
     chatDiv.style.width = "70%";
 }

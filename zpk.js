@@ -10,7 +10,6 @@ var Team = require('./entities/team.js');
 var Planet = require('./entities/planet.js');
 var Enemy = require('./entities/enemy.js');
 var Pack = require('./data/pack.js');
-
 var express = require('express');
 var app = express();
 var serv = require('http').Server(app);
@@ -45,9 +44,6 @@ for(var st in Station.list) {
 			}
 		}
 	});
-}
-for(let i = 0; i < 5; i++) {
-    new Enemy();
 }
 new Wormhole('WormholeB', 150, -450, 'qwe', 'testy');
 new Wormhole('WormholeC', 0, -700, 'testy', 'qwe');
@@ -111,13 +107,12 @@ io.sockets.on('connection', function(socket){
 
 	//Relay chat back to clients
 	socket.on('clientMessage', function(message) {
-		if(message == '/blue') {
-			Player.list[socket.id].setBlue();
-			return;
-		}if(message == '/red') {
-			Player.list[socket.id].setRed();
-			return;
-		}
+		if(message == '/spawn') {
+            for(let i = 0; i < 4; i++) {
+                new Enemy();
+            }
+            return;
+         }
 		for(var u in socketList) {
 			socketList[u].emit('serverMessage', '(' + Player.list[socket.id].name + ')' + message);
 		}

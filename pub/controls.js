@@ -87,6 +87,7 @@ btnSell.onclick = () => {
 //MOBILE
 if(isMobile) {
     mobileUI.style.display = 'absolute'
+    // chatDiv.style.height = '100px';
 } else {
     mobileUI.style.display = 'none'
 }
@@ -109,18 +110,18 @@ mobRight.addEventListener('touchstart', function(e) {
 }, false);
 mobAction.addEventListener('touchstart', function(e) {
     e.preventDefault();
-    for(var w in Wormhole.list) {
-        if(Player.list[ownId].intersects(w)) {
-            socket.emit('kP',{input:'warp', state:true});
-            return;
-        }
-    }
-    for(var s in Station.list) {
-        if(Player.list[ownId].intersects(s)) {
-            socket.emit('kP',{input:'dock', state:true});
-            return;
-        }
-    }
+    //for(var w in Wormhole.list) {
+    //    if(Player.list[ownId].intersects(w)) {
+    //        socket.emit('kP',{input:'warp', state:true});
+    //        return;
+    //    }
+    //}
+    //for(var s in Station.list) {
+    //    if(Player.list[ownId].intersects(s)) {
+    //        socket.emit('kP',{input:'dock', state:true});
+    //        return;
+    //    }
+    //}
 
     socket.emit('kP',{input:'attack',state:true});
 }, false);
